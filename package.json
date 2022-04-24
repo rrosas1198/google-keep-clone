@@ -1,0 +1,27 @@
+{
+    "name": "root",
+    "private": true,
+    "workspaces": [
+        "backend",
+        "frontend",
+        "packages/*"
+    ],
+    "gitHooks": {
+        "commit-msg": "commitlint -e -V"
+    },
+    "scripts": {
+        "build": "lage prepack"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^16.2.3",
+        "@techkit/linter-config": "^0.3.2",
+        "@types/node": "^17.0.25",
+        "bauen": "^0.9.0",
+        "eslint": "^8.14.0",
+        "lage": "^1.5.0",
+        "prettier": "^2.6.2",
+        "typescript": "^4.6.3",
+        "vitest": "^0.9.4",
+        "yorkie": "^2.0.0"
+    }
+}
