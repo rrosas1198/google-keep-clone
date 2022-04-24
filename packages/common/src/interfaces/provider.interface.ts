@@ -11,7 +11,7 @@ export interface ClassProvider<T = any> {
 }
 
 export interface FactoryProvider<T = any> {
-    useFactory: (dependencyContainer: DependencyContainer) => T;
+    useFactory: (container: DependencyContainer) => T;
     provide: InjectionToken;
     scope?: ScopeEnum;
 }
