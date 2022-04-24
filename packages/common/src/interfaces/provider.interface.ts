@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DependencyContainer, InjectionToken } from "tsyringe";
+import { DependencyContainer } from "tsyringe";
 import { DelayedConstructor } from "tsyringe/dist/typings/lazy-helpers";
 import { ScopeEnum } from "../enums";
+import { InjectionToken } from "./injection-token.interface";
 import { Type } from "./type.interface";
 
 export interface ClassProvider<T = any> {

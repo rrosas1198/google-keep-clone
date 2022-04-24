@@ -1,0 +1,1 @@
+export { InjectionToken } from "tsyringe";
