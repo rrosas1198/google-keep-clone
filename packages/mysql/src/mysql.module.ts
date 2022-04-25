@@ -1,16 +1,16 @@
 import { DynamicModule } from "@keep/common";
 import { ConfigService } from "@keep/config";
-import { DATABASE_TOKEN } from "./constants";
-import { MysqlDriver } from "./driver/mysql";
+import { MYSQL_TOKEN } from "./constants";
 import { ConnectionOptions } from "./interfaces";
+import { MysqlService } from "./mysql.service";
 
-export class DatabaseModule {
+export class MysqlModule {
     public static forRoot(): DynamicModule {
         return {
-            module: DatabaseModule,
+            module: MysqlModule,
             providers: [
                 {
-                    provide: DATABASE_TOKEN,
+                    provide: MYSQL_TOKEN,
                     useFactory: container => {
                         const configService = container.resolve(ConfigService);
 
@@ -22,7 +22,7 @@ export class DatabaseModule {
                             database: configService.get<string>("MYSQL_DATABASE")
                         };
 
-                        return new MysqlDriver(options);
+                        return new MysqlService(options);
                     }
                 }
             ]

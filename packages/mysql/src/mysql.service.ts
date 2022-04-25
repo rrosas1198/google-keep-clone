@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from "@keep/common";
 import { createPool as MysqlCreatePool, Pool, PoolOptions } from "mysql2/promise";
-import { ConnectionCallback, ConnectionOptions, Driver } from "src/interfaces";
+import { ConnectionCallback, ConnectionOptions } from "./interfaces";
 import { MysqlConnection } from "./mysql.connection";
 
 @Injectable()
-export class MysqlDriver implements Driver {
+export class MysqlService {
     public readonly connections = new Set<MysqlConnection>();
     private pool!: Pool;
 

@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PoolConnection } from "mysql2/promise";
-import { Connection } from "src/interfaces";
-import { MysqlDriver } from "./mysql.driver";
+import { MysqlService } from "./mysql.service";
 
-export class MysqlConnection implements Connection {
+export class MysqlConnection {
     constructor(
-        private readonly mysqlDriver: MysqlDriver,
+        private readonly mysqlService: MysqlService,
         private readonly poolConnection: PoolConnection
     ) {}
 
@@ -28,7 +27,7 @@ export class MysqlConnection implements Connection {
 
     public release() {
         this.poolConnection.release();
-        this.mysqlDriver.connections.delete(this);
+        this.mysqlService.connections.delete(this);
         return Promise.resolve();
     }
 }
