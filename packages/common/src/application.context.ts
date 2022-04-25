@@ -20,12 +20,12 @@ export class ApplicationContext {
         this.container.register(token, value, { lifecycle: scope });
     }
 
-    public registerModule(metatype: Type) {
+    public registerModule(metatype: Type | DynamicModule) {
         const providers = this.getProviders(metatype);
         providers.forEach(provider => this.register(provider));
     }
 
-    protected getProviders(metatype: Type): Provider[] {
+    protected getProviders(metatype: Type | DynamicModule): Provider[] {
         const imports = this.getMetadata<Type | DynamicModule>(metatype, MODULE_METADATA.IMPORTS);
         const providers = this.getMetadata<Provider>(metatype, MODULE_METADATA.PROVIDERS);
 
@@ -53,7 +53,7 @@ export class ApplicationContext {
         return provider.useValue;
     }
 
-    protected getMetadata<T>(metatype: Type, metadataKey: string) {
+    protected getMetadata<T>(metatype: Type | DynamicModule, metadataKey: string) {
         const metadata = Reflect.getMetadata<T[]>(metadataKey, metatype);
         return (metadata || []) as T[];
     }

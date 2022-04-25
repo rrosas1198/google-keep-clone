@@ -1,17 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { ApplicationContext } from "./application-context";
+import { ApplicationContext } from "./application.context";
 import { Platform, Type } from "./interfaces";
 
-export class Application {
+export abstract class Application<T> {
     constructor(
-        protected readonly module: Type,
-        protected readonly platform: Platform,
+        protected readonly appModule: Type,
+        protected readonly platform: Platform<T>,
         protected readonly context = new ApplicationContext()
     ) {}
 
-    public async startup(...params: any[]) {
-        this.context.registerModule(this.module);
-
-        await this.platform.bootstrap(...params);
-    }
+    public abstract startup(params: T): Promise<void>;
 }

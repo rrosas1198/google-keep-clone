@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from "@keep/common";
 import { createPool as MysqlCreatePool, Pool, PoolOptions } from "mysql2/promise";
-import { ConnectionCallback, ConnectionOptions } from "./interfaces";
+import type { ConnectionCallback, ConnectionOptions } from "./interfaces";
 import { MysqlConnection } from "./mysql.connection";
 
 @Injectable()
