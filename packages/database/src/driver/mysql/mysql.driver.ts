@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createPool as MysqlCreatePool, Pool, PoolOptions } from "mysql2/promise";
-import { Driver } from "src/interfaces";
-import { MysqlCallback, MysqlConnectionOptions } from "./interfaces";
+import { ConnectionCallback, Driver } from "src/interfaces";
+import { MysqlConnectionOptions } from "./interfaces";
 import { MysqlConnection } from "./mysql.connection";
 
 export class MysqlDriver implements Driver {
+    public readonly connections = new Set<MysqlConnection>();
     private pool!: Pool;
-    private connections = new Set<MysqlConnection>();
 
     constructor(private readonly options: MysqlConnectionOptions) {}
 
@@ -24,14 +24,7 @@ export class MysqlDriver implements Driver {
         this.connections.clear();
     }
 
-    public async getConnection() {
-        const poolConnection = await this.pool.getConnection();
-        const connection = new MysqlConnection(poolConnection);
-        this.connections.add(connection);
-        return connection;
-    }
-
-    public async request<T = any>(callback: MysqlCallback<T>) {
+    public async request<T = any>(callback: ConnectionCallback<T>) {
         const connection = await this.getConnection();
 
         try {
@@ -40,11 +33,11 @@ export class MysqlDriver implements Driver {
         } catch (error) {
             throw error;
         } finally {
-            this.release(connection);
+            connection.release();
         }
     }
 
-    public async transaction<T = any>(callback: MysqlCallback<T>) {
+    public async transaction<T = any>(callback: ConnectionCallback<T>) {
         const connection = await this.getConnection();
 
         try {
@@ -56,13 +49,15 @@ export class MysqlDriver implements Driver {
             await connection.rollback();
             throw error;
         } finally {
-            this.release(connection);
+            connection.release();
         }
     }
 
-    public release(connection: MysqlConnection) {
-        connection.release();
-        this.connections.delete(connection);
+    public async getConnection() {
+        const poolConnection = await this.pool.getConnection();
+        const mysqlConnection = new MysqlConnection(this, poolConnection);
+        this.connections.add(mysqlConnection);
+        return mysqlConnection;
     }
 
     private createPool(options: MysqlConnectionOptions) {
@@ -72,8 +67,8 @@ export class MysqlDriver implements Driver {
             user: options.username,
             password: options.password,
             database: options.database,
-            charset: options.charset,
-            timezone: options.timezone
+            charset: options.charset || "utf8mb4",
+            timezone: options.timezone || "Z"
         };
         return MysqlCreatePool(_options);
     }

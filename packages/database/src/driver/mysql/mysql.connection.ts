@@ -1,33 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FieldPacket, PoolConnection, RowDataPacket } from "mysql2/promise";
+import { PoolConnection } from "mysql2/promise";
 import { Connection } from "src/interfaces";
+import { MysqlDriver } from "./mysql.driver";
 
 export class MysqlConnection implements Connection {
-    constructor(private readonly poolConnection: PoolConnection) {}
+    constructor(
+        private readonly mysqlDriver: MysqlDriver,
+        private readonly poolConnection: PoolConnection
+    ) {}
 
-    public async count(tableName: string) {
-        const result = await this.poolConnection.query("SELECT COUNT(*) as count FROM ??", [
-            tableName
-        ]);
-        return (result[0] as RowDataPacket).count as number;
-    }
-
-    public async findOne<T>(sql: string, values?: Array<string | number>) {
-        const result = await this.query<T>(sql, values);
-        return (result?.[0] || null) as T;
-    }
-
-    public findAndCount<T>(): Promise<[T[], number]> {
-        throw new Error("Method not implemented.");
-    }
-
-    public insert(): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
-
-    public async query<T, V = FieldPacket>(sql: string, values?: Array<string | number>) {
-        const result = await this.poolConnection.query(sql, values);
-        return result as any as [T, V[]];
+    public async query<T = any>(query: string, params?: Array<string | number>) {
+        const rawResults = await this.poolConnection.query(query, params);
+        return rawResults[0] as T[];
     }
 
     public beginTransaction() {
@@ -44,6 +28,7 @@ export class MysqlConnection implements Connection {
 
     public release() {
         this.poolConnection.release();
+        this.mysqlDriver.connections.delete(this);
         return Promise.resolve();
     }
 }
