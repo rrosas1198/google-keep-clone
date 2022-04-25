@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Injectable } from "@keep/common";
 import { createPool as MysqlCreatePool, Pool, PoolOptions } from "mysql2/promise";
-import { ConnectionCallback, Driver } from "src/interfaces";
-import { MysqlConnectionOptions } from "./interfaces";
+import { ConnectionCallback, ConnectionOptions, Driver } from "src/interfaces";
 import { MysqlConnection } from "./mysql.connection";
 
+@Injectable()
 export class MysqlDriver implements Driver {
     public readonly connections = new Set<MysqlConnection>();
     private pool!: Pool;
 
-    constructor(private readonly options: MysqlConnectionOptions) {}
+    constructor(private readonly options: ConnectionOptions) {}
 
     public async connect() {
         this.pool = this.createPool(this.options);
@@ -60,7 +61,7 @@ export class MysqlDriver implements Driver {
         return mysqlConnection;
     }
 
-    private createPool(options: MysqlConnectionOptions) {
+    private createPool(options: ConnectionOptions) {
         const _options: PoolOptions = {
             host: options.host,
             port: options.port,

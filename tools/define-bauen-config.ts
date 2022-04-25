@@ -7,6 +7,7 @@ export function defineBauenConfig(rootDir: string) {
         entries: ["./src/index.ts"],
         outputs: ["js"],
         parser: "swc",
+        externals: ["regenerator-runtime"],
         preserveModules: true,
         rollupPlugins: {
             alias: {

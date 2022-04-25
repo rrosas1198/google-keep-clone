@@ -10,7 +10,8 @@
         "commit-msg": "commitlint -e -V"
     },
     "scripts": {
-        "build": "lage prepack"
+        "build": "lage prepack",
+        "rebuild": "lage prepack --no-cache"
     },
     "devDependencies": {
         "@commitlint/cli": "^16.2.3",

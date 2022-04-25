@@ -1,7 +1,12 @@
 import { Type } from "@keep/common";
-import { DatabaseType } from "./database-type.interface";
 
 export interface ConnectionOptions {
-    type: DatabaseType;
+    host?: string;
+    port?: number;
+    username?: string;
+    password?: string;
+    database?: string;
+    charset?: string;
+    timezone?: string;
     migrations?: Type[];
 }
