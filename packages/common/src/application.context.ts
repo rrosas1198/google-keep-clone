@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { container as Container, isClassProvider, isFactoryProvider } from "tsyringe";
-import { MODULE_METADATA } from "./constants/module.constants";
 import { ScopeEnum } from "./enums";
-import { DynamicModule, InjectionToken, Provider, Type } from "./interfaces";
+import { DynamicModule, InjectionToken, ModuleMetadataKey, Provider, Type } from "./interfaces";
 import { isDynamicModule, isTypeProvider } from "./utils";
 
 export class ApplicationContext {
@@ -26,18 +25,7 @@ export class ApplicationContext {
     }
 
     protected getProviders(metatype: Type | DynamicModule): Provider[] {
-        const imports = this.getMetadata<Type | DynamicModule>(metatype, MODULE_METADATA.IMPORTS);
-        const providers = this.getMetadata<Provider>(metatype, MODULE_METADATA.PROVIDERS);
-
-        const staticProviders = imports
-            .filter(module => !isDynamicModule(module))
-            .flatMap((module: any) => this.getProviders(module));
-
-        const dynamicProviders = imports
-            .filter(module => isDynamicModule(module))
-            .flatMap((module: any) => module.providers || []);
-
-        return [...new Set([...providers, ...staticProviders, ...dynamicProviders])];
+        return this.getDeepMetadata<Provider>(metatype, "providers");
     }
 
     protected getProviderValue<T = any>(provider: Provider<T>) {
@@ -53,8 +41,28 @@ export class ApplicationContext {
         return provider.useValue;
     }
 
-    protected getMetadata<T>(metatype: Type | DynamicModule, metadataKey: string) {
-        const metadata = Reflect.getMetadata<T[]>(metadataKey, metatype);
+    protected getDeepMetadata<T>(
+        metatype: Type | DynamicModule,
+        metadataKey: ModuleMetadataKey
+    ): T[] {
+        const imports = this.getMetadata<Type | DynamicModule>(metatype, "imports");
+        const metadata = this.getMetadata<T>(metatype, metadataKey);
+
+        const staticMetadata = imports
+            .filter((meta: any) => !isDynamicModule(meta))
+            .flatMap((meta: any) => this.getDeepMetadata(meta, metadataKey));
+
+        const dynamicMetadata = imports
+            .filter((meta: any) => isDynamicModule(meta))
+            .flatMap((meta: any) => meta[metadataKey] || []);
+
+        return [...new Set([...metadata, ...staticMetadata, ...dynamicMetadata])];
+    }
+
+    protected getMetadata<T>(metatype: Type | DynamicModule, metadataKey: ModuleMetadataKey) {
+        const metadata = isDynamicModule(metatype)
+            ? metatype[metadataKey]
+            : Reflect.getMetadata(metadataKey, metatype);
         return (metadata || []) as T[];
     }
 }

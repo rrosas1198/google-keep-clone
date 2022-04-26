@@ -1,21 +1,43 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Platform } from "@keep/common";
-import { App, CompatibilityEvent, createApp, H3Error, MIMES } from "h3";
+import {
+    App,
+    CompatibilityEvent,
+    CompatibilityEventHandler,
+    createApp,
+    createRouter,
+    H3Error,
+    MIMES,
+    Router
+} from "h3";
 import { listen } from "listhen";
+import { HttpMethodEnum, HttpStatusEnum } from "./enums";
 import { HttpException } from "./http.exception";
 import { HttpOptions } from "./interfaces";
 import { isException, parseStack } from "./utils";
 
 export class HttpPlatform implements Platform<HttpOptions> {
     private readonly server!: App;
+    private readonly router!: Router;
     private readonly rootDir = process.cwd();
 
     constructor() {
         this.server = createApp({ onError: this.handleError.bind(this) as any });
+        this.router = createRouter();
     }
 
     public async bootstrap(options?: Partial<HttpOptions>) {
+        this.server.use(this.router);
         await listen(this.server, options);
+    }
+
+    public addRoute(
+        path: string,
+        handler: CompatibilityEventHandler,
+        methods: HttpMethodEnum[] = []
+    ) {
+        const _methods = methods.map(method => method.toLocaleLowerCase() as any);
+        this.router.add(path, handler, _methods);
     }
 
     private handleError(error: H3Error, event: CompatibilityEvent) {
@@ -43,7 +65,8 @@ export class HttpPlatform implements Platform<HttpOptions> {
     }
 
     private createException(error: H3Error) {
-        const message = error.message ?? error.statusMessage;
-        return isException(error) ? error : HttpException.fromStatus(error.statusCode, message);
+        const message = error.message || error.statusMessage;
+        const statusCode = error.statusCode || HttpStatusEnum.INTERNAL_SERVER_ERROR;
+        return isException(error) ? error : HttpException.fromStatus(statusCode, message);
     }
 }

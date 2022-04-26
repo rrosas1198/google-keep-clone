@@ -14,8 +14,6 @@
     },
     "devDependencies": {
         "bauen": "^0.9.0",
-        "execa": "^6.1.0",
-        "fkill": "^8.0.0",
         "vitest": "^0.9.4"
     }
 }

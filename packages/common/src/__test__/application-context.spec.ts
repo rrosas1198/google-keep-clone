@@ -1,7 +1,7 @@
 import "@abraham/reflection";
-import { ApplicationContext } from "src/application-context";
+import { ApplicationContext } from "src/application.context";
+import { Injectable, Module } from "src/decorators";
 import { describe, expect, it } from "vitest";
-import { Injectable, Module } from "../decorators";
 
 describe("application context", () => {
     it("should register the module", async () => {
