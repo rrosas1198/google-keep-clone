@@ -13,7 +13,7 @@
         "@abraham/reflection": "^0.10.0"
     },
     "devDependencies": {
-        "bauen": "^0.9.0",
-        "vitest": "^0.9.4"
+        "bauen": "^0.10.3",
+        "vitest": "^0.10.0"
     }
 }

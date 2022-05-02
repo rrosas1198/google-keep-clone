@@ -1,6 +1,5 @@
-import { defineConfig } from "bauen";
+import { defineBauenConfig } from "../tools/define-bauen-config";
 
-export default defineConfig({
-    entries: ["./src/index.ts"],
-    outputs: ["js"]
+export default defineBauenConfig(__dirname, {
+    entries: ["./src/main.ts"]
 });

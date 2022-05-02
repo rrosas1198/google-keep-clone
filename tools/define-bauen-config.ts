@@ -1,21 +1,16 @@
-import { defineConfig } from "bauen";
+import { defineConfig, mergeConfig, UserConfig } from "bauen";
 import { resolve } from "path";
-import { killActiveProcesses, runNpmScript } from "./run-npm-script";
 
-export function defineBauenConfig(rootDir: string) {
-    return defineConfig({
+export function defineBauenConfig(rootDir: string, ...configs: UserConfig[]) {
+    const baseConfig = defineConfig({
         rootDir,
-        entries: ["./src/index.ts"],
-        outputs: ["js"],
+        run: true,
         parser: "swc",
+        outputs: ["js"],
         externals: ["regenerator-runtime"],
         // preserveModules: true,
-        onBundleStart() {
-            killActiveProcesses();
-        },
         onBundleEnd() {
             console.clear();
-            runNpmScript("start");
         },
         rollupPlugins: {
             alias: {
@@ -23,9 +18,14 @@ export function defineBauenConfig(rootDir: string) {
                     src: resolve(rootDir, "./src")
                 }
             },
+            raw: {
+                include: [/\.sql$/i]
+            },
             replace: {
                 preventAssignment: true
             }
         }
     });
+
+    return mergeConfig(baseConfig, ...configs);
 }
