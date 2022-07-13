@@ -2,7 +2,7 @@
     "name": "app-backend",
     "version": "0.0.0",
     "scripts": {
-        "start": "node ./dist/index.js",
+        "start": "node ./dist/main.js",
         "prepack": "bauen",
         "watch": "bauen watch",
         "test": "vitest",
@@ -11,7 +11,10 @@
         "update": "taze -w"
     },
     "dependencies": {
-        "@abraham/reflection": "^0.10.0"
+        "@abraham/reflection": "^0.10.0",
+        "@keep/common": "^0.0.1",
+        "@keep/mysql": "^0.0.1",
+        "@keep/platform-http": "^0.0.1"
     },
     "devDependencies": {
         "bauen": "^0.10.6",
