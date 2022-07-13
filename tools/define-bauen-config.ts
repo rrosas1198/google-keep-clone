@@ -5,7 +5,7 @@ export function defineBauenConfig(rootDir: string, ...configs: UserConfig[]) {
     const baseConfig = defineConfig({
         rootDir,
         run: true,
-        parser: "swc",
+        parser: "typescript",
         outputs: ["js"],
         externals: ["regenerator-runtime"],
         // preserveModules: true,
