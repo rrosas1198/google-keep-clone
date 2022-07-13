@@ -17,5 +17,16 @@
     "eslint.validate": ["javascript", "typescript"],
     "eslint.alwaysShowStatus": true,
     "eslint.lintTask.enable": true,
-    "eslint.format.enable": true
+    "eslint.format.enable": true,
+    "cSpell.words": [
+        "abraham",
+        "bauen",
+        "commitlint",
+        "lage",
+        "listhen",
+        "taze",
+        "techkit",
+        "tsyringe",
+        "yorkie"
+    ]
 }
