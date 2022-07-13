@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ApplicationContext, DynamicModule, Type } from "@keep/common";
-import { joinURL } from "ufo";
+import { joinURL, withLeadingSlash } from "ufo";
 import { METHOD_TOKEN, PATH_TOKEN, VERSION_TOKEN } from "./constants";
 import { HttpMethodEnum } from "./enums";
 import { ControllerMetadata, MethodMetadata, RouteMetadata } from "./interfaces";
@@ -38,11 +38,18 @@ export class HttpContext extends ApplicationContext {
         methodMetadata: MethodMetadata[]
     ) {
         const methods = methodMetadata.filter(meta => !!meta.path);
-        return methods.map<RouteMetadata>(meta => ({
-            path: joinURL(baseMetadata.path, meta.version || baseMetadata.version, meta.path),
+        return methods.map(meta => this.mapControllerMethod(baseMetadata, meta));
+    }
+
+    protected mapControllerMethod(baseMetadata: ControllerMetadata, meta: MethodMetadata) {
+        const version = meta.version || baseMetadata.version;
+        const joinedPath = joinURL("api", version, baseMetadata.path, meta.path);
+
+        return <RouteMetadata>{
+            path: withLeadingSlash(joinedPath),
             method: meta.method,
             handler: baseMetadata.instance[meta.methodName].bind(baseMetadata.instance)
-        }));
+        };
     }
 
     protected getControllerMetadata(metatype: Type) {
