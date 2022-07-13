@@ -8,18 +8,20 @@
         "watch": "bauen watch",
         "test": "vitest",
         "test:watch": "vitest --watch",
-        "test:coverage": "vitest --coverage"
+        "test:coverage": "vitest --coverage",
+        "update": "taze -w"
     },
     "dependencies": {
         "@abraham/reflection": "latest",
         "@keep/common": "^0.0.1",
         "@keep/config": "^0.0.1",
-        "h3": "^0.7.6",
-        "listhen": "^0.2.11",
-        "ufo": "^0.8.3"
+        "h3": "^0.7.10",
+        "listhen": "^0.2.13",
+        "ufo": "^0.8.5"
     },
     "devDependencies": {
-        "bauen": "^0.10.3",
-        "vitest": "^0.10.0"
+        "bauen": "^0.10.6",
+        "taze": "^0.7.6",
+        "vitest": "^0.18.0"
     }
 }

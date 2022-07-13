@@ -14,7 +14,7 @@ export class ApplicationContext {
     public register<T>(provider: Provider<T>) {
         const token: InjectionToken = (provider as any).provide || provider;
         const value: Type<T> = this.getProviderValue(provider) as any;
-        const scope = (provider as any)?.scope || ScopeEnum.SINGLETON;
+        const scope = this.getProviderScope<T>(provider);
 
         this.container.register(token, value, { lifecycle: scope });
     }
@@ -33,12 +33,17 @@ export class ApplicationContext {
             return provider;
         }
         if (isClassProvider(provider)) {
-            return provider.useClass;
+            return { useClass: provider.useClass };
         }
         if (isFactoryProvider(provider)) {
-            return provider.useFactory;
+            return { useFactory: provider.useFactory };
         }
-        return provider.useValue;
+        return { useValue: provider.useValue };
+    }
+
+    protected getProviderScope<T = any>(provider: Provider<T>) {
+        const hasScope = isTypeProvider(provider) || isClassProvider(provider);
+        return hasScope ? (provider as any)?.scope || ScopeEnum.SINGLETON : null;
     }
 
     protected getDeepMetadata<T>(

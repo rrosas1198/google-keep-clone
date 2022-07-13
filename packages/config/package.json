@@ -8,14 +8,16 @@
         "watch": "bauen watch",
         "test": "vitest",
         "test:watch": "vitest --watch",
-        "test:coverage": "vitest --coverage"
+        "test:coverage": "vitest --coverage",
+        "update": "taze -w"
     },
     "dependencies": {
         "@keep/common": "^0.0.1",
-        "dotenv": "^16.0.0"
+        "dotenv": "^16.0.1"
     },
     "devDependencies": {
-        "bauen": "^0.10.3",
-        "vitest": "^0.10.0"
+        "bauen": "^0.10.6",
+        "taze": "^0.7.6",
+        "vitest": "^0.18.0"
     }
 }
