@@ -11,7 +11,7 @@ export class MysqlModule {
             providers: [
                 {
                     provide: MYSQL_TOKEN,
-                    useFactory: container => {
+                    useFactory: async container => {
                         const configService = container.resolve(ConfigService);
 
                         const options = <ConnectionOptions>{
@@ -22,7 +22,10 @@ export class MysqlModule {
                             database: configService.get<string>("MYSQL_DATABASE")
                         };
 
-                        return new MysqlService(options);
+                        const mysqlService = new MysqlService(options);
+                        await mysqlService.connect();
+
+                        return mysqlService;
                     }
                 }
             ]
