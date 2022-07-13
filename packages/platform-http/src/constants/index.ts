@@ -1,2 +1,2 @@
-export * from "./decorator.contants";
+export * from "./decorator.constants";
 export * from "./version.constants";

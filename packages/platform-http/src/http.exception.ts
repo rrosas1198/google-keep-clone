@@ -14,7 +14,9 @@ export class HttpException extends Error {
 
         if (typeof Error.prepareStackTrace === "function") {
             Error.prepareStackTrace(this, this.constructor as any);
-        } else if (typeof Error.captureStackTrace === "function") {
+        }
+
+        if (typeof Error.captureStackTrace === "function") {
             Error.captureStackTrace(this, this.constructor);
         }
     }
