@@ -29,7 +29,6 @@ export class HttpContext extends ApplicationContext {
     protected getControllerRoutes(metatype: Type, baseMetadata: ControllerMetadata) {
         const methods = Object.getOwnPropertyNames(metatype.prototype);
         const metadata = methods.map(method => this.getMethodMetadata(metatype, method));
-
         return this.mapControllerRoute(baseMetadata, metadata);
     }
 
