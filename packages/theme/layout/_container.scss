@@ -1,0 +1,33 @@
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable at-rule-no-unknown */
+@use "./breakpoints";
+@use "./media-query";
+
+@mixin core-styles() {
+    .container,
+    .container-fluid {
+        max-inline-size: var(--layout-max-width);
+        inline-size: 100%;
+        margin-inline: auto;
+
+        @each $breakpoint in breakpoints.get-keys() {
+            $max-width: breakpoints.get-fallback($breakpoint, max-width);
+
+            @include media-query.breakpoint-up($breakpoint) {
+                --layout-max-width: #{$max-width};
+            }
+        }
+    }
+
+    .container {
+        padding-inline: var(--layout-margin);
+
+        @each $breakpoint in breakpoints.get-keys() {
+            $margin: breakpoints.get-fallback($breakpoint, margin);
+
+            @include media-query.breakpoint-up($breakpoint) {
+                --layout-margin: #{$margin};
+            }
+        }
+    }
+}
