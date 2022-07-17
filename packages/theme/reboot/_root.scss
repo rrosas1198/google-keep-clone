@@ -4,6 +4,12 @@
 @use "../system/kernel";
 
 @mixin core-styles() {
+    :root {
+        @include static-styles();
+    }
+}
+
+@mixin static-styles() {
     @each $style in color.get-keys() {
         $property: color.get-custom-property($style, color.$light-theme);
         @include kernel.declaration($property);

@@ -1,0 +1,6 @@
+/* stylelint-disable at-rule-no-unknown */
+@use "sass:string";
+
+@function has-prefix($string, $prefix) {
+    @return string.slice($string, 1, string.length($prefix)) == $prefix;
+}

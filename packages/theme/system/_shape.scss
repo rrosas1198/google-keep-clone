@@ -4,16 +4,23 @@
 @use "../modules/math-ext";
 
 $shape: (
+    // corner extra large
     corner-extra-large: math-ext.to-em(28px),
     corner-extra-large-top: math-ext.to-em(28px) math-ext.to-em(28px) 0 0,
+    // corner extra small
     corner-extra-small: math-ext.to-em(4px),
     corner-extra-small-top: math-ext.to-em(4px) math-ext.to-em(4px) 0 0,
+    // corner full
     corner-full: math-ext.to-em(9999px),
+    // corner large
     corner-large: math-ext.to-em(16px),
     corner-large-end: 0 math-ext.to-em(16px) math-ext.to-em(16px) 0,
     corner-large-top: math-ext.to-em(16px) math-ext.to-em(16px) 0 0,
+    // corner medium
     corner-medium: math-ext.to-em(12px),
+    // corner none
     corner-none: 0,
+    // corner small
     corner-small: math-ext.to-em(8px)
 ) !default;
 

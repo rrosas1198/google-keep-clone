@@ -1,5 +1,6 @@
 /* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
+@use "sass:map";
 @use "../references/palette";
 @use "./kernel";
 
@@ -71,9 +72,10 @@ $dark-theme: (
     @return map.keys($light-theme);
 }
 
-@function get-varname($property, $theme: $light-theme) {
-    $custom-property: get-custom-property($property, $theme);
-    @return kernel.get-varname($custom-property);
+@function get-varname($property) {
+    $property: get-custom-property($property, $light-theme);
+    $varname: kernel.get-varname($property);
+    @return var($varname);
 }
 
 @function get-custom-property($property, $theme: $light-theme) {

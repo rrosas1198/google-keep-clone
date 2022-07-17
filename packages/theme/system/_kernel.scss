@@ -1,7 +1,9 @@
 /* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
 @use "sass:map";
+@use "sass:meta";
 @use "sass:string";
+@use "../modules/string-ext";
 
 @function get-varname($custom-prop) {
     @return map.get($custom-prop, "varname");
@@ -47,6 +49,6 @@
             $value: get-fallback($custom-prop);
         }
 
-        $property: $value;
+        #{$property}: #{$value};
     }
 }

@@ -93,11 +93,11 @@ $palette: (
 
 @function get-fallback($property) {
     $property: _validate-palette($property);
-    @return map.get($motion, $property);
+    @return map.get($palette, $property);
 }
 
 @function _validate-palette($property) {
-    @if map.has-key($motion, $property) {
+    @if map.has-key($palette, $property) {
         @return $property;
     }
     @error "palette: invalid property #{$property}";
