@@ -1,4 +1,10 @@
 /* stylelint-disable at-rule-no-unknown */
+@use "@keep/theme/layout/container";
+@use "@keep/theme/reboot/fonts";
 @use "@keep/theme/reboot/reboot";
+@use "@keep/theme/reboot/root";
 
+@include root.core-styles();
 @include reboot.core-styles();
+
+@include container.core-styles();
