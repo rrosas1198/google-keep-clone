@@ -1,0 +1,6 @@
+/* stylelint-disable at-rule-no-unknown */
+@mixin static-styles() {
+    .mdc-icon-button--standard {
+        background-color: transparent;
+    }
+}

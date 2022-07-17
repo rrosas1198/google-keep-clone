@@ -1,0 +1,18 @@
+/* stylelint-disable at-rule-no-unknown */
+@use "sass:map";
+@use "./icon-button-theme";
+
+@mixin theme-styles($theme) {
+    @include icon-button-theme.icon-size(map.get($theme, icon-size));
+    @include icon-button-theme.state-layer-size($size: map.get($theme, state-layer-size));
+
+    @include icon-button-theme.icon-color(
+        (
+            default: map.get($theme, unselected-icon-color),
+            disabled: map.get($theme, disabled-icon-color),
+            focus: map.get($theme, unselected-focus-icon-color),
+            hover: map.get($theme, unselected-hover-icon-color),
+            pressed: map.get($theme, unselected-pressed-icon-color)
+        )
+    );
+}

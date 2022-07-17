@@ -11,11 +11,11 @@ $state: (
 
 @function get-fallback($property) {
     $property: _validate-state($property);
-    @return map.get($motion, $property);
+    @return map.get($state, $property);
 }
 
 @function _validate-state($property) {
-    @if map.has-key($motion, $property) {
+    @if map.has-key($state, $property) {
         @return $property;
     }
     @error "state: invalid property #{$property}";

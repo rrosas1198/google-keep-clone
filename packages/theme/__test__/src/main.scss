@@ -1,10 +1,18 @@
 /* stylelint-disable at-rule-no-unknown */
+@use "src/icon-button/icon-button-styles";
+@use "src/icon-button/standard-styles";
 @use "src/layout/container";
 @use "src/reboot/fonts";
 @use "src/reboot/reboot";
 @use "src/reboot/root";
 
+/* reboot */
 @include root.core-styles();
 @include reboot.core-styles();
 
+/* container */
 @include container.core-styles();
+
+/* icon button */
+@include icon-button-styles.core-styles();
+@include standard-styles.core-styles();

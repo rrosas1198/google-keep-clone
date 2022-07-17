@@ -1,0 +1,34 @@
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable at-rule-no-unknown */
+@use "../modules/math-ext";
+@use "../system/color";
+@use "../system/shape";
+@use "../system/state";
+
+$theme-tokens: (
+    disabled-icon-color: color.get-varname(on-surface),
+    disabled-icon-opacity: 0.38,
+    icon-size: math-ext.to-rem(24px),
+    selected-focus-icon-color: color.get-varname(primary),
+    selected-focus-state-layer-color: color.get-varname(primary),
+    selected-focus-state-layer-opacity: state.get-fallback(focus-state-layer-opacity),
+    selected-hover-icon-color: color.get-varname(primary),
+    selected-hover-state-layer-color: color.get-varname(primary),
+    selected-hover-state-layer-opacity: state.get-fallback(hover-state-layer-opacity),
+    selected-icon-color: color.get-varname(primary),
+    selected-pressed-icon-color: color.get-varname(primary),
+    selected-pressed-state-layer-color: color.get-varname(primary),
+    selected-pressed-state-layer-opacity: state.get-fallback(pressed-state-layer-opacity),
+    state-layer-shape: shape.get-fallback(corner-full),
+    state-layer-size: math-ext.to-rem(40px),
+    unselected-focus-icon-color: color.get-varname(on-surface-variant),
+    unselected-focus-state-layer-color: color.get-varname(on-surface-variant),
+    unselected-focus-state-layer-opacity: state.get-fallback(hover-state-layer-opacity),
+    unselected-hover-icon-color: color.get-varname(on-surface-variant),
+    unselected-hover-state-layer-color: color.get-varname(on-surface-variant),
+    unselected-hover-state-layer-opacity: state.get-fallback(hover-state-layer-opacity),
+    unselected-icon-color: color.get-varname(on-surface-variant),
+    unselected-pressed-icon-color: color.get-varname(on-surface-variant),
+    unselected-pressed-state-layer-color: color.get-varname(on-surface-variant),
+    unselected-pressed-state-layer-opacity: state.get-fallback(pressed-state-layer-opacity)
+) !default;

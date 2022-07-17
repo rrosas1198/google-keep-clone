@@ -1,0 +1,6 @@
+/* stylelint-disable at-rule-no-unknown */
+@use "./icon-button";
+
+@mixin core-styles() {
+    @include icon-button.static-styles();
+}

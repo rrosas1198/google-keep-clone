@@ -1,0 +1,42 @@
+/* stylelint-disable at-rule-no-unknown */
+@use "sass:map";
+
+@mixin state-layer-size($size) {
+    width: $size;
+    height: $size;
+}
+
+@mixin icon-size($size) {
+    font-size: $size;
+
+    i,
+    svg,
+    img {
+        width: $size;
+        height: $size;
+    }
+}
+
+@mixin icon-color($mapping) {
+    @include _set-icon-color(map.get($mapping, "default"));
+
+    &:disabled {
+        @include _set-icon-color(map.get($mapping, "disabled"));
+    }
+
+    &:focus {
+        @include _set-icon-color(map.get($mapping, "focus"));
+    }
+
+    &:hover {
+        @include _set-icon-color(map.get($mapping, "hover"));
+    }
+
+    &:not(:disabled):active {
+        @include _set-icon-color(map.get($mapping, "pressed"));
+    }
+}
+
+@mixin _set-icon-color($color) {
+    color: $color;
+}
