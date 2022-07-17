@@ -23,9 +23,16 @@ export const VIconButton = defineComponent({
     render(props: IconButtonProps) {
         const classList = computed(() => ({
             "mdc-icon-button": true,
-            "mdc-icon-button--standard": props.variant === "standard"
+            "mdc-icon-button--standard": props.variant === "standard",
+            "mdc-icon-button--filled": props.variant === "filled",
+            "mdc-icon-button--tonal": props.variant === "tonal",
+            "mdc-icon-button--outlined": props.variant === "outlined"
         }));
 
-        return <button class={classList}>VIconButton</button>;
+        return (
+            <button class={classList}>
+                <span class="mdc-icon-button__icon">VIconButton</span>
+            </button>
+        );
     }
 });
