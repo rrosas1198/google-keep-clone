@@ -1,0 +1,30 @@
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable at-rule-no-unknown */
+@use "sass:map";
+@use "../modules/math-ext";
+
+$shape: (
+    corner-extra-large: math-ext.to-em(28px),
+    corner-extra-large-top: math-ext.to-em(28px) math-ext.to-em(28px) 0 0,
+    corner-extra-small: math-ext.to-em(4px),
+    corner-extra-small-top: math-ext.to-em(4px) math-ext.to-em(4px) 0 0,
+    corner-full: math-ext.to-em(9999px),
+    corner-large: math-ext.to-em(16px),
+    corner-large-end: 0 math-ext.to-em(16px) math-ext.to-em(16px) 0,
+    corner-large-top: math-ext.to-em(16px) math-ext.to-em(16px) 0 0,
+    corner-medium: math-ext.to-em(12px),
+    corner-none: 0,
+    corner-small: math-ext.to-em(8px)
+) !default;
+
+@function get-fallback($property) {
+    $property: _validate-shape($property);
+    @return map.get($shape, $property);
+}
+
+@function _validate-shape($property) {
+    @if map.has-key($shape, $property) {
+        @return $property;
+    }
+    @error "shape: invalid property #{$property}";
+}

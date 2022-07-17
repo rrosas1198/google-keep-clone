@@ -1,0 +1,39 @@
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable at-rule-no-unknown */
+@use "sass:map";
+@use "../system/color";
+@use "../system/typescale";
+
+$body-theme: (
+    container-color: color.get-varname(background),
+    text-font: typescale.get-fallback(body-medium-font),
+    text-weight: typescale.get-fallback(body-medium-weight),
+    text-size: typescale.get-fallback(body-medium-size),
+    text-tracking: typescale.get-fallback(body-medium-line-height),
+    text-color: color.get-varname(on-background)
+);
+
+@mixin body-styles($theme: $body-theme) {
+    @include _static-theme-base($theme);
+    @include _static-typography-base($theme);
+}
+
+@mixin _static-theme-base($theme) {
+    $text-color: map.get($theme, text-color);
+    $container-color: map.get($theme, container-color);
+
+    color: $text-color;
+    background-color: $container-color;
+}
+
+@mixin _static-typography-base($theme) {
+    $font-family: map.get($theme, text-font);
+    $font-weight: map.get($theme, text-weight);
+    $font-size: map.get($theme, text-size);
+    $letter-spacing: map.get($theme, text-tracking);
+
+    font-family: $font-family;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    line-height: $letter-spacing;
+}

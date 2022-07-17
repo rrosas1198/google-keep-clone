@@ -1,0 +1,15 @@
+{
+    "name": "@keep/theme",
+    "version": "0.0.1",
+    "scripts": {
+        "build": "vite build __test__",
+        "watch": "vite __test__",
+        "deps:update": "taze -w"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^3.0.0",
+        "bauen": "^0.10.9",
+        "taze": "^0.7.6",
+        "vitest": "^0.18.1"
+    }
+}

@@ -1,0 +1,17 @@
+/* stylelint-disable at-rule-no-unknown */
+@use "sass:math";
+@use "sass:meta";
+
+@function to-em($px) {
+    @if math.compatible($px, 1px) {
+        @return math.div($px, 16px) * 1em;
+    }
+    @error "math: cannot convert #{$px} to em";
+}
+
+@function to-rem($px) {
+    @if math.compatible($px, 1px) {
+        @return math.div($px, 16px) * 1rem;
+    }
+    @error "math: cannot convert #{$px} to rem";
+}

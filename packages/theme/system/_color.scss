@@ -1,0 +1,90 @@
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable at-rule-no-unknown */
+@use "../references/palette";
+@use "./kernel";
+
+$light-theme: (
+    background: palette.get-fallback(neutral-100),
+    error: palette.get-fallback(error-40),
+    error-container: palette.get-fallback(error-90),
+    inverse-on-surface: palette.get-fallback(neutral-95),
+    inverse-primary: palette.get-fallback(primary-80),
+    inverse-surface: palette.get-fallback(neutral-20),
+    on-background: palette.get-fallback(neutral-10),
+    on-error: palette.get-fallback(error-100),
+    on-error-container: palette.get-fallback(error-10),
+    on-primary: palette.get-fallback(primary-100),
+    on-primary-container: palette.get-fallback(primary-10),
+    on-secondary: palette.get-fallback(secondary-100),
+    on-secondary-container: palette.get-fallback(secondary-10),
+    on-surface: palette.get-fallback(neutral-10),
+    on-surface-variant: palette.get-fallback(neutral-variant-30),
+    on-tertiary: palette.get-fallback(tertiary-100),
+    on-tertiary-container: palette.get-fallback(tertiary-10),
+    outline: palette.get-fallback(neutral-variant-50),
+    primary: palette.get-fallback(primary-40),
+    primary-container: palette.get-fallback(primary-90),
+    secondary: palette.get-fallback(secondary-40),
+    secondary-container: palette.get-fallback(secondary-90),
+    shadow: palette.get-fallback(neutral-0),
+    surface: palette.get-fallback(neutral-100),
+    surface-tint: #6991d6,
+    surface-tint-color: palette.get-fallback(primary-40),
+    surface-variant: palette.get-fallback(neutral-variant-90),
+    tertiary: palette.get-fallback(tertiary-40),
+    tertiary-container: palette.get-fallback(tertiary-90)
+) !default;
+
+$dark-theme: (
+    background: palette.get-fallback(neutral-10),
+    error: palette.get-fallback(error-80),
+    error-container: palette.get-fallback(error-30),
+    inverse-on-surface: palette.get-fallback(neutral-20),
+    inverse-primary: palette.get-fallback(primary-40),
+    inverse-surface: palette.get-fallback(neutral-90),
+    on-background: palette.get-fallback(neutral-90),
+    on-error: palette.get-fallback(error-20),
+    on-error-container: palette.get-fallback(error-80),
+    on-primary: palette.get-fallback(primary-20),
+    on-primary-container: palette.get-fallback(primary-90),
+    on-secondary: palette.get-fallback(secondary-20),
+    on-secondary-container: palette.get-fallback(secondary-90),
+    on-surface: palette.get-fallback(neutral-90),
+    on-surface-variant: palette.get-fallback(neutral-variant-80),
+    on-tertiary: palette.get-fallback(tertiary-20),
+    on-tertiary-container: palette.get-fallback(tertiary-90),
+    outline: palette.get-fallback(neutral-variant-60),
+    primary: palette.get-fallback(primary-80),
+    primary-container: palette.get-fallback(primary-30),
+    secondary: palette.get-fallback(secondary-80),
+    secondary-container: palette.get-fallback(secondary-30),
+    shadow: palette.get-fallback(neutral-0),
+    surface: palette.get-fallback(neutral-10),
+    surface-tint: #d1e1ff,
+    surface-tint-color: palette.get-fallback(primary-80),
+    surface-variant: palette.get-fallback(neutral-variant-30),
+    tertiary: palette.get-fallback(tertiary-80),
+    tertiary-container: palette.get-fallback(tertiary-30)
+) !default;
+
+@function get-keys() {
+    @return map.keys($light-theme);
+}
+
+@function get-varname($property, $theme: $light-theme) {
+    $custom-property: get-custom-property($property, $theme);
+    @return kernel.get-varname($custom-property);
+}
+
+@function get-custom-property($property, $theme: $light-theme) {
+    $property: _validate-color($property);
+    $fallback: map.get($theme, $property);
+    @return kernel.create-custom-property("md-sys-color-#{$property}", $fallback);
+}
+
+@function _validate-color($property) {
+    @if map.has-key($light-theme, $property) {
+        @return $property;
+    }
+    @error "color: invalid property #{$property}";
+}

@@ -1,0 +1,24 @@
+/* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
+@use "sass:math";
+@use "sass:string";
+
+@mixin aspect-ratio($width, $height) {
+    $ratio: string.unquote("#{$width}/#{$height}");
+
+    aspect-ratio: $ratio;
+
+    @supports not (aspect-ratio: $ratio) {
+        &::before {
+            float: left;
+            padding-top: math.percentage(math.div($height, $width));
+            content: "";
+        }
+
+        &::after {
+            display: block;
+            clear: both;
+            content: "";
+        }
+    }
+}

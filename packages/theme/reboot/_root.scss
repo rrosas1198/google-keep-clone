@@ -1,0 +1,18 @@
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable at-rule-no-unknown */
+@use "../system/color";
+@use "../system/kernel";
+
+@mixin core-styles() {
+    @each $style in color.get-keys() {
+        $property: color.get-custom-property($style, color.$light-theme);
+        @include kernel.declaration($property);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        @each $style in color.get-keys() {
+            $property: color.get-custom-property($style, color.$dark-theme);
+            @include kernel.declaration($property);
+        }
+    }
+}

@@ -1,0 +1,19 @@
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable at-rule-no-unknown */
+@use "sass:map";
+@use "../system/color";
+
+$selection-theme: (
+    container-color: color.get-varname(secondary),
+    text-color: color.get-varname(on-secondary)
+);
+
+@mixin with-selection($theme: $selection-theme) {
+    $container-color: map.get($theme, container-color);
+    $text-color: map.get($theme, text-color);
+
+    ::selection {
+        color: $text-color;
+        background-color: $container-color;
+    }
+}

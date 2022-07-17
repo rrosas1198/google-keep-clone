@@ -1,0 +1,6 @@
+/* stylelint-disable at-rule-no-unknown */
+@use "src/reboot/reboot";
+@use "src/reboot/root";
+
+@include root.core-styles();
+@include reboot.core-styles();

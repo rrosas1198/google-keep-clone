@@ -1,0 +1,22 @@
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable at-rule-no-unknown */
+@use "sass:map";
+
+$state: (
+    dragged-state-layer-opacity: 0.16,
+    focus-state-layer-opacity: 0.12,
+    hover-state-layer-opacity: 0.08,
+    pressed-state-layer-opacity: 0.12
+) !default;
+
+@function get-fallback($property) {
+    $property: _validate-state($property);
+    @return map.get($motion, $property);
+}
+
+@function _validate-state($property) {
+    @if map.has-key($motion, $property) {
+        @return $property;
+    }
+    @error "state: invalid property #{$property}";
+}

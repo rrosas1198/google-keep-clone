@@ -1,0 +1,23 @@
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable at-rule-no-unknown */
+@use "sass:map";
+
+$typeface: (
+    brand: roboto,
+    plain: roboto,
+    weight-bold: 700,
+    weight-medium: 500,
+    weight-regular: 400
+) !default;
+
+@function get-fallback($property) {
+    $property: _validate-typeface($property);
+    @return map.get($typeface, $property);
+}
+
+@function _validate-typeface($property) {
+    @if map.has-key($typeface, $property) {
+        @return $property;
+    }
+    @error "typeface: invalid property #{$property}";
+}
