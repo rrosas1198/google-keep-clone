@@ -4,7 +4,7 @@
     "main": "./dist/index.js",
     "typings": "./dist/index.d.ts",
     "scripts": {
-        "prepack": "bauen",
+        "build": "bauen",
         "watch": "bauen watch",
         "test": "vitest",
         "test:watch": "vitest --watch",

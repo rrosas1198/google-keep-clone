@@ -26,6 +26,7 @@
         "commitlint",
         "esbuild",
         "lage",
+        "listbox",
         "listhen",
         "metatype",
         "nuxi",

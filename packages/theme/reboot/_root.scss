@@ -15,10 +15,10 @@
         @include kernel.declaration($property);
     }
 
-    @media (prefers-color-scheme: dark) {
+    /* @media (prefers-color-scheme: dark) {
         @each $style in color.get-keys() {
             $property: color.get-custom-property($style, color.$dark-theme);
             @include kernel.declaration($property);
         }
-    }
+    } */
 }
