@@ -2,13 +2,13 @@
     "name": "app-frontend",
     "version": "0.0.0",
     "scripts": {
-        "dev": "nuxi dev",
+        "start": "nuxi preview",
         "build": "nuxi build",
-        "preview": "nuxi preview",
-        "deps:update": "taze -w",
+        "watch": "nuxi dev",
         "test": "vitest",
         "test:watch": "vitest --watch",
-        "test:coverage": "vitest --coverage"
+        "test:coverage": "vitest --coverage",
+        "deps:update": "taze -w"
     },
     "dependencies": {
         "@keep/components": "^0.0.1",

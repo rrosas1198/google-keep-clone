@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "scripts": {
         "start": "node ./dist/main.js",
-        "prepack": "bauen",
+        "build": "bauen",
         "watch": "bauen watch",
         "test": "vitest",
         "test:watch": "vitest --watch",
