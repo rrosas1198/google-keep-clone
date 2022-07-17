@@ -17,7 +17,7 @@
         "mysql2": "^2.3.3"
     },
     "devDependencies": {
-        "bauen": "^0.10.8",
+        "bauen": "^0.10.9",
         "taze": "^0.7.6",
         "vitest": "^0.18.1"
     }
