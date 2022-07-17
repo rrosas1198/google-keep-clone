@@ -2,6 +2,7 @@
     "files.exclude": {
         "**/.git": true,
         "**/.swc": true,
+        "**/.nuxt": true,
         "**/.DS_Store": true,
         "**/node_modules": true
     },
@@ -26,10 +27,14 @@
         "lage",
         "listhen",
         "metatype",
+        "nuxi",
+        "nuxt",
         "stylelint",
         "taze",
         "techkit",
         "tsyringe",
+        "typescale",
+        "varname",
         "yorkie"
     ]
 }

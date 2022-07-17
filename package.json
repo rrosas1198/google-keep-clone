@@ -12,10 +12,10 @@
     "scripts": {
         "build": "lage prepack",
         "rebuild": "lage prepack --no-cache",
-        "update": "lage update && taze -w",
         "lint": "npm run lint:ts && npm run lint:scss",
         "lint:ts": "eslint */**/*.ts --fix",
-        "lint:scss": "stylelint */**/*.scss --fix"
+        "lint:scss": "stylelint */**/*.scss --fix",
+        "deps:update": "lage deps:update && taze -w"
     },
     "devDependencies": {
         "@techkit/linter-config": "^0.3.7",

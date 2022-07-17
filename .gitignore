@@ -6,6 +6,7 @@ package-lock.json*
 yarn.lock*
 
 # Output
+**/.nuxt
 **/dist
 
 # Logs

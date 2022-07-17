@@ -1,4 +1,21 @@
 {
     "name": "app-frontend",
-    "version": "0.0.0"
+    "version": "0.0.0",
+    "scripts": {
+        "dev": "nuxi dev",
+        "build": "nuxi build",
+        "preview": "nuxi preview",
+        "deps:update": "taze -w",
+        "test": "vitest",
+        "test:watch": "vitest --watch",
+        "test:coverage": "vitest --coverage"
+    },
+    "dependencies": {
+        "nuxt": "^3.0.0-rc.5"
+    },
+    "devDependencies": {
+        "bauen": "^0.10.9",
+        "taze": "^0.7.6",
+        "vitest": "^0.18.1"
+    }
 }

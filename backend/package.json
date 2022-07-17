@@ -8,7 +8,7 @@
         "test": "vitest",
         "test:watch": "vitest --watch",
         "test:coverage": "vitest --coverage",
-        "update": "taze -w"
+        "deps:update": "taze -w"
     },
     "dependencies": {
         "@abraham/reflection": "^0.10.0",
