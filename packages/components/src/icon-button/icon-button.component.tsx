@@ -1,4 +1,4 @@
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, Ref, ref, renderSlot, SetupContext } from "vue";
 import { ARIAHasPopup } from "../interfaces";
 import { coerce, useRender } from "../utils";
 import { IconButtonColor, IconButtonProps, IconButtonVariant } from "./icon-button.interface";
@@ -39,7 +39,9 @@ export const VIconButton = defineComponent({
             default: "standard"
         }
     },
-    setup(props: IconButtonProps) {
+    setup(props: IconButtonProps, { slots }: SetupContext) {
+        const root = ref<HTMLElement>() as Ref<HTMLElement>;
+
         const isDisabled = coerce<boolean>(props.disabled);
 
         const classList = {
@@ -50,20 +52,19 @@ export const VIconButton = defineComponent({
             "mdc-icon-button--outlined": props.variant === "outlined"
         };
 
-        useRender(() => {
-            return (
-                <button
-                    id={props.id}
-                    name={props.name || props.id}
-                    class={classList}
-                    aria-label={props.ariaLabel}
-                    aria-has-popup={props.ariaHasPopup}
-                    disabled={isDisabled}
-                >
-                    <span class="mdc-icon-button__icon">V</span>
-                </button>
-            );
-        });
+        useRender(() => (
+            <button
+                ref={root}
+                id={props.id}
+                name={props.name || props.id}
+                class={classList}
+                aria-label={props.ariaLabel}
+                aria-has-popup={props.ariaHasPopup}
+                disabled={isDisabled}
+            >
+                <span class="mdc-icon-button__icon">{renderSlot(slots, "default")}</span>
+            </button>
+        ));
 
         return {};
     }

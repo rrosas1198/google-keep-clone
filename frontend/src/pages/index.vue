@@ -1,6 +1,6 @@
 <template>
     <h1>GoogleKeep</h1>
-    <VIconButton id="menu" aria-label="Abrir menú" />
+    <VIconButton id="menu" aria-label="Abrir menú">V</VIconButton>
 </template>
 
 <script setup>
