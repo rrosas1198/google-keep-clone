@@ -1,5 +1,6 @@
 import { Ref } from "vue";
 
+// See: https://github.com/luncheon/ripplet.js
 // See: https://github.com/asplunds/use-ripple
 // See: https://github.com/rwu823/react-ripples
 // See: https://github.com/surmon-china/vue-touch-ripple

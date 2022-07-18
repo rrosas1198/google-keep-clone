@@ -13,7 +13,7 @@
     "dependencies": {
         "@keep/components": "^0.0.1",
         "@keep/theme": "^0.0.1",
-        "nuxt": "^3.0.0-rc.5"
+        "nuxt": "^3.0.0-rc.6"
     },
     "devDependencies": {
         "bauen": "^0.10.9",
