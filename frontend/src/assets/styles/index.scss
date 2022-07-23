@@ -1,6 +1,6 @@
 /* stylelint-disable at-rule-no-unknown */
 @use "@keep/theme/icon-button/icon-button-styles";
-@use "@keep/theme/icon-button/standard-styles";
+@use "@keep/theme/icon-button/standard-styles" as icon-button-standard-styles;
 @use "@keep/theme/layout/container";
 @use "@keep/theme/reboot/fonts";
 @use "@keep/theme/reboot/reboot";
@@ -15,4 +15,4 @@
 
 /* icon button */
 @include icon-button-styles.core-styles();
-@include standard-styles.core-styles();
+@include icon-button-standard-styles.core-styles();

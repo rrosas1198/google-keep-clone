@@ -1,6 +1,7 @@
-import { coerce, useRender } from "src/utils";
+import { useRender } from "src/composables";
+import { coerce } from "src/utils";
 import { defineComponent, PropType, renderSlot, SetupContext } from "vue";
-import { ButtonColor, ButtonProps, ButtonVariant } from "./button.interface";
+import { ButtonColor, ButtonProps, ButtonType, ButtonVariant } from "./button.interface";
 
 export const VButton = defineComponent({
     name: "VButton",
@@ -13,10 +14,6 @@ export const VButton = defineComponent({
             type: String,
             default: null
         },
-        disabled: {
-            type: [Boolean, String],
-            default: false
-        },
         color: {
             type: String as PropType<ButtonColor>,
             default: null
@@ -24,9 +21,30 @@ export const VButton = defineComponent({
         variant: {
             type: String as PropType<ButtonVariant>,
             default: "standard"
+        },
+        autofocus: {
+            type: [Boolean, String],
+            default: false
+        },
+        disabled: {
+            type: [Boolean, String],
+            default: false
+        },
+        type: {
+            type: String as PropType<ButtonType>,
+            default: "button"
+        },
+        leadingIcon: {
+            type: String,
+            default: null
+        },
+        trailingIcon: {
+            type: String,
+            default: null
         }
     },
-    setup(props: ButtonProps, { slots }: SetupContext) {
+    setup(props: ButtonProps, { attrs, slots }: SetupContext) {
+        const isAutofocus = coerce<boolean>(props.autofocus);
         const isDisabled = coerce<boolean>(props.disabled);
 
         const classList = {
@@ -40,14 +58,27 @@ export const VButton = defineComponent({
             "mdc-button--outlined": props.variant === "outlined"
         };
 
+        function renderLeading() {
+            // leadingIcon
+        }
+
+        function renderTrailing() {
+            // trailingIcon
+        }
+
         useRender(() => (
             <button
                 id={props.id}
                 name={props.name || props.id}
                 class={classList}
+                autofocus={isAutofocus}
                 disabled={isDisabled}
+                type={props.type}
+                {...attrs}
             >
-                {renderSlot(slots, "default")}
+                {renderLeading()}
+                <span class="mdc-button__label">{renderSlot(slots, "default")}</span>
+                {renderTrailing()}
             </button>
         ));
 

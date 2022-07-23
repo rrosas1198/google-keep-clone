@@ -1,7 +1,13 @@
-import { defineComponent, PropType, Ref, ref, renderSlot, SetupContext } from "vue";
-import { ARIAHasPopup } from "../interfaces";
-import { coerce, useRender } from "../utils";
-import { IconButtonColor, IconButtonProps, IconButtonVariant } from "./icon-button.interface";
+import { useRender } from "src/composables";
+import { ARIAHasPopup } from "src/interfaces";
+import { coerce } from "src/utils";
+import { defineComponent, PropType, renderSlot, SetupContext } from "vue";
+import {
+    IconButtonColor,
+    IconButtonProps,
+    IconButtonType,
+    IconButtonVariant
+} from "./icon-button.interface";
 
 export const VIconButton = defineComponent({
     name: "VIconButton",
@@ -14,6 +20,14 @@ export const VIconButton = defineComponent({
             type: String,
             default: null
         },
+        color: {
+            type: String as PropType<IconButtonColor>,
+            default: null
+        },
+        variant: {
+            type: String as PropType<IconButtonVariant>,
+            default: "standard"
+        },
         ariaLabel: {
             type: String,
             required: true
@@ -22,22 +36,21 @@ export const VIconButton = defineComponent({
             type: String as PropType<ARIAHasPopup>,
             default: null
         },
+        autofocus: {
+            type: [Boolean, String],
+            default: false
+        },
         disabled: {
             type: [Boolean, String],
             default: false
         },
-        color: {
-            type: String as PropType<IconButtonColor>,
-            default: null
-        },
-        variant: {
-            type: String as PropType<IconButtonVariant>,
-            default: "standard"
+        type: {
+            type: String as PropType<IconButtonType>,
+            default: "button"
         }
     },
-    setup(props: IconButtonProps, { slots }: SetupContext) {
-        const root = ref<HTMLElement>() as Ref<HTMLElement>;
-
+    setup(props: IconButtonProps, { attrs, slots }: SetupContext) {
+        const isAutofocus = coerce<boolean>(props.autofocus);
         const isDisabled = coerce<boolean>(props.disabled);
 
         const classList = {
@@ -53,13 +66,15 @@ export const VIconButton = defineComponent({
 
         useRender(() => (
             <button
-                ref={root}
                 id={props.id}
                 name={props.name || props.id}
                 class={classList}
+                autofocus={isAutofocus}
+                disabled={isDisabled}
+                type={props.type}
                 aria-label={props.ariaLabel}
                 aria-has-popup={props.ariaHasPopup}
-                disabled={isDisabled}
+                {...attrs}
             >
                 <span class="mdc-icon-button__icon">{renderSlot(slots, "default")}</span>
             </button>
