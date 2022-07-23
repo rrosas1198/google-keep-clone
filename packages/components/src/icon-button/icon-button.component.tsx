@@ -5,10 +5,6 @@ import { IconButtonColor, IconButtonProps, IconButtonVariant } from "./icon-butt
 
 export const VIconButton = defineComponent({
     name: "VIconButton",
-    model: {
-        prop: "modelValue",
-        event: "update:modelValue"
-    },
     props: {
         id: {
             type: String,
@@ -46,6 +42,9 @@ export const VIconButton = defineComponent({
 
         const classList = {
             "mdc-icon-button": true,
+            "mdc-icon-button--primary": props.color === "primary",
+            "mdc-icon-button--secondary": props.color === "secondary",
+            "mdc-icon-button--tertiary": props.color === "tertiary",
             "mdc-icon-button--standard": props.variant === "standard",
             "mdc-icon-button--filled": props.variant === "filled",
             "mdc-icon-button--tonal": props.variant === "tonal",
