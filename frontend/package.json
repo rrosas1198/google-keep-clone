@@ -11,11 +11,11 @@
         "deps:update": "taze -w"
     },
     "dependencies": {
-        "@keep/components": "^0.0.1",
-        "@keep/theme": "^0.0.1",
         "nuxt": "^3.0.0-rc.6"
     },
     "devDependencies": {
+        "@keep/components": "^0.0.1",
+        "@keep/theme": "^0.0.1",
         "bauen": "^0.10.9",
         "taze": "^0.7.6",
         "vitest": "^0.18.1"

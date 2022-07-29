@@ -1,7 +1,7 @@
 <template>
     <h1>GoogleKeep</h1>
     <VIconButton id="menu" aria-label="Abrir menú">
-        <span class="material-symbols-outlined">menu</span>
+        <i class="material-symbols-outlined">menu</i>
     </VIconButton>
 </template>
 
