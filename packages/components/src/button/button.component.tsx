@@ -47,6 +47,9 @@ export const VButton = defineComponent({
         const isAutofocus = coerce<boolean>(props.autofocus);
         const isDisabled = coerce<boolean>(props.disabled);
 
+        const hasLeading = "leading" in slots || !!props.leadingIcon;
+        const hasTrailing = "trailing" in slots || !!props.trailingIcon;
+
         const classList = {
             "mdc-button": true,
             "mdc-button--primary": props.color === "primary",
@@ -59,11 +62,19 @@ export const VButton = defineComponent({
         };
 
         function renderLeading() {
-            // leadingIcon
+            return (
+                <span class="mdc-button__leading">
+                    {"leading" in slots ? renderSlot(slots, "leading") : props.leadingIcon}
+                </span>
+            );
         }
 
         function renderTrailing() {
-            // trailingIcon
+            return (
+                <span class="mdc-button__trailing">
+                    {"trailing" in slots ? renderSlot(slots, "trailing") : props.trailingIcon}
+                </span>
+            );
         }
 
         useRender(() => (
@@ -76,9 +87,9 @@ export const VButton = defineComponent({
                 type={props.type}
                 {...attrs}
             >
-                {renderLeading()}
+                {hasLeading && renderLeading()}
                 <span class="mdc-button__label">{renderSlot(slots, "default")}</span>
-                {renderTrailing()}
+                {hasTrailing && renderTrailing()}
             </button>
         ));
 
