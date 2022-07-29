@@ -1,6 +1,6 @@
-import { useRender } from "src/composables";
-import { coerce } from "src/utils";
 import { defineComponent, PropType, renderSlot, SetupContext } from "vue";
+import { useRender } from "../composables";
+import { coerce } from "../utils";
 import { ButtonColor, ButtonProps, ButtonType, ButtonVariant } from "./button.interface";
 
 export const VButton = defineComponent({

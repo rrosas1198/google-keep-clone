@@ -1,6 +1,6 @@
-import { useModel, useRender } from "src/composables";
-import { coerce } from "src/utils";
 import { defineComponent, PropType, renderSlot, SetupContext } from "vue";
+import { useModel, useRender } from "../composables";
+import { coerce } from "../utils";
 import { TextFieldProps, TextFieldType } from "./text-field.interface";
 
 export const VTextField = defineComponent({

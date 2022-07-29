@@ -1,7 +1,7 @@
-import { useRender } from "src/composables";
-import { ARIAHasPopup } from "src/interfaces";
-import { coerce } from "src/utils";
 import { defineComponent, PropType, renderSlot, SetupContext } from "vue";
+import { useRender } from "../composables";
+import { ARIAHasPopup } from "../interfaces";
+import { coerce } from "../utils";
 import {
     IconButtonColor,
     IconButtonProps,
