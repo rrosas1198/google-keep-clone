@@ -4,24 +4,29 @@
             <i class="material-symbols-outlined">menu</i>
         </VIconButton>
 
-        <form id="search">
-            <VIconButton id="search-submit" aria-label="Buscar" type="submit">
+        <form id="search" class="home__search">
+            <VIconButton
+                id="search-submit"
+                class="home__search-submit"
+                aria-label="Buscar"
+                type="submit"
+            >
                 <i class="material-symbols-outlined">search</i>
             </VIconButton>
 
-            <VTextField
-                id="search-input"
-                label="Buscar"
-                placeholder="Buscar"
-                leading-icon="search"
-            />
+            <VTextField id="search-input" label="Buscar" placeholder="Buscar" />
 
-            <VIconButton id="search-clear" aria-label="Borrar búsqueda" type="reset">
+            <VIconButton
+                id="search-reset"
+                class="home__search-reset"
+                aria-label="Borrar búsqueda"
+                type="reset"
+            >
                 <i class="material-symbols-outlined">close</i>
             </VIconButton>
         </form>
 
-        <VIconButton id="refresh" link aria-label="Actualizar">
+        <VIconButton id="refresh" class="home__refresh" link aria-label="Actualizar">
             <i class="material-symbols-outlined">refresh</i>
         </VIconButton>
 
@@ -29,7 +34,7 @@
             <i class="material-symbols-outlined">{{ gridViewIcon }}</i>
         </VIconButton>
 
-        <VIconButton id="settings" link aria-label="Configuración">
+        <VIconButton id="settings" class="home__settings" link aria-label="Configuración">
             <i class="material-symbols-outlined">settings</i>
         </VIconButton>
 
@@ -66,6 +71,7 @@ function toggleViewMode() {
 
 <style lang="scss">
 @use "@keep/theme/modules/math-ext";
+@use "@keep/theme/layout/media-query";
 @use "@keep/theme/system/shape";
 
 .home__header {
@@ -76,5 +82,39 @@ function toggleViewMode() {
     padding-block: math-ext.to-rem(4px);
     margin-block: math-ext.to-rem(8px);
     border-radius: shape.get-fallback(corner-extra-large);
+}
+
+.home__search {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.home__search-submit,
+.home__search-reset {
+    position: absolute;
+    inset-block-start: 0;
+    display: none;
+
+    @include media-query.breakpoint-up(medium) {
+        display: flex;
+    }
+}
+
+.home__search-submit {
+    inset-inline-start: 0;
+}
+
+.home__search-reset {
+    inset-inline-end: 0;
+}
+
+.home__refresh,
+.home__settings {
+    display: none;
+
+    @include media-query.breakpoint-up(medium) {
+        display: flex;
+    }
 }
 </style>
