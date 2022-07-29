@@ -1,12 +1,12 @@
 import { ApplicationContext } from "@keep/common";
-import { MigrationService } from "./migration/migration.service";
+import { MigrationRunner } from "./migration/migration.runner";
 
 async function main() {
     const context = new ApplicationContext();
 
     // Migration
-    const migrationService = context.resolve(MigrationService);
-    await migrationService.execute();
+    const migrationRunner = context.resolve(MigrationRunner);
+    await migrationRunner.execute();
 }
 
 main().catch(error => {

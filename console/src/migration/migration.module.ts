@@ -1,7 +1,7 @@
 import { Module } from "@keep/common";
-import { MigrationService } from "./migration.service";
+import { MigrationRunner } from "./migration.runner";
 
 @Module({
-    providers: [MigrationService]
+    providers: [MigrationRunner]
 })
 export class MigrationModule {}
