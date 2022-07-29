@@ -29,9 +29,9 @@ import { VIconButton } from "@keep/components";
 
 const isSingleView = ref(false);
 
-const gridViewIcon = computed(() => (isSingleView.value ? "view_agenda" : "grid_view"));
+const gridViewIcon = computed(() => (isSingleView.value ? "grid_view" : "view_agenda"));
 const gridViewLabel = computed(() =>
-    isSingleView.value ? "Vista de columna" : "Vista de cuadricula"
+    isSingleView.value ? "Vista de cuadrícula" : "Vista de lista"
 );
 
 function toggleViewMode() {
