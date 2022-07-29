@@ -1,0 +1,23 @@
+{
+    "name": "app-console",
+    "version": "0.0.0",
+    "scripts": {
+        "start": "node ./dist/main.js",
+        "build": "bauen",
+        "watch": "bauen watch",
+        "test": "vitest",
+        "test:watch": "vitest --watch",
+        "test:coverage": "vitest --coverage",
+        "deps:update": "taze -w"
+    },
+    "dependencies": {
+        "@abraham/reflection": "^0.10.0",
+        "@keep/common": "^0.0.1",
+        "@keep/mysql": "^0.0.1"
+    },
+    "devDependencies": {
+        "bauen": "^0.10.9",
+        "taze": "^0.7.6",
+        "vitest": "^0.18.1"
+    }
+}
