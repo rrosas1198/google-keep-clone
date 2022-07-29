@@ -1,6 +1,6 @@
 import { useModel, useRender } from "src/composables";
 import { coerce } from "src/utils";
-import { defineComponent, PropType, SetupContext } from "vue";
+import { defineComponent, PropType, renderSlot, SetupContext } from "vue";
 import { TextFieldProps, TextFieldType } from "./text-field.interface";
 
 export const VTextField = defineComponent({
@@ -59,7 +59,7 @@ export const VTextField = defineComponent({
             default: null
         }
     },
-    setup(props: TextFieldProps, { attrs }: SetupContext) {
+    setup(props: TextFieldProps, { attrs, slots }: SetupContext) {
         const model = useModel<string>();
 
         const isAutofocus = coerce<boolean>(props.autofocus);
@@ -67,21 +67,32 @@ export const VTextField = defineComponent({
         const isReadonly = coerce<boolean>(props.readonly);
         const isRequired = coerce<boolean>(props.required);
 
+        const hasLeading = "leading" in slots || !!props.leadingIcon;
+        const hasTrailing = "trailing" in slots || !!props.trailingIcon;
+
         function handleInput(event: Event) {
             model.value = (event.target as HTMLInputElement).value;
         }
 
         function renderLeading() {
-            // leadingIcon
+            return (
+                <span class="mdc-text-field__leading">
+                    {"leading" in slots ? renderSlot(slots, "leading") : props.leadingIcon}
+                </span>
+            );
         }
 
         function renderTrailing() {
-            // trailingIcon
+            return (
+                <span class="mdc-text-field__trailing">
+                    {"trailing" in slots ? renderSlot(slots, "trailing") : props.trailingIcon}
+                </span>
+            );
         }
 
         useRender(() => (
             <div class="mdc-text-field">
-                {renderLeading()}
+                {hasLeading && renderLeading()}
                 <input
                     class="mdc-text-field__input"
                     placeholder={props.placeholder}
@@ -94,7 +105,7 @@ export const VTextField = defineComponent({
                     onInput={handleInput}
                     {...attrs}
                 />
-                {renderTrailing()}
+                {hasTrailing && renderTrailing()}
             </div>
         ));
 
