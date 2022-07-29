@@ -15,5 +15,6 @@ export interface IconButtonProps {
     ariaHasPopup: ARIAHasPopup;
     autofocus: boolean | string;
     disabled: boolean | string;
+    link: boolean | string;
     type: IconButtonType;
 }

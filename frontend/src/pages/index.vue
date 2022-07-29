@@ -1,14 +1,14 @@
 <template>
     <header class="home__header container-fluid">
-        <VIconButton id="menu" aria-label="Abrir menú">
+        <VIconButton id="menu" link aria-label="Abrir menú">
             <i class="material-symbols-outlined">menu</i>
         </VIconButton>
 
-        <VIconButton id="view" :aria-label="gridViewLabel" @click.prevent="toggleViewMode">
+        <VIconButton id="view" link :aria-label="gridViewLabel" @click.prevent="toggleViewMode">
             <i class="material-symbols-outlined">{{ gridViewIcon }}</i>
         </VIconButton>
 
-        <VIconButton id="avatar" aria-label="Cuenta de Google: Jhon Doe (jhondoe@example.com)">
+        <VIconButton id="avatar" link aria-label="Cuenta de Google: Jhon Doe (jhondoe@example.com)">
             <i class="material-symbols-outlined">person_filled</i>
         </VIconButton>
     </header>

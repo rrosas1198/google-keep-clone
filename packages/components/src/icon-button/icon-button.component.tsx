@@ -44,6 +44,10 @@ export const VIconButton = defineComponent({
             type: [Boolean, String],
             default: false
         },
+        link: {
+            type: [Boolean, String],
+            default: false
+        },
         type: {
             type: String as PropType<IconButtonType>,
             default: "button"
@@ -52,6 +56,9 @@ export const VIconButton = defineComponent({
     setup(props: IconButtonProps, { attrs, slots }: SetupContext) {
         const isAutofocus = coerce<boolean>(props.autofocus);
         const isDisabled = coerce<boolean>(props.disabled);
+        const isLink = coerce<boolean>(props.link);
+
+        const Element = isLink ? "a" : "button";
 
         const classList = {
             "mdc-icon-button": true,
@@ -65,19 +72,20 @@ export const VIconButton = defineComponent({
         };
 
         useRender(() => (
-            <button
+            <Element
                 id={props.id}
                 name={props.name || props.id}
                 class={classList}
                 autofocus={isAutofocus}
                 disabled={isDisabled}
-                type={props.type}
+                type={isLink ? undefined : props.type}
+                role={isLink ? "button" : undefined}
                 aria-label={props.ariaLabel}
                 aria-has-popup={props.ariaHasPopup}
                 {...attrs}
             >
                 <span class="mdc-icon-button__icon">{renderSlot(slots, "default")}</span>
-            </button>
+            </Element>
         ));
 
         return {};
