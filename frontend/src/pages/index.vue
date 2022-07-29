@@ -4,8 +4,33 @@
             <i class="material-symbols-outlined">menu</i>
         </VIconButton>
 
+        <form id="search">
+            <VIconButton id="search-submit" aria-label="Buscar" type="submit">
+                <i class="material-symbols-outlined">search</i>
+            </VIconButton>
+
+            <VTextField
+                id="search-input"
+                label="Buscar"
+                placeholder="Buscar"
+                leading-icon="search"
+            />
+
+            <VIconButton id="search-clear" aria-label="Borrar búsqueda" type="reset">
+                <i class="material-symbols-outlined">close</i>
+            </VIconButton>
+        </form>
+
+        <VIconButton id="refresh" link aria-label="Actualizar">
+            <i class="material-symbols-outlined">refresh</i>
+        </VIconButton>
+
         <VIconButton id="view" link :aria-label="gridViewLabel" @click.prevent="toggleViewMode">
             <i class="material-symbols-outlined">{{ gridViewIcon }}</i>
+        </VIconButton>
+
+        <VIconButton id="settings" link aria-label="Configuración">
+            <i class="material-symbols-outlined">settings</i>
         </VIconButton>
 
         <VIconButton id="avatar" link aria-label="Cuenta de Google: Jhon Doe (jhondoe@example.com)">
@@ -25,7 +50,7 @@
 </template>
 
 <script setup>
-import { VIconButton } from "@keep/components";
+import { VIconButton, VTextField } from "@keep/components";
 
 const isSingleView = ref(false);
 
