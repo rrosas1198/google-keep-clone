@@ -74,26 +74,32 @@ export const VTextField = defineComponent({
             model.value = (event.target as HTMLInputElement).value;
         }
 
+        function getLeadingContent() {
+            if ("leading" in slots) return renderSlot(slots, "leading");
+            return <i class="material-symbols-outlined">{props.leadingIcon}</i>;
+        }
+
+        function getTrailingContent() {
+            if ("trailing" in slots) return renderSlot(slots, "trailing");
+            return <i class="material-symbols-outlined">{props.trailingIcon}</i>;
+        }
+
         function renderLeading() {
-            return (
-                <span class="mdc-text-field__leading">
-                    {"leading" in slots ? renderSlot(slots, "leading") : props.leadingIcon}
-                </span>
-            );
+            if (!hasLeading) return null;
+            return <span class="mdc-text-field__leading">{getLeadingContent()}</span>;
         }
 
         function renderTrailing() {
-            return (
-                <span class="mdc-text-field__trailing">
-                    {"trailing" in slots ? renderSlot(slots, "trailing") : props.trailingIcon}
-                </span>
-            );
+            if (!hasTrailing) return null;
+            return <span class="mdc-text-field__trailing">{getTrailingContent()}</span>;
         }
 
         useRender(() => (
             <div class="mdc-text-field">
-                {hasLeading && renderLeading()}
+                {renderLeading()}
                 <input
+                    id={props.id}
+                    name={props.name || props.id}
                     class="mdc-text-field__input"
                     placeholder={props.placeholder}
                     autofocus={isAutofocus}
@@ -105,7 +111,7 @@ export const VTextField = defineComponent({
                     onInput={handleInput}
                     {...attrs}
                 />
-                {hasTrailing && renderTrailing()}
+                {renderTrailing()}
             </div>
         ));
 
