@@ -1,10 +1,10 @@
 import { defineComponent, PropType, SetupContext } from "vue";
 import { ToggleValue, useRender, useToggle } from "../composables";
 import { coerce } from "../utils";
-import { CheckboxColor, CheckboxProps } from "./checkbox.interface";
+import { RadioColor, RadioProps } from "./radio.interface";
 
-export const VCheckbox = defineComponent({
-    name: "VCheckbox",
+export const VRadio = defineComponent({
+    name: "VRadio",
     props: {
         id: {
             type: String,
@@ -15,7 +15,7 @@ export const VCheckbox = defineComponent({
             default: null
         },
         color: {
-            type: String as PropType<CheckboxColor>,
+            type: String as PropType<RadioColor>,
             default: null
         },
         modelValue: {
@@ -31,10 +31,6 @@ export const VCheckbox = defineComponent({
             default: false
         },
         checked: {
-            type: [Boolean, String],
-            default: false
-        },
-        indeterminate: {
             type: [Boolean, String],
             default: false
         },
@@ -55,21 +51,19 @@ export const VCheckbox = defineComponent({
             default: false
         }
     },
-    setup(props: CheckboxProps, { attrs }: SetupContext) {
+    setup(props: RadioProps, { attrs }: SetupContext) {
         const { checked, handleInput } = useToggle(props);
 
         const isAutofocus = coerce<boolean>(props.autofocus);
         const isDisabled = coerce<boolean>(props.disabled);
-        const isIndeterminate = coerce<boolean>(props.indeterminate);
 
-        const ariaChecked = isIndeterminate ? "mixed" : undefined;
         const ariaLabel = props.ariaLabelOn || props.ariaLabelOff;
 
         const classList = {
-            "mdc-checkbox": true,
-            "mdc-checkbox--primary": props.color === "primary",
-            "mdc-checkbox--secondary": props.color === "secondary",
-            "mdc-checkbox--tertiary": props.color === "tertiary"
+            "mdc-radio": true,
+            "mdc-radio--primary": props.color === "primary",
+            "mdc-radio--secondary": props.color === "secondary",
+            "mdc-radio--tertiary": props.color === "tertiary"
         };
 
         useRender(() => (
@@ -77,26 +71,18 @@ export const VCheckbox = defineComponent({
                 <input
                     id={props.id}
                     name={props.name || props.id}
-                    class="mdc-checkbox__native-control"
-                    type="checkbox"
+                    class="mdc-radio__native-control"
+                    type="radio"
                     autofocus={isAutofocus}
                     disabled={isDisabled}
-                    indeterminate={isIndeterminate}
                     checked={checked.value}
-                    aria-checked={ariaChecked}
                     aria-label={ariaLabel}
                     onChange={handleInput}
                     {...attrs}
                 />
-                <div class="mdc-checkbox__background">
-                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                            class="md3-checkbox__checkmark-path"
-                            fill="none"
-                            d="M1.73,12.91 8.1,19.28 22.79,4.59"
-                        ></path>
-                    </svg>
-                    <div class="mdc-checkbox__mixedmark"></div>
+                <div class="mdc-radio__background">
+                    <div class="mdc-radio__outer-circle"></div>
+                    <div class="mdc-radio__inner-circle"></div>
                 </div>
             </div>
         ));
