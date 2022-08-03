@@ -20,6 +20,7 @@ export function useToggle(props: ToggleProps) {
     const ariaLabel = computed(() => (checked.value ? ariaLabelOn.value : ariaLabelOff.value));
 
     const update = (value: ToggleValue) => {
+        emit("input", value);
         emit("change", value);
         emit("update:modelValue", value);
     };

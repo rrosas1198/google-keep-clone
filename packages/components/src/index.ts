@@ -4,6 +4,8 @@ export * from "./composables";
 export * from "./icon-button";
 export * from "./icon-button-toggle";
 export * from "./interfaces";
+export * from "./radio";
 export * from "./ripple";
+export * from "./switch";
 export * from "./text-field";
 export * from "./utils";
