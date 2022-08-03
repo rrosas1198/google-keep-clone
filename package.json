@@ -14,7 +14,7 @@
         "build": "lage prepack",
         "rebuild": "lage prepack --no-cache",
         "lint": "npm run lint:ts && npm run lint:scss",
-        "lint:ts": "eslint */**/*.ts --fix",
+        "lint:ts": "eslint */**/*.{ts,tsx} --fix",
         "lint:scss": "stylelint */**/*.scss --fix",
         "deps:update": "lage deps:update && taze -w"
     },
