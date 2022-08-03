@@ -1,4 +1,5 @@
 export * from "./button";
+export * from "./checkbox";
 export * from "./composables";
 export * from "./icon-button";
 export * from "./icon-button-toggle";

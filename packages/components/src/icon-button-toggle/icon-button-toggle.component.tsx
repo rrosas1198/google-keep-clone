@@ -42,6 +42,10 @@ export const VIconButtonToggle = defineComponent({
             type: [Boolean, String],
             default: false
         },
+        autofocus: {
+            type: [Boolean, String],
+            default: false
+        },
         ariaLabelOn: {
             type: String,
             default: null
@@ -62,6 +66,7 @@ export const VIconButtonToggle = defineComponent({
     setup(props: IconButtonToggleProps, { attrs, slots }: SetupContext) {
         const { checked, ariaLabel, handleClick } = useToggle(props);
 
+        const isAutofocus = coerce<boolean>(props.autofocus);
         const isDisabled = coerce<boolean>(props.disabled);
         const ariaPressed = props.ariaLabelOn && props.ariaLabelOff ? undefined : checked.value;
 
@@ -81,6 +86,7 @@ export const VIconButtonToggle = defineComponent({
                 id={props.id}
                 name={props.name || props.id}
                 class={classList}
+                autofocus={isAutofocus}
                 disabled={isDisabled}
                 type="button"
                 aria-pressed={ariaPressed}

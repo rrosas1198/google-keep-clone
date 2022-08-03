@@ -11,4 +11,5 @@ export interface IconButtonToggleProps extends ToggleProps {
     color: IconButtonToggleColor;
     variant: IconButtonToggleVariant;
     ariaLabel: string;
+    autofocus: boolean | string;
 }

@@ -28,10 +28,15 @@ export function useToggle(props: ToggleProps) {
 
     const uncheck = () => update(dataValueOff.value);
 
+    const handleInput = (event: Event) => {
+        const target = event.target as HTMLInputElement;
+        update(target?.checked ? dataValueOn.value : dataValueOff.value);
+    };
+
     const handleClick = () => {
         if (disabled.value) return;
         checked.value ? uncheck() : check();
     };
 
-    return { checked, ariaLabel, handleClick };
+    return { checked, ariaLabel, handleInput, handleClick };
 }
