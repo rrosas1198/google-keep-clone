@@ -1,12 +1,14 @@
 /* stylelint-disable at-rule-no-unknown */
-@use "./icon-button-tokens";
 @use "./standard-icon-button";
+@use "./standard-icon-button-tokens";
 @use "./standard-icon-button-theme";
 
 @mixin core-styles() {
     @include standard-icon-button.static-styles();
 
-    .mdc-icon-button--standard {
-        @include standard-icon-button-theme.theme-styles(icon-button-tokens.$theme-tokens);
+    .mdc-icon-button--standard.mdc-icon-button--primary {
+        @include standard-icon-button-theme.theme-styles(
+            standard-icon-button-tokens.$primary-theme
+        );
     }
 }

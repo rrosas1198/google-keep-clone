@@ -1,5 +1,6 @@
 /* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
+@use "sass:map";
 @use "../modules/math-ext";
 @use "../system/color";
 @use "../system/shape";
@@ -9,15 +10,15 @@ $theme-tokens: (
     disabled-icon-color: color.get-varname(on-surface),
     disabled-icon-opacity: 0.38,
     icon-size: math-ext.to-rem(24px),
-    selected-focus-icon-color: color.get-varname(primary),
-    selected-focus-state-layer-color: color.get-varname(primary),
+    selected-focus-icon-color: null,
+    selected-focus-state-layer-color: null,
     selected-focus-state-layer-opacity: state.get-fallback(focus-state-layer-opacity),
-    selected-hover-icon-color: color.get-varname(primary),
-    selected-hover-state-layer-color: color.get-varname(primary),
+    selected-hover-icon-color: null,
+    selected-hover-state-layer-color: null,
     selected-hover-state-layer-opacity: state.get-fallback(hover-state-layer-opacity),
-    selected-icon-color: color.get-varname(primary),
-    selected-pressed-icon-color: color.get-varname(primary),
-    selected-pressed-state-layer-color: color.get-varname(primary),
+    selected-icon-color: null,
+    selected-pressed-icon-color: null,
+    selected-pressed-state-layer-color: null,
     selected-pressed-state-layer-opacity: state.get-fallback(pressed-state-layer-opacity),
     state-layer-shape: shape.get-fallback(corner-full),
     state-layer-size: math-ext.to-rem(40px),
@@ -31,4 +32,17 @@ $theme-tokens: (
     unselected-pressed-icon-color: color.get-varname(on-surface-variant),
     unselected-pressed-state-layer-color: color.get-varname(on-surface-variant),
     unselected-pressed-state-layer-opacity: state.get-fallback(pressed-state-layer-opacity)
+) !default;
+
+$primary-theme: map.merge(
+    $theme-token,
+    (
+        selected-focus-icon-color: color.get-varname(primary),
+        selected-focus-state-layer-color: color.get-varname(primary),
+        selected-hover-icon-color: color.get-varname(primary),
+        selected-hover-state-layer-color: color.get-varname(primary),
+        selected-icon-color: color.get-varname(primary),
+        selected-pressed-icon-color: color.get-varname(primary),
+        selected-pressed-state-layer-color: color.get-varname(primary)
+    )
 ) !default;
