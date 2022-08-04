@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `note`
     `noteIsPinned`   TINYINT(1)   NOT NULL DEFAULT 0,
     `noteCreatedAt`  DATETIME     NOT NULL,
     `noteDeletedAt`  DATETIME     NULL,
-    `userId`         INT          NOT NULL,
+    `userId`         INT UNSIGNED NOT NULL,
     PRIMARY KEY (`noteId`),
     FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE = InnoDB;
