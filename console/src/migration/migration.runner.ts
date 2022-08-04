@@ -5,10 +5,12 @@ import MigrationDatabase from "./migration.database.sql";
 
 @Injectable()
 export class MigrationRunner implements Runner {
-    constructor(@InjectMysql() private readonly mysqlService: MysqlService) {}
+    constructor(@InjectMysql() private readonly mysqlService: Promise<MysqlService>) {}
 
     public async execute() {
-        await this.mysqlService.transaction(async connection => {
+        const mysqlService = await this.mysqlService;
+
+        await mysqlService.transaction(async connection => {
             await connection.query(MigrationDatabase);
         });
     }

@@ -4,6 +4,7 @@ import { defineBauenConfig } from "../../tools/define-bauen-config";
 
 export default defineBauenConfig(__dirname, {
     entries: ["./src/index.ts"],
+    parser: "esbuild",
     rollupPlugins: {
         esbuild: {
             jsx: "transform",

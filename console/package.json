@@ -13,6 +13,7 @@
     "dependencies": {
         "@abraham/reflection": "^0.10.0",
         "@keep/common": "^0.0.1",
+        "@keep/config": "^0.0.1",
         "@keep/mysql": "^0.0.1"
     },
     "devDependencies": {

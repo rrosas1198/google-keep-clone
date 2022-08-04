@@ -1,8 +1,10 @@
 import { ApplicationContext } from "@keep/common";
+import { AppModule } from "./app.module";
 import { MigrationRunner } from "./migration/migration.runner";
 
 async function main() {
     const context = new ApplicationContext();
+    context.registerModule(AppModule);
 
     // Migration
     const migrationRunner = context.resolve(MigrationRunner);

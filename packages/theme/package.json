@@ -7,7 +7,6 @@
         "deps:update": "taze -w"
     },
     "devDependencies": {
-        "@vitejs/plugin-vue": "^3.0.0",
         "bauen": "^0.10.9",
         "sass": "^1.53.0",
         "taze": "^0.7.6",
