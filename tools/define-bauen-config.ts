@@ -5,7 +5,7 @@ export function defineBauenConfig(rootDir: string, ...configs: UserConfig[]) {
     const baseConfig = defineConfig({
         rootDir,
         run: true,
-        parser: "esbuild",
+        parser: "typescript",
         outputs: ["js"],
         onBundleEnd() {
             console.clear();

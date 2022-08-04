@@ -1,12 +1,15 @@
 import { Injectable } from "@keep/common";
-import { MysqlService } from "@keep/mysql";
+import { InjectMysql, MysqlService } from "@keep/mysql";
 import { Runner } from "src/interfaces";
+import MigrationDatabase from "./migration.database.sql";
 
 @Injectable()
 export class MigrationRunner implements Runner {
-    constructor(private readonly mysqlService: MysqlService) {}
+    constructor(@InjectMysql() private readonly mysqlService: MysqlService) {}
 
-    public execute() {
-        return Promise.resolve();
+    public async execute() {
+        await this.mysqlService.transaction(async connection => {
+            await connection.query(MigrationDatabase);
+        });
     }
 }
