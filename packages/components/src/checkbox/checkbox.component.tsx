@@ -1,6 +1,7 @@
 import { defineComponent, PropType, SetupContext } from "vue";
-import { ToggleValue, useRender, useToggle } from "../composables";
+import { ToggleValue, useRender } from "../composables";
 import { coerce } from "../utils";
+import { useCheckbox } from "./checkbox.factory";
 import { CheckboxColor, CheckboxProps } from "./checkbox.interface";
 
 export const VCheckbox = defineComponent({
@@ -16,10 +17,6 @@ export const VCheckbox = defineComponent({
         },
         color: {
             type: String as PropType<CheckboxColor>,
-            default: null
-        },
-        modelValue: {
-            type: [Number, String, Boolean] as PropType<ToggleValue>,
             default: null
         },
         autofocus: {
@@ -38,32 +35,27 @@ export const VCheckbox = defineComponent({
             type: [Boolean, String],
             default: false
         },
-        ariaLabelOn: {
-            type: String,
+        value: {
+            type: [Number, String, Boolean] as PropType<ToggleValue>,
             default: null
         },
-        ariaLabelOff: {
-            type: String,
+        modelValue: {
+            type: [Number, String, Boolean] as PropType<ToggleValue>,
             default: null
         },
-        dataValueOn: {
-            type: [Number, String, Boolean] as PropType<ToggleValue>,
-            default: true
-        },
-        dataValueOff: {
-            type: [Number, String, Boolean] as PropType<ToggleValue>,
-            default: false
+        ariaLabel: {
+            type: String,
+            default: null
         }
     },
     setup(props: CheckboxProps, { attrs }: SetupContext) {
-        const { checked, handleInput } = useToggle(props);
+        const { isChecked, handleChange } = useCheckbox(props);
 
         const isAutofocus = coerce<boolean>(props.autofocus);
         const isDisabled = coerce<boolean>(props.disabled);
         const isIndeterminate = coerce<boolean>(props.indeterminate);
 
         const ariaChecked = isIndeterminate ? "mixed" : undefined;
-        const ariaLabel = props.ariaLabelOn || props.ariaLabelOff;
 
         const classList = {
             "mdc-checkbox": true,
@@ -82,10 +74,10 @@ export const VCheckbox = defineComponent({
                     autofocus={isAutofocus}
                     disabled={isDisabled}
                     indeterminate={isIndeterminate}
-                    checked={checked.value}
+                    checked={isChecked.value}
                     aria-checked={ariaChecked}
-                    aria-label={ariaLabel}
-                    onChange={handleInput}
+                    aria-label={props.ariaLabel}
+                    onChange={handleChange}
                     {...attrs}
                 />
                 <div class="mdc-checkbox__background">
