@@ -1,7 +1,8 @@
 import { defineComponent, PropType, SetupContext } from "vue";
-import { ToggleValue, useRender, useToggle } from "../composables";
+import { useRender } from "../composables";
 import { coerce } from "../utils";
-import { RadioColor, RadioProps } from "./radio.interface";
+import { useRadio } from "./radio.factory";
+import { RadioColor, RadioProps, RadioValue } from "./radio.interface";
 
 export const VRadio = defineComponent({
     name: "VRadio",
@@ -12,17 +13,17 @@ export const VRadio = defineComponent({
         },
         name: {
             type: String,
-            default: null
+            required: true
         },
         color: {
             type: String as PropType<RadioColor>,
             default: null
         },
-        modelValue: {
-            type: [Number, String, Boolean] as PropType<ToggleValue>,
-            default: null
-        },
         autofocus: {
+            type: [Boolean, String],
+            default: false
+        },
+        selected: {
             type: [Boolean, String],
             default: false
         },
@@ -30,34 +31,24 @@ export const VRadio = defineComponent({
             type: [Boolean, String],
             default: false
         },
-        checked: {
-            type: [Boolean, String],
-            default: false
-        },
-        ariaLabelOn: {
-            type: String,
+        value: {
+            type: [Number, String, Boolean] as PropType<RadioValue>,
             default: null
         },
-        ariaLabelOff: {
-            type: String,
+        modelValue: {
+            type: [Number, String, Boolean] as PropType<RadioValue>,
             default: null
         },
-        dataValueOn: {
-            type: [Number, String, Boolean] as PropType<ToggleValue>,
-            default: true
-        },
-        dataValueOff: {
-            type: [Number, String, Boolean] as PropType<ToggleValue>,
-            default: false
+        ariaLabel: {
+            type: String,
+            default: null
         }
     },
     setup(props: RadioProps, { attrs }: SetupContext) {
-        const { checked, handleInput } = useToggle(props);
+        const { isSelected, handleChange } = useRadio(props);
 
         const isAutofocus = coerce<boolean>(props.autofocus);
         const isDisabled = coerce<boolean>(props.disabled);
-
-        const ariaLabel = props.ariaLabelOn || props.ariaLabelOff;
 
         const classList = {
             "mdc-radio": true,
@@ -70,14 +61,15 @@ export const VRadio = defineComponent({
             <div class={classList}>
                 <input
                     id={props.id}
-                    name={props.name || props.id}
+                    name={props.name}
                     class="mdc-radio__native-control"
                     type="radio"
                     autofocus={isAutofocus}
                     disabled={isDisabled}
-                    checked={checked.value}
-                    aria-label={ariaLabel}
-                    onChange={handleInput}
+                    checked={isSelected.value}
+                    value={props.value}
+                    aria-label={props.ariaLabel}
+                    onChange={handleChange}
                     {...attrs}
                 />
                 <div class="mdc-radio__background">

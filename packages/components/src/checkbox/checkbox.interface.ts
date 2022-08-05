@@ -1,6 +1,6 @@
-export type CheckboxColor = "primary" | "secondary" | "tertiary";
-
 export type CheckboxValue = number | string | boolean;
+
+export type CheckboxColor = "primary" | "secondary" | "tertiary";
 
 export interface CheckboxProps {
     id: string;

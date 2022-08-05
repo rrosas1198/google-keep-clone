@@ -1,11 +1,15 @@
-import { ToggleProps } from "../composables";
+export type RadioValue = number | string | boolean;
 
 export type RadioColor = "primary" | "secondary" | "tertiary";
 
-export interface RadioProps extends ToggleProps {
+export interface RadioProps {
     id: string;
     name: string;
     color: RadioColor;
     autofocus: boolean | string;
-    checked: boolean | string;
+    selected: boolean | string;
+    disabled: boolean | string;
+    value: RadioValue;
+    modelValue: RadioValue;
+    ariaLabel: string;
 }

@@ -18,7 +18,6 @@ export function useCheckbox(props: CheckboxProps) {
     });
 
     const handleChange = (event: Event) => {
-        if (props.disabled) return;
         const target = event.target as HTMLInputElement;
         emit("change", target.checked);
         emit("update:modelValue", target.checked);
