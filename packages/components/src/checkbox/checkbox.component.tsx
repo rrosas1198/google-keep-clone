@@ -37,7 +37,7 @@ export const VCheckbox = defineComponent({
         },
         value: {
             type: [Number, String, Boolean] as PropType<ToggleValue>,
-            default: null
+            default: true
         },
         modelValue: {
             type: [Number, String, Boolean] as PropType<ToggleValue>,
