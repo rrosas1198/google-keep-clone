@@ -1,6 +1,7 @@
 import { defineComponent, PropType, SetupContext } from "vue";
-import { ToggleValue, useRender, useToggle } from "../composables";
+import { useRender } from "../composables";
 import { coerce } from "../utils";
+import { useSwitch } from "./switch.factory";
 import { SwitchColor, SwitchProps } from "./switch.interface";
 
 export const VSwitch = defineComponent({
@@ -18,9 +19,9 @@ export const VSwitch = defineComponent({
             type: String as PropType<SwitchColor>,
             default: null
         },
-        modelValue: {
-            type: [Number, String, Boolean] as PropType<ToggleValue>,
-            default: null
+        active: {
+            type: [Boolean, String],
+            default: false
         },
         autofocus: {
             type: [Boolean, String],
@@ -30,25 +31,17 @@ export const VSwitch = defineComponent({
             type: [Boolean, String],
             default: false
         },
-        ariaLabelOn: {
-            type: String,
+        modelValue: {
+            type: Boolean,
             default: null
         },
-        ariaLabelOff: {
+        ariaLabel: {
             type: String,
             default: null
-        },
-        dataValueOn: {
-            type: [Number, String, Boolean] as PropType<ToggleValue>,
-            default: true
-        },
-        dataValueOff: {
-            type: [Number, String, Boolean] as PropType<ToggleValue>,
-            default: false
         }
     },
     setup(props: SwitchProps, { attrs }: SetupContext) {
-        const { checked, ariaLabel, handleClick } = useToggle(props);
+        const { isActive, handleChange } = useSwitch(props);
 
         const isAutofocus = coerce<boolean>(props.autofocus);
         const isDisabled = coerce<boolean>(props.disabled);
@@ -70,9 +63,9 @@ export const VSwitch = defineComponent({
                     role="switch"
                     autofocus={isAutofocus}
                     disabled={isDisabled}
-                    aria-checked={checked.value}
-                    aria-label={ariaLabel.value}
-                    onClick={handleClick}
+                    aria-checked={isActive.value}
+                    aria-label={props.ariaLabel}
+                    onClick={handleChange}
                     {...attrs}
                 >
                     <div class="mdc-switch__track"></div>
@@ -84,7 +77,7 @@ export const VSwitch = defineComponent({
                     class="mdc-switch__input"
                     type="checkbox"
                     aria-hidden="true"
-                    checked={checked.value}
+                    checked={isActive.value}
                 />
             </div>
         ));
