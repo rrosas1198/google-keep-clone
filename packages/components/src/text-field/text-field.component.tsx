@@ -1,6 +1,7 @@
 import { defineComponent, PropType, renderSlot, SetupContext } from "vue";
-import { useModel, useRender } from "../composables";
+import { useRender } from "../composables";
 import { coerce } from "../utils";
+import { useTextField } from "./text-field.factory";
 import { TextFieldProps, TextFieldType } from "./text-field.interface";
 
 export const VTextField = defineComponent({
@@ -26,14 +27,6 @@ export const VTextField = defineComponent({
             type: String as PropType<TextFieldType>,
             default: "text"
         },
-        modelValue: {
-            type: String,
-            default: null
-        },
-        placeholder: {
-            type: String,
-            default: null
-        },
         autofocus: {
             type: [Boolean, String],
             default: false
@@ -50,6 +43,14 @@ export const VTextField = defineComponent({
             type: [Boolean, String],
             default: false
         },
+        modelValue: {
+            type: String,
+            default: null
+        },
+        placeholder: {
+            type: String,
+            default: null
+        },
         leadingIcon: {
             type: String,
             default: null
@@ -60,7 +61,7 @@ export const VTextField = defineComponent({
         }
     },
     setup(props: TextFieldProps, { attrs, slots }: SetupContext) {
-        const model = useModel<string>();
+        const { handleInput } = useTextField();
 
         const isAutofocus = coerce<boolean>(props.autofocus);
         const isDisabled = coerce<boolean>(props.disabled);
@@ -69,10 +70,6 @@ export const VTextField = defineComponent({
 
         const hasLeading = "leading" in slots || !!props.leadingIcon;
         const hasTrailing = "trailing" in slots || !!props.trailingIcon;
-
-        function handleInput(event: Event) {
-            model.value = (event.target as HTMLInputElement).value;
-        }
 
         function getLeadingContent() {
             if ("leading" in slots) return renderSlot(slots, "leading");
@@ -107,7 +104,7 @@ export const VTextField = defineComponent({
                     readonly={isReadonly}
                     required={isRequired}
                     type={props.type}
-                    value={model.value}
+                    value={props.modelValue}
                     onInput={handleInput}
                     {...attrs}
                 />

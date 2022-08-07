@@ -5,12 +5,12 @@ export interface TextFieldProps {
     name: string;
     label: string;
     type: TextFieldType;
-    modelValue: string;
-    placeholder: string;
     autofocus: boolean | string;
     disabled: boolean | string;
-    required: boolean | string;
     readonly: boolean | string;
+    required: boolean | string;
+    modelValue: string;
+    placeholder: string;
     leadingIcon: string;
     trailingIcon: string;
 }
