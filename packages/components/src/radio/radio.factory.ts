@@ -7,9 +7,8 @@ export function useRadio(props: RadioProps) {
     const isSelected = computed(() => {
         if (props.modelValue !== null && props.modelValue !== undefined) {
             return props.modelValue === props.value;
-        } else {
-            return !!props.modelValue;
         }
+        return !!props.modelValue;
     });
 
     const handleChange = (event: Event) => {

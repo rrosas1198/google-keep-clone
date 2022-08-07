@@ -32,11 +32,11 @@ export const VRadio = defineComponent({
             default: false
         },
         value: {
-            type: [Number, String, Boolean] as PropType<RadioValue>,
+            type: [Number, String] as PropType<RadioValue>,
             default: null
         },
         modelValue: {
-            type: [Number, String, Boolean] as PropType<RadioValue>,
+            type: [Number, String] as PropType<RadioValue>,
             default: null
         },
         ariaLabel: {

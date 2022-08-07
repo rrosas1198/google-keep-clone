@@ -1,8 +1,8 @@
 import { defineComponent, PropType, SetupContext } from "vue";
-import { ToggleValue, useRender } from "../composables";
+import { useRender } from "../composables";
 import { coerce } from "../utils";
 import { useCheckbox } from "./checkbox.factory";
-import { CheckboxColor, CheckboxProps } from "./checkbox.interface";
+import { CheckboxColor, CheckboxProps, CheckboxValue } from "./checkbox.interface";
 
 export const VCheckbox = defineComponent({
     name: "VCheckbox",
@@ -36,11 +36,11 @@ export const VCheckbox = defineComponent({
             default: false
         },
         value: {
-            type: [Number, String, Boolean] as PropType<ToggleValue>,
+            type: [Number, String, Boolean] as PropType<CheckboxValue>,
             default: true
         },
         modelValue: {
-            type: [Number, String, Boolean] as PropType<ToggleValue>,
+            type: [Number, String, Boolean] as PropType<CheckboxValue>,
             default: null
         },
         ariaLabel: {

@@ -1,6 +1,7 @@
 import { defineComponent, PropType, renderSlot, SetupContext } from "vue";
-import { ToggleValue, useRender, useToggle } from "../composables";
+import { useRender } from "../composables";
 import { coerce } from "../utils";
+import { useIconButtonToggle } from "./icon-button-toggle.factory";
 import {
     IconButtonToggleColor,
     IconButtonToggleProps,
@@ -30,21 +31,21 @@ export const VIconButtonToggle = defineComponent({
             type: String as PropType<IconButtonToggleVariant>,
             default: "standard"
         },
-        modelValue: {
-            type: [Number, String, Boolean] as PropType<ToggleValue>,
-            default: null
-        },
-        ariaLabel: {
-            type: String,
-            required: true
+        autofocus: {
+            type: [Boolean, String],
+            default: false
         },
         disabled: {
             type: [Boolean, String],
             default: false
         },
-        autofocus: {
-            type: [Boolean, String],
-            default: false
+        modelValue: {
+            type: Boolean,
+            default: null
+        },
+        ariaLabel: {
+            type: String,
+            required: true
         },
         ariaLabelOn: {
             type: String,
@@ -54,24 +55,33 @@ export const VIconButtonToggle = defineComponent({
             type: String,
             default: null
         },
-        dataValueOn: {
-            type: [Number, String, Boolean] as PropType<ToggleValue>,
+        dataIconOn: {
+            type: String,
             default: true
         },
-        dataValueOff: {
-            type: [Number, String, Boolean] as PropType<ToggleValue>,
+        dataIconOff: {
+            type: String,
             default: false
         }
     },
     setup(props: IconButtonToggleProps, { attrs, slots }: SetupContext) {
-        const { checked, ariaLabel, handleClick } = useToggle(props);
+        const { isOn, handleChange } = useIconButtonToggle(props);
 
         const isAutofocus = coerce<boolean>(props.autofocus);
         const isDisabled = coerce<boolean>(props.disabled);
-        const ariaPressed = props.ariaLabelOn && props.ariaLabelOff ? undefined : checked.value;
+
+        const hasAriaLabel = props.ariaLabelOn && props.ariaLabelOff;
+
+        const ariaPressed = hasAriaLabel ? undefined : isOn.value;
+        const ariaLabel = hasAriaLabel
+            ? isOn.value
+                ? props.ariaLabelOn
+                : props.ariaLabelOff
+            : props.ariaLabel;
 
         const classList = {
             "mdc-icon-button": true,
+            "mdc-icon-button--on": isOn.value,
             "mdc-icon-button--primary": props.color === "primary",
             "mdc-icon-button--secondary": props.color === "secondary",
             "mdc-icon-button--tertiary": props.color === "tertiary",
@@ -90,8 +100,8 @@ export const VIconButtonToggle = defineComponent({
                 disabled={isDisabled}
                 type="button"
                 aria-pressed={ariaPressed}
-                aria-label={ariaLabel.value}
-                onClick={handleClick}
+                aria-label={ariaLabel}
+                onClick={handleChange}
                 {...attrs}
             >
                 <span class="mdc-icon-button__icon">{renderSlot(slots, "default")}</span>

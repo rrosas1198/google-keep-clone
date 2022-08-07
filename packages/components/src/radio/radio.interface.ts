@@ -1,4 +1,4 @@
-export type RadioValue = number | string | boolean;
+export type RadioValue = number | string;
 
 export type RadioColor = "primary" | "secondary" | "tertiary";
 
