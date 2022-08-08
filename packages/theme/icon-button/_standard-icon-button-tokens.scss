@@ -35,7 +35,7 @@ $theme-tokens: (
 ) !default;
 
 $primary-theme: map.merge(
-    $theme-token,
+    $theme-tokens,
     (
         selected-focus-icon-color: color.get-varname(primary),
         selected-focus-state-layer-color: color.get-varname(primary),
