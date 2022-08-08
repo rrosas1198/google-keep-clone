@@ -61,21 +61,17 @@ export const VButton = defineComponent({
             "mdc-button--outlined": props.variant === "outlined"
         };
 
-        function renderLeading() {
-            return (
-                <span class="mdc-button__leading">
-                    {"leading" in slots ? renderSlot(slots, "leading") : props.leadingIcon}
-                </span>
-            );
-        }
+        const renderLeading = () => (
+            <span class="mdc-button__leading">
+                {"leading" in slots ? renderSlot(slots, "leading") : props.leadingIcon}
+            </span>
+        );
 
-        function renderTrailing() {
-            return (
-                <span class="mdc-button__trailing">
-                    {"trailing" in slots ? renderSlot(slots, "trailing") : props.trailingIcon}
-                </span>
-            );
-        }
+        const renderTrailing = () => (
+            <span class="mdc-button__trailing">
+                {"trailing" in slots ? renderSlot(slots, "trailing") : props.trailingIcon}
+            </span>
+        );
 
         useRender(() => (
             <button

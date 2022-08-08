@@ -71,25 +71,25 @@ export const VTextField = defineComponent({
         const hasLeading = "leading" in slots || !!props.leadingIcon;
         const hasTrailing = "trailing" in slots || !!props.trailingIcon;
 
-        function getLeadingContent() {
+        const getLeadingContent = () => {
             if ("leading" in slots) return renderSlot(slots, "leading");
             return <i class="material-symbols-outlined">{props.leadingIcon}</i>;
-        }
+        };
 
-        function getTrailingContent() {
+        const getTrailingContent = () => {
             if ("trailing" in slots) return renderSlot(slots, "trailing");
             return <i class="material-symbols-outlined">{props.trailingIcon}</i>;
-        }
+        };
 
-        function renderLeading() {
+        const renderLeading = () => {
             if (!hasLeading) return null;
             return <span class="mdc-text-field__leading">{getLeadingContent()}</span>;
-        }
+        };
 
-        function renderTrailing() {
+        const renderTrailing = () => {
             if (!hasTrailing) return null;
             return <span class="mdc-text-field__trailing">{getTrailingContent()}</span>;
-        }
+        };
 
         useRender(() => (
             <div class="mdc-text-field">

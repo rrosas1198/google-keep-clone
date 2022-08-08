@@ -1,7 +1,7 @@
 /* stylelint-disable at-rule-no-unknown */
-@use "@keep/theme/icon-button/icon-button-styles";
-@use "@keep/theme/icon-button/standard-styles" as icon-button-standard-styles;
-@use "@keep/theme/layout/container";
+@use "@keep/theme/icon-button/shared-styles" as shared-icon-button-styles;
+@use "@keep/theme/icon-button/standard-styles" as standard-icon-button-styles;
+@use "@keep/theme/layout/layout-styles";
 @use "@keep/theme/reboot/fonts";
 @use "@keep/theme/reboot/reboot";
 @use "@keep/theme/reboot/root";
@@ -10,9 +10,9 @@
 @include root.core-styles();
 @include reboot.core-styles();
 
-/* container */
-@include container.core-styles();
+/* layout */
+@include layout-styles.core-styles();
 
 /* icon button */
-@include icon-button-styles.core-styles();
-@include icon-button-standard-styles.core-styles();
+@include shared-icon-button-styles.core-styles();
+@include standard-icon-button-styles.core-styles();
