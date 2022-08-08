@@ -3,6 +3,7 @@
         "**/.git": true,
         "**/.swc": true,
         "**/.nuxt": true,
+        "**/.temp": true,
         "**/.output": true,
         "**/.DS_Store": true,
         "**/node_modules": true
