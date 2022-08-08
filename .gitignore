@@ -25,6 +25,7 @@ yarn-error.log*
 
 # Temp
 **/tmp
+**/.temp
 
 # Tests
 /coverage
