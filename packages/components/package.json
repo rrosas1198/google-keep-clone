@@ -9,12 +9,21 @@
         "test": "vitest",
         "test:watch": "vitest --watch",
         "test:coverage": "vitest --coverage",
+        "vitebook:build": "vitebook build",
+        "vitebook:dev": "vitebook dev",
+        "vitebook:preview": "vitebook preview",
         "deps:update": "taze -w"
     },
     "devDependencies": {
+        "@vitebook/client": "0.100.5",
+        "@vitebook/core": "0.100.5",
+        "@vitebook/theme-default": "0.100.5",
+        "@vitebook/vue": "0.100.5",
         "@vitejs/plugin-vue": "^3.0.1",
+        "@vue/compiler-sfc": "^3.2.37",
         "bauen": "^0.10.9",
         "taze": "^0.7.6",
+        "vite": "^3.0.4",
         "vitest": "^0.21.0",
         "vue": "^3.2.37"
     },

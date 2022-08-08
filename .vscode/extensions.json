@@ -4,6 +4,7 @@
         "editorconfig.editorconfig",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "hediet.vscode-drawio"
+        "hediet.vscode-drawio",
+        "Vue.volar"
     ]
 }
