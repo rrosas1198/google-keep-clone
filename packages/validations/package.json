@@ -1,0 +1,19 @@
+{
+    "name": "@keep/validations",
+    "version": "0.0.1",
+    "main": "./dist/index.js",
+    "typings": "./dist/index.d.ts",
+    "scripts": {
+        "prepack": "bauen",
+        "watch": "bauen watch",
+        "test": "vitest",
+        "test:watch": "vitest --watch",
+        "test:coverage": "vitest --coverage",
+        "deps:update": "taze -w"
+    },
+    "devDependencies": {
+        "bauen": "^0.10.9",
+        "taze": "^0.7.6",
+        "vitest": "^0.21.0"
+    }
+}
