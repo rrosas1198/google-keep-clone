@@ -1,8 +1,8 @@
 import { Module } from "@keep/common";
 import { MysqlModule } from "@keep/mysql";
-import { AccountModule } from "./account/infrastructure/account.module";
+import { UserModule } from "./user/infrastructure/user.module";
 
 @Module({
-    imports: [MysqlModule.forRoot(), AccountModule]
+    imports: [MysqlModule.forRoot(), UserModule]
 })
 export class AppModule {}

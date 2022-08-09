@@ -7,7 +7,9 @@ CREATE TABLE IF NOT EXISTS `user`
     `userId`        INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `userFirstName` VARCHAR(255) NOT NULL,
     `userLastName`  VARCHAR(255) NOT NULL,
+    `userEmail`     VARCHAR(255) NOT NULL,
     `userPassword`  VARCHAR(255) NOT NULL,
+    `userToken`     VARCHAR(255) NOT NULL,
     `userCreatedAt` DATETIME     NOT NULL,
     `userDeletedAt` DATETIME     NULL,
     PRIMARY KEY (`userId`)
