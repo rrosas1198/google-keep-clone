@@ -1,1 +1,1 @@
-export * from "./signin.dto";
+export * from "./credentials.dto";
