@@ -14,9 +14,9 @@ export class HttpApplication extends Application<HttpOptions, HttpPlatform, Http
         const mainModule = HttpModule.forRoot(this.appModule);
 
         this.context.registerModule(mainModule);
-        this.context.routes.forEach(route =>
-            this.platform.addRoute(route.path, route.handler, [route.method])
-        );
+        this.context.routes.forEach(route => {
+            this.platform.addRoute(route.path, route.handler, [route.method]);
+        });
 
         const configService = this.context.resolve(ConfigService);
 

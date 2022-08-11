@@ -22,7 +22,7 @@ function getConditions(params?: Partial<UserEntity>) {
     const conditions = [];
 
     if (params?.email) {
-        conditions.push(`u.userEmail = ${params.email}`);
+        conditions.push(`u.userEmail = '${params.email}'`);
     }
 
     return conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";

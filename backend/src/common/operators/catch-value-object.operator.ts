@@ -6,7 +6,7 @@ import { ValueObjectReturn } from "../interfaces";
 export function catchValueObject<T, A>(): OperatorFunction<ValueObjectReturn<T, A>, A> {
     return pipe(
         tap(([errors]) => {
-            if (!errors) return;
+            if (errors.length <= 0) return;
             throw ValidatorException.fromErrors(errors);
         }),
         map(([_errors, instance]) => instance as A)

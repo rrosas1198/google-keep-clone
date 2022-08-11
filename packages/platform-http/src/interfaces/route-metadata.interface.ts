@@ -1,8 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { HttpMethodEnum } from "src/enums";
+import { RouteParamtypesEnum } from "src/enums";
 
-export interface RouteMetadata {
-    path: string;
-    method: HttpMethodEnum;
-    handler: (...params: any[]) => Promise<void>;
-}
+export type RouteMetadata = [RouteParamtypesEnum, { index: number; data: unknown }];

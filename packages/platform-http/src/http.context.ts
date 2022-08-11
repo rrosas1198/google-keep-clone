@@ -3,10 +3,17 @@ import { ApplicationContext, DynamicModule, Type } from "@keep/common";
 import { joinURL, withLeadingSlash } from "ufo";
 import { METHOD_TOKEN, PATH_TOKEN, VERSION_TOKEN } from "./constants";
 import { HttpMethodEnum } from "./enums";
-import { ControllerMetadata, MethodMetadata, RouteMetadata } from "./interfaces";
+import { HttpRouteHandler } from "./http.route-handler";
+import { ControllerMetadata, ControllerMethodMetadata, MethodMetadata } from "./interfaces";
+import { getRouteMetadata } from "./utils";
 
 export class HttpContext extends ApplicationContext {
-    public readonly routes = new Set<RouteMetadata>();
+    private _routes = new Set<ControllerMethodMetadata>();
+    private httpRouteHandler = new HttpRouteHandler();
+
+    public get routes() {
+        return this._routes;
+    }
 
     public override registerModule(metatype: Type | DynamicModule) {
         super.registerModule(metatype);
@@ -19,7 +26,7 @@ export class HttpContext extends ApplicationContext {
         const metadata = this.getControllerMetadata(metatype);
         const routes = this.getControllerRoutes(metatype, metadata);
 
-        routes.forEach(route => this.routes.add(route));
+        routes.forEach(route => this._routes.add(route));
     }
 
     protected getControllers(metatype: Type | DynamicModule): Type[] {
@@ -44,10 +51,14 @@ export class HttpContext extends ApplicationContext {
         const version = meta.version || baseMetadata.version;
         const joinedPath = joinURL("api", version, baseMetadata.path, meta.path);
 
-        return <RouteMetadata>{
+        const handler = baseMetadata.instance[meta.methodName].bind(baseMetadata.instance);
+        const parameters = getRouteMetadata(baseMetadata.metatype.prototype, meta.methodName);
+        const routeHandler = this.httpRouteHandler.getHandler(handler, parameters);
+
+        return <ControllerMethodMetadata>{
             path: withLeadingSlash(joinedPath),
             method: meta.method,
-            handler: baseMetadata.instance[meta.methodName].bind(baseMetadata.instance)
+            handler: routeHandler
         };
     }
 
@@ -56,7 +67,7 @@ export class HttpContext extends ApplicationContext {
         const version = Reflect.getMetadata(VERSION_TOKEN, metatype) as string;
         const instance = this.container.resolve(metatype);
 
-        return <ControllerMetadata>{ instance, path, version };
+        return <ControllerMetadata>{ metatype, instance, path, version };
     }
 
     protected getMethodMetadata(metatype: Type, methodName: string) {

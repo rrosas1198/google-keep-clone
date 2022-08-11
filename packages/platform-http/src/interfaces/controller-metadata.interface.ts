@@ -2,5 +2,6 @@
 export interface ControllerMetadata {
     path: string;
     version: string;
+    metatype: any;
     instance: any;
 }

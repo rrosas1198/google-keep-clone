@@ -7,5 +7,6 @@ export * from "./http.context";
 export * from "./http.exception";
 export * from "./http.module";
 export * from "./http.platform";
+export * from "./http.route-handler";
 export * from "./interfaces";
 export * from "./utils";
