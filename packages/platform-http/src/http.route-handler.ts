@@ -1,5 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IncomingMessage, MIMES, ServerResponse, useBody, useMethod, useQuery } from "h3";
+import {
+    getMethod,
+    getQuery,
+    getRouterParams,
+    IncomingMessage,
+    MIMES,
+    readBody,
+    ServerResponse
+} from "h3";
 import { Observable } from "rxjs";
 import { Writable } from "stream";
 import { HttpMethodEnum, HttpStatusEnum, RouteParamtypesEnum } from "./enums";
@@ -12,7 +20,7 @@ export class HttpRouteHandler {
         const resolveParams = this.resolveHandlerParams(handler, routeMetadata);
 
         return async (request: IncomingMessage, response: ServerResponse) => {
-            const httpMethod = useMethod(request) as HttpMethodEnum;
+            const httpMethod = getMethod(request) as HttpMethodEnum;
             response.statusCode = this.getStatusByMethod(httpMethod);
             response.setHeader("Content-Type", MIMES.json);
             // response.flushHeaders();
@@ -53,11 +61,11 @@ export class HttpRouteHandler {
                 case RouteParamtypesEnum.RESPONSE:
                     return response;
                 case RouteParamtypesEnum.BODY:
-                    return useBody(request);
+                    return readBody(request);
                 case RouteParamtypesEnum.PARAM:
-                    return null;
+                    return getRouterParams(request);
                 case RouteParamtypesEnum.QUERY:
-                    return useQuery(request);
+                    return getQuery(request);
                 default:
                     return null;
             }
