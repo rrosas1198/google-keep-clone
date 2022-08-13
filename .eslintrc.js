@@ -5,13 +5,4 @@ const {
     EslintTsConfig
 } = require("@techkit/linter-config");
 
-module.exports = mergeEslintConfig(EslintBaseConfig, EslintTsConfig, EslintPrettierConfig, {
-    overrides: [
-        {
-            rules: {
-                "@typescript-eslint/indent": "off",
-                "@typescript-eslint/ban-types": "off"
-            }
-        }
-    ]
-});
+module.exports = mergeEslintConfig(EslintBaseConfig, EslintTsConfig, EslintPrettierConfig);

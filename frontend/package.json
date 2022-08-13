@@ -11,7 +11,7 @@
         "deps:update": "taze -w"
     },
     "dependencies": {
-        "nuxt": "^3.0.0-rc.6"
+        "nuxt": "^3.0.0-rc.8"
     },
     "devDependencies": {
         "@keep/components": "^0.0.1",
