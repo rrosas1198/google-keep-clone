@@ -1,0 +1,31 @@
+{
+    "name": "@keep/platform-nuxt",
+    "version": "0.0.1",
+    "main": "./dist/index.js",
+    "typings": "./dist/index.d.ts",
+    "scripts": {
+        "prepack": "bauen",
+        "watch": "bauen watch",
+        "test": "vitest",
+        "test:watch": "vitest --watch",
+        "test:coverage": "vitest --coverage",
+        "deps:update": "taze -w"
+    },
+    "dependencies": {
+        "@keep/common": "^0.0.1",
+        "@keep/config": "^0.0.1"
+    },
+    "devDependencies": {
+        "bauen": "^0.10.9",
+        "nuxt": "^3.0.0-rc.8",
+        "rxjs": "^7.5.6",
+        "taze": "^0.7.6",
+        "vitest": "^0.21.1",
+        "vue": "^3.2.37"
+    },
+    "peerDependencies": {
+        "nuxt": "^3.0.0-rc.8",
+        "rxjs": ">= 7.5.0",
+        "vue": ">= 3.2.0"
+    }
+}
