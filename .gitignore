@@ -32,3 +32,6 @@ yarn-error.log*
 
 # Cache
 /tsconfig.build.tsbuildinfo
+
+# Workspaces
+**/*.code-workspace

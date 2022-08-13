@@ -5,6 +5,7 @@
         "experimentalDecorators": true,
         "paths": {
             "@keep/components": ["../packages/components/src/index.ts"],
+            "@keep/platform-nuxt": ["../packages/platform-nuxt/src/index.ts"],
             "@keep/theme": ["../packages/theme"]
         }
     }

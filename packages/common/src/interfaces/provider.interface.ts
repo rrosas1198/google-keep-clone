@@ -3,7 +3,7 @@ import { DependencyContainer } from "tsyringe";
 import { DelayedConstructor } from "tsyringe/dist/typings/lazy-helpers";
 import { ScopeEnum } from "../enums";
 import { IConstructor } from "./constructor.interface";
-import { IContainerToken } from "./injection-token.interface";
+import { IContainerToken } from "./container-token.interface";
 
 export interface IClassProvider<T = any> {
     useClass: IConstructor<T> | DelayedConstructor<T>;
