@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ModuleMetadata } from "src/interfaces";
+import { IModuleMetadata } from "src/interfaces";
 
-export function Module(metadata: ModuleMetadata): ClassDecorator {
+export function Module(metadata: IModuleMetadata): ClassDecorator {
     return (target: Function) => {
         for (const property in metadata) {
             if (metadata.hasOwnProperty(property)) {

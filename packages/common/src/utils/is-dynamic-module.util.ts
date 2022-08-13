@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DynamicModule } from "src/interfaces";
+import { IDynamicModule } from "src/interfaces";
 
-export function isDynamicModule(module: any): module is DynamicModule {
+export function isDynamicModule(module: any): module is IDynamicModule {
     return module && module.module;
 }

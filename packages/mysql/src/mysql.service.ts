@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from "@keep/common";
 import { createPool as MysqlCreatePool, Pool, PoolOptions } from "mysql2/promise";
-import type { ConnectionCallback, ConnectionOptions } from "./interfaces";
+import type { IConnectionCallback, IConnectionOptions } from "./interfaces";
 import { MysqlConnection } from "./mysql.connection";
 
 @Injectable()
@@ -9,7 +9,7 @@ export class MysqlService {
     public readonly connections = new Set<MysqlConnection>();
     private pool!: Pool;
 
-    constructor(private readonly options: ConnectionOptions) {}
+    constructor(private readonly options: IConnectionOptions) {}
 
     public async connect() {
         this.pool = this.createPool(this.options);
@@ -25,7 +25,7 @@ export class MysqlService {
         this.connections.clear();
     }
 
-    public async request<T = any>(callback: ConnectionCallback<T>) {
+    public async request<T = any>(callback: IConnectionCallback<T>) {
         const connection = await this.getConnection();
 
         try {
@@ -38,7 +38,7 @@ export class MysqlService {
         }
     }
 
-    public async transaction<T = any>(callback: ConnectionCallback<T>) {
+    public async transaction<T = any>(callback: IConnectionCallback<T>) {
         const connection = await this.getConnection();
 
         try {
@@ -61,7 +61,7 @@ export class MysqlService {
         return mysqlConnection;
     }
 
-    private createPool(options: ConnectionOptions) {
+    private createPool(options: IConnectionOptions) {
         const _options: PoolOptions = {
             host: options.host,
             port: options.port,

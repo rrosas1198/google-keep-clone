@@ -1,3 +1,3 @@
-import { ValidationRule } from "src/interfaces";
+import { IValidationRule } from "src/interfaces";
 
-export const defineRule = (rule: ValidationRule) => rule;
+export const defineRule = (rule: IValidationRule) => rule;

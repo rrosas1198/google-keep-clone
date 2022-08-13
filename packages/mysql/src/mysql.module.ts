@@ -1,12 +1,12 @@
-import { DynamicModule } from "@keep/common";
+import { IDynamicModule } from "@keep/common";
 import { ConfigService } from "@keep/config";
 import { DependencyContainer, instanceCachingFactory } from "tsyringe";
 import { MYSQL_TOKEN } from "./constants";
-import { ConnectionOptions } from "./interfaces";
+import { IConnectionOptions } from "./interfaces";
 import { MysqlService } from "./mysql.service";
 
 export class MysqlModule {
-    public static forRoot(): DynamicModule {
+    public static forRoot(): IDynamicModule {
         return {
             module: MysqlModule,
             providers: [
@@ -21,7 +21,7 @@ export class MysqlModule {
     private static async connect(container: DependencyContainer) {
         const configService = container.resolve(ConfigService);
 
-        const options = <ConnectionOptions>{
+        const options = <IConnectionOptions>{
             host: configService.get<string>("MYSQL_HOST"),
             port: parseInt(configService.get<string>("MYSQL_PORT")),
             username: configService.get<string>("MYSQL_USERNAME"),

@@ -1,12 +1,12 @@
-import { Application, Type } from "@keep/common";
+import { Application, IConstructor } from "@keep/common";
 import { ConfigService } from "@keep/config";
 import { HttpContext } from "./http.context";
 import { HttpModule } from "./http.module";
 import { HttpPlatform } from "./http.platform";
-import { HttpOptions } from "./interfaces";
+import { IHttpOptions } from "./interfaces";
 
-export class HttpApplication extends Application<HttpOptions, HttpPlatform, HttpContext> {
-    constructor(appModule: Type) {
+export class HttpApplication extends Application<IHttpOptions, HttpPlatform, HttpContext> {
+    constructor(appModule: IConstructor) {
         super(appModule, new HttpPlatform(), new HttpContext());
     }
 
@@ -20,7 +20,7 @@ export class HttpApplication extends Application<HttpOptions, HttpPlatform, Http
 
         const configService = this.context.resolve(ConfigService);
 
-        const params: HttpOptions = {
+        const params: IHttpOptions = {
             port: configService.get("HTTP_PORT"),
             hostname: configService.get("HTTP_HOST")
         };

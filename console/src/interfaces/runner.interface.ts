@@ -1,3 +1,3 @@
-export interface Runner {
+export interface IRunner {
     execute(): Promise<void>;
 }

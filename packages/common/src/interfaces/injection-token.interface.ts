@@ -1,1 +1,1 @@
-export { InjectionToken } from "tsyringe";
+export { InjectionToken as IContainerToken } from "tsyringe";

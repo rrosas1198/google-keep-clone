@@ -1,5 +1,5 @@
-import { ValidationError } from "src/interfaces";
+import { IValidationError } from "src/interfaces";
 
-export function flushErrors<T>(errors: ValidationError<T>[]) {
+export function flushErrors<T>(errors: IValidationError<T>[]) {
     return errors.filter(error => error.codes.length > 0);
 }

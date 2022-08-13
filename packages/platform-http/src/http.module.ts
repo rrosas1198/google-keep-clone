@@ -1,4 +1,4 @@
-import { DynamicModule, Module, Type } from "@keep/common";
+import { IConstructor, IDynamicModule, Module } from "@keep/common";
 import { ConfigModule } from "@keep/config";
 
 @Module({
@@ -7,7 +7,7 @@ import { ConfigModule } from "@keep/config";
     ]
 })
 export class HttpModule {
-    public static forRoot(appModule: Type): DynamicModule {
+    public static forRoot(appModule: IConstructor): IDynamicModule {
         return {
             module: HttpModule,
             imports: [appModule]

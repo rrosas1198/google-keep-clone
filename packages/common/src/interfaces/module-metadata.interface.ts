@@ -1,11 +1,9 @@
-import { DynamicModule } from "./dynamic-module.interface";
+import { IConstructor } from "./constructor.interface";
+import { IDynamicModule } from "./dynamic-module.interface";
 import { Provider } from "./provider.interface";
-import { Type } from "./type.interface";
 
-export interface ModuleMetadata {
-    imports?: Array<Type | DynamicModule>;
+export interface IModuleMetadata {
+    imports?: Array<IConstructor | IDynamicModule>;
     providers?: Provider[];
-    controllers?: Type[]; // HttpPlatform
+    controllers?: IConstructor[]; // HttpPlatform
 }
-
-export type ModuleMetadataKey = keyof ModuleMetadata;

@@ -1,9 +1,9 @@
-import { ValueObjectProps } from "src/interfaces";
+import { IValueObjectProps } from "src/interfaces";
 
 export abstract class ValueObject<T> {
-    protected readonly props: ValueObjectProps<T>;
+    protected readonly props: IValueObjectProps<T>;
 
-    constructor(props: ValueObjectProps<T>) {
+    constructor(props: IValueObjectProps<T>) {
         this.props = props;
     }
 

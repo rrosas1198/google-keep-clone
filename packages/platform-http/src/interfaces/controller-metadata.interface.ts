@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export interface ControllerMetadata {
+export interface IControllerMetadata {
     path: string;
     version: string;
     metatype: any;

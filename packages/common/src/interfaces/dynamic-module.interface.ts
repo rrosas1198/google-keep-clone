@@ -1,6 +1,6 @@
-import { ModuleMetadata } from "./module-metadata.interface";
-import { Type } from "./type.interface";
+import { IConstructor } from "./constructor.interface";
+import { IModuleMetadata } from "./module-metadata.interface";
 
-export interface DynamicModule extends ModuleMetadata {
-    module: Type;
+export interface IDynamicModule extends IModuleMetadata {
+    module: IConstructor;
 }

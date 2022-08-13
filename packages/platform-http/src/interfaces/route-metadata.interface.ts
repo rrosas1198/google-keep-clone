@@ -1,3 +1,3 @@
 import { RouteParamtypesEnum } from "src/enums";
 
-export type RouteMetadata = [RouteParamtypesEnum, { index: number; data: unknown }];
+export type IRouteMetadata = [RouteParamtypesEnum, { index: number; data: unknown }];

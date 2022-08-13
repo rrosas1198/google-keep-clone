@@ -11,12 +11,12 @@ import {
 import { Observable } from "rxjs";
 import { Writable } from "stream";
 import { HttpMethodEnum, HttpStatusEnum, RouteParamtypesEnum } from "./enums";
-import { RouteMetadata } from "./interfaces";
+import { IRouteMetadata } from "./interfaces";
 
 export type ObservableHandler = (...params: any[]) => Observable<unknown>;
 
 export class HttpRouteHandler {
-    public getHandler(handler: ObservableHandler, routeMetadata: RouteMetadata[]) {
+    public getHandler(handler: ObservableHandler, routeMetadata: IRouteMetadata[]) {
         const resolveParams = this.resolveHandlerParams(handler, routeMetadata);
 
         return async (request: IncomingMessage, response: ServerResponse) => {
@@ -39,7 +39,7 @@ export class HttpRouteHandler {
         };
     }
 
-    protected resolveHandlerParams(handler: ObservableHandler, routeMetadata: RouteMetadata[]) {
+    protected resolveHandlerParams(handler: ObservableHandler, routeMetadata: IRouteMetadata[]) {
         return async (request: IncomingMessage, response: ServerResponse) => {
             const params = new Array(handler.length).fill(null);
             const resolve = this.getValueByParamtype(request, response);

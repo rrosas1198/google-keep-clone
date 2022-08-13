@@ -1,4 +1,4 @@
-import { Injectable, UseCase } from "@keep/common";
+import { Injectable, IUseCase } from "@keep/common";
 import { HttpException, HttpStatusEnum } from "@keep/platform-http";
 import { map, MonoTypeOperatorFunction, Observable, tap } from "rxjs";
 import { throwIfNotFound } from "src/common/operators";
@@ -8,7 +8,7 @@ import { UserRepositoryImpl } from "../repositories";
 import { HashService, TokenService } from "../services";
 
 @Injectable()
-export class SigninUseCase implements UseCase<CredentialsVo, string> {
+export class SigninUseCase implements IUseCase<CredentialsVo, string> {
     constructor(
         private readonly hashService: HashService,
         private readonly tokenService: TokenService,

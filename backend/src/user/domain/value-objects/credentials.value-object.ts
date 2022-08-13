@@ -1,15 +1,15 @@
 import { ValueObject } from "@keep/common";
 import { flushErrors } from "@keep/validations";
-import { ValueObjectReturn } from "src/common/interfaces";
+import { IValueObjectReturn } from "src/common/interfaces";
 import { EmailVo } from "src/common/value-objects";
 
-export interface CredentialsProps {
+export interface ICredentialsProps {
     email: string;
     password: string;
 }
 
-export class CredentialsVo extends ValueObject<CredentialsProps> {
-    private constructor(props: CredentialsProps) {
+export class CredentialsVo extends ValueObject<ICredentialsProps> {
+    private constructor(props: ICredentialsProps) {
         super(props);
     }
 
@@ -17,7 +17,7 @@ export class CredentialsVo extends ValueObject<CredentialsProps> {
         return this.props;
     }
 
-    public static fromProps(credentialsDto: CredentialsProps) {
+    public static fromProps(credentialsDto: ICredentialsProps) {
         const [emailCodes, emailVo] = EmailVo.fromString(credentialsDto.email);
 
         const errors = flushErrors([
@@ -31,6 +31,6 @@ export class CredentialsVo extends ValueObject<CredentialsProps> {
         const isValid = errors.every(error => error.codes.length <= 0);
         const instance = isValid ? new CredentialsVo(credentialsDto) : null;
 
-        return [errors, instance] as ValueObjectReturn<CredentialsProps, CredentialsVo>;
+        return [errors, instance] as IValueObjectReturn<ICredentialsProps, CredentialsVo>;
     }
 }

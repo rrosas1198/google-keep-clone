@@ -1,6 +1,6 @@
 import { ValidationCodeEnum } from "src/enums";
 
-export interface ValidationResult<T> {
+export interface IValidationResult<T> {
     value: T;
     valid: boolean;
     codes: ValidationCodeEnum[];

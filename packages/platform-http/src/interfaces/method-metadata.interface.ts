@@ -1,6 +1,6 @@
 import { HttpMethodEnum } from "src/enums";
 
-export interface MethodMetadata {
+export interface IMethodMetadata {
     path: string;
     method: HttpMethodEnum;
     methodName: string;

@@ -1,9 +1,9 @@
 import { ApplicationContext } from "./application.context";
-import { Platform, Type } from "./interfaces";
+import { IConstructor, IPlatform } from "./interfaces";
 
-export abstract class Application<K, T extends Platform<K>, V extends ApplicationContext> {
+export abstract class Application<K, T extends IPlatform<K>, V extends ApplicationContext> {
     constructor(
-        protected readonly appModule: Type,
+        protected readonly appModule: IConstructor,
         protected readonly platform: T,
         protected readonly context: V
     ) {}

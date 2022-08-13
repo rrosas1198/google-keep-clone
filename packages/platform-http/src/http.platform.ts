@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Platform } from "@keep/common";
+import { IPlatform } from "@keep/common";
 import {
     App,
     CompatibilityEvent,
@@ -13,10 +13,10 @@ import {
 import { listen } from "listhen";
 import { HttpMethodEnum, HttpStatusEnum } from "./enums";
 import { HttpException } from "./http.exception";
-import { HttpOptions } from "./interfaces";
+import { IHttpOptions } from "./interfaces";
 import { isException, parseStack } from "./utils";
 
-export class HttpPlatform implements Platform<HttpOptions> {
+export class HttpPlatform implements IPlatform<IHttpOptions> {
     private readonly server!: App;
     private readonly router!: Router;
     private readonly rootDir = process.cwd();
@@ -26,7 +26,7 @@ export class HttpPlatform implements Platform<HttpOptions> {
         this.router = createRouter();
     }
 
-    public async bootstrap(options?: Partial<HttpOptions>) {
+    public async bootstrap(options?: Partial<IHttpOptions>) {
         this.server.use(this.router);
         await listen(this.server, options);
     }

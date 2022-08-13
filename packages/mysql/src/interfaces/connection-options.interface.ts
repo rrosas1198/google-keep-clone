@@ -1,6 +1,6 @@
-import { Type } from "@keep/common";
+import { IConstructor } from "@keep/common";
 
-export interface ConnectionOptions {
+export interface IConnectionOptions {
     host?: string;
     port?: number;
     username?: string;
@@ -8,5 +8,5 @@ export interface ConnectionOptions {
     database?: string;
     charset?: string;
     timezone?: string;
-    migrations?: Type[];
+    migrations?: IConstructor[];
 }

@@ -1,6 +1,6 @@
 import { ValueObject } from "@keep/common";
 import { flushRules, isString, isValidEmail, notBlank } from "@keep/validations";
-import { MonoValueObjectReturn } from "../interfaces";
+import { IMonoValueObjectReturn } from "../interfaces";
 
 export class EmailVo extends ValueObject<string> {
     private constructor(value: string) {
@@ -14,7 +14,7 @@ export class EmailVo extends ValueObject<string> {
     public static fromString(value: string) {
         const { codes, valid } = this.validate(value);
         const instance = valid ? new EmailVo(value) : null;
-        return [codes, instance] as MonoValueObjectReturn<EmailVo>;
+        return [codes, instance] as IMonoValueObjectReturn<EmailVo>;
     }
 
     private static validate(value: string) {

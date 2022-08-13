@@ -1,35 +1,41 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { container as Container, isClassProvider, isFactoryProvider } from "tsyringe";
 import { ScopeEnum } from "./enums";
-import { DynamicModule, InjectionToken, ModuleMetadataKey, Provider, Type } from "./interfaces";
-import { isDynamicModule, isTypeProvider } from "./utils";
+import {
+    IConstructor,
+    IContainerToken,
+    IDynamicModule,
+    IModuleMetadata,
+    Provider
+} from "./interfaces";
+import { isConstructor, isDynamicModule } from "./utils";
 
 export class ApplicationContext {
     constructor(protected readonly container = Container) {}
 
-    public resolve<T>(token: InjectionToken<T>) {
+    public resolve<T>(token: IContainerToken<T>) {
         return this.container.resolve<T>(token);
     }
 
     public register<T>(provider: Provider<T>) {
-        const token: InjectionToken = (provider as any).provide || provider;
-        const value: Type<T> = this.getProviderValue(provider) as any;
+        const token: IContainerToken = (provider as any).provide || provider;
+        const value: IConstructor<T> = this.getProviderValue(provider) as any;
         const scope = this.getProviderScope<T>(provider);
 
         this.container.register(token, value, { lifecycle: scope });
     }
 
-    public registerModule(metatype: Type | DynamicModule) {
+    public registerModule(metatype: IConstructor | IDynamicModule) {
         const providers = this.getProviders(metatype);
         providers.forEach(provider => this.register(provider));
     }
 
-    protected getProviders(metatype: Type | DynamicModule): Provider[] {
+    protected getProviders(metatype: IConstructor | IDynamicModule): Provider[] {
         return this.getDeepMetadata<Provider>(metatype, "providers");
     }
 
     protected getProviderValue<T = any>(provider: Provider<T>) {
-        if (isTypeProvider(provider)) {
+        if (isConstructor(provider)) {
             return provider;
         }
         if (isClassProvider(provider)) {
@@ -42,15 +48,15 @@ export class ApplicationContext {
     }
 
     protected getProviderScope<T = any>(provider: Provider<T>) {
-        const hasScope = isTypeProvider(provider) || isClassProvider(provider);
+        const hasScope = isConstructor(provider) || isClassProvider(provider);
         return hasScope ? (provider as any)?.scope || ScopeEnum.SINGLETON : null;
     }
 
     protected getDeepMetadata<T>(
-        metatype: Type | DynamicModule,
-        metadataKey: ModuleMetadataKey
+        metatype: IConstructor | IDynamicModule,
+        metadataKey: keyof IModuleMetadata
     ): T[] {
-        const imports = this.getMetadata<Type | DynamicModule>(metatype, "imports");
+        const imports = this.getMetadata<IConstructor | IDynamicModule>(metatype, "imports");
         const metadata = this.getMetadata<T>(metatype, metadataKey);
 
         const staticMetadata = imports
@@ -64,7 +70,10 @@ export class ApplicationContext {
         return [...new Set([...metadata, ...staticMetadata, ...dynamicMetadata])];
     }
 
-    protected getMetadata<T>(metatype: Type | DynamicModule, metadataKey: ModuleMetadataKey) {
+    protected getMetadata<T>(
+        metatype: IConstructor | IDynamicModule,
+        metadataKey: keyof IModuleMetadata
+    ) {
         const metadata = isDynamicModule(metatype)
             ? metatype[metadataKey]
             : Reflect.getMetadata(metadataKey, metatype);

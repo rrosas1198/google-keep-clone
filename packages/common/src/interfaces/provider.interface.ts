@@ -2,24 +2,28 @@
 import { DependencyContainer } from "tsyringe";
 import { DelayedConstructor } from "tsyringe/dist/typings/lazy-helpers";
 import { ScopeEnum } from "../enums";
-import { InjectionToken } from "./injection-token.interface";
-import { Type } from "./type.interface";
+import { IConstructor } from "./constructor.interface";
+import { IContainerToken } from "./injection-token.interface";
 
-export interface ClassProvider<T = any> {
-    useClass: Type<T> | DelayedConstructor<T>;
-    provide: InjectionToken;
+export interface IClassProvider<T = any> {
+    useClass: IConstructor<T> | DelayedConstructor<T>;
+    provide: IContainerToken;
     scope?: ScopeEnum;
 }
 
-export interface FactoryProvider<T = any> {
+export interface IFactoryProvider<T = any> {
     useFactory: (container: DependencyContainer) => T;
-    provide: InjectionToken;
+    provide: IContainerToken;
     scope?: ScopeEnum;
 }
 
-export interface ValueProvider<T = any> {
+export interface IValueProvider<T = any> {
     useValue: T;
-    provide: InjectionToken;
+    provide: IContainerToken;
 }
 
-export type Provider<T = any> = Type<T> | ClassProvider<T> | FactoryProvider<T> | ValueProvider<T>;
+export type Provider<T = any> =
+    | IConstructor<T>
+    | IClassProvider<T>
+    | IFactoryProvider<T>
+    | IValueProvider<T>;

@@ -1,5 +1,5 @@
-import { ValidationCodeEnum, ValidationError } from "@keep/validations";
+import { IValidationError, ValidationCodeEnum } from "@keep/validations";
 
-export type MonoValueObjectReturn<T> = [ValidationCodeEnum[], T | null];
+export type IMonoValueObjectReturn<T> = [ValidationCodeEnum[], T | null];
 
-export type ValueObjectReturn<T, V> = [ValidationError<T>[], V | null];
+export type IValueObjectReturn<T, V> = [IValidationError<T>[], V | null];

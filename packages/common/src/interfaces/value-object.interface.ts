@@ -1,9 +1,9 @@
-export type ValueObjectPrimitiveValue = string | number | boolean;
+export type IValueObjectPrimitiveValue = string | number | boolean;
 
-export interface ValueObjectPrimitive<T extends ValueObjectPrimitiveValue | Date> {
+export interface IValueObjectPrimitive<T extends IValueObjectPrimitiveValue | Date> {
     value: T;
 }
 
-export type ValueObjectProps<T> = T extends ValueObjectPrimitiveValue | Date
-    ? ValueObjectPrimitive<T>
+export type IValueObjectProps<T> = T extends IValueObjectPrimitiveValue | Date
+    ? IValueObjectPrimitive<T>
     : T;

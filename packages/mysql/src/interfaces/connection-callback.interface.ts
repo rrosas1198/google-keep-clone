@@ -1,3 +1,3 @@
 import { MysqlConnection } from "src/mysql.connection";
 
-export type ConnectionCallback<T> = (connection: MysqlConnection) => Promise<T>;
+export type IConnectionCallback<T> = (connection: MysqlConnection) => Promise<T>;
