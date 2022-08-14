@@ -1,16 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Subscription } from "rxjs";
 import { isSubscription } from "rxjs/internal/Subscription";
-
-export interface IDisposable {
-    dispose(): void;
-}
-
-export class MultiDisposeError extends Error {
-    constructor(public readonly errors: unknown[]) {
-        super(`Disposable: Encountered errors while disposing. Errors: [${errors.join(", ")}]`);
-    }
-}
+import { MultiDisposeError } from "src/exceptions";
+import { IDisposable } from "src/interfaces";
 
 export class Disposable implements IDisposable {
     private _toDispose = new Set<IDisposable | Subscription>();
