@@ -4,7 +4,7 @@ export class SigninModel {
     public email = ref("");
     public password = ref("");
 
-    public toSigninParams(): ISigninUseCaseParams {
+    public getSigninParams(): ISigninUseCaseParams {
         return {
             email: unref(this.email),
             password: unref(this.password)

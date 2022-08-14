@@ -10,7 +10,7 @@ export class SigninViewModel extends ViewModel {
     }
 
     public onSubmit() {
-        const subscription = this.signinUseCase.execute(this.model.toSigninParams()).subscribe();
-        this.addDisposable(subscription);
+        const subscription = this.signinUseCase.execute(this.model.getSigninParams()).subscribe();
+        this.shouldDispose(subscription);
     }
 }
