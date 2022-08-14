@@ -1,6 +1,6 @@
-import { UserEntity } from "src/user/domain/entities";
+import { IUserEntity } from "src/user/domain/entities";
 
-export function findOneQuery(params?: Partial<UserEntity>) {
+export function findOneQuery(params?: Partial<IUserEntity>) {
     const conditions = getConditions(params);
 
     return `
@@ -18,7 +18,7 @@ export function findOneQuery(params?: Partial<UserEntity>) {
     `;
 }
 
-function getConditions(params?: Partial<UserEntity>) {
+function getConditions(params?: Partial<IUserEntity>) {
     const conditions = [];
 
     if (params?.email) {

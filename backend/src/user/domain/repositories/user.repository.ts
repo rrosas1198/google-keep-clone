@@ -1,6 +1,10 @@
+import { Inject } from "@keep/common";
 import { Observable } from "rxjs";
-import { UserEntity } from "../entities";
+import { IUserEntity } from "../entities";
 
-export interface UserRepository {
-    findByEmail(email: string): Observable<UserEntity>;
+export const IUserRepositoryToken = Symbol.for("IUserRepositoryToken");
+export const IUserRepository = Inject(IUserRepositoryToken);
+
+export interface IUserRepository {
+    findByEmail(email: string): Observable<IUserEntity>;
 }

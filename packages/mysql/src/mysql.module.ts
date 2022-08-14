@@ -1,7 +1,7 @@
 import { IDynamicModule } from "@keep/common";
 import { ConfigService } from "@keep/config";
 import { DependencyContainer, instanceCachingFactory } from "tsyringe";
-import { MYSQL_TOKEN } from "./constants";
+import { IMysqlServiceToken } from "./decorators";
 import { IConnectionOptions } from "./interfaces";
 import { MysqlService } from "./mysql.service";
 
@@ -11,7 +11,7 @@ export class MysqlModule {
             module: MysqlModule,
             providers: [
                 {
-                    provide: MYSQL_TOKEN,
+                    provide: IMysqlServiceToken,
                     useFactory: instanceCachingFactory(this.connect)
                 }
             ]

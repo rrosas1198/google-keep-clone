@@ -1,8 +1,8 @@
 import { map, OperatorFunction } from "rxjs";
-import { UserEntity } from "src/user/domain/entities";
+import { IUserEntity } from "src/user/domain/entities";
 
-export function mapFindOne(): OperatorFunction<GenericRecord, UserEntity> {
-    return map<GenericRecord, UserEntity>(data => ({
+export function mapFindOne(): OperatorFunction<GenericRecord, IUserEntity> {
+    return map<GenericRecord, IUserEntity>(data => ({
         id: data.id,
         firstName: data.firstName,
         lastName: data.lastName,

@@ -1,1 +1,1 @@
-export * from "./inject-mysql.decorator";
+export * from "./mysql-service.decorator";
