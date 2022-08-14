@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from "@keep/platform-http";
 import { mergeMap, of } from "rxjs";
 import { catchValueObject } from "src/common/operators";
-import { SigninUseCase } from "../../application/use-cases";
+import { SigninUseCase } from "../../domain/use-cases";
 import { CredentialsVo } from "../../domain/value-objects";
 import { ICredentialsDto } from "../dtos";
 

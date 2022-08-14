@@ -1,9 +1,9 @@
 import { Module } from "@keep/common";
 import { UserMySqlDatastore } from "./application/datastores/mysql";
 import { UserMysqlRepositoryImpl } from "./application/repositories/mysql";
-import { SigninUseCase } from "./application/use-cases";
 import { IUserRepositoryToken } from "./domain/repositories";
 import { HashService, TokenService } from "./domain/services";
+import { SigninUseCase } from "./domain/use-cases";
 import { UserController } from "./infrastructure/controllers";
 
 @Module({

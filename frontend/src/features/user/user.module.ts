@@ -1,14 +1,13 @@
 import { Module } from "@keep/common";
-import { UserRestDatastoreImpl } from "./application/datastores/rest";
+import { UserRestDatastore } from "./application/datastores/rest";
 import { UserRestRepositoryImpl } from "./application/repositories/rest";
-import { IUserDatastoreToken } from "./domain/datastore";
 import { IUserRepositoryToken } from "./domain/repositories";
 
 @Module({
     providers: [
         {
-            provide: IUserDatastoreToken,
-            useClass: UserRestDatastoreImpl
+            provide: UserRestDatastore,
+            useClass: UserRestDatastore
         },
         {
             provide: IUserRepositoryToken,

@@ -1,11 +1,11 @@
 import { Observable } from "rxjs";
-import { IUserDatastore } from "src/features/user/domain/datastore";
 import { IUserRepository } from "src/features/user/domain/repositories";
+import { UserRestDatastore } from "../../datastores/rest";
 
 export class UserRestRepositoryImpl implements IUserRepository {
-    constructor(@IUserDatastore private readonly userDatastore: IUserDatastore) {}
+    constructor(private readonly userRestDatastore: UserRestDatastore) {}
 
     public signup(email: string, password: string): Observable<string> {
-        return this.userDatastore.signin(email, password);
+        return this.userRestDatastore.signin(email, password);
     }
 }
