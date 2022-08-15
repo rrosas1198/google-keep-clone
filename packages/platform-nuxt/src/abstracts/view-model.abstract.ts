@@ -1,11 +1,10 @@
-import { BehaviorSubject } from "rxjs";
-import { ViewModelStateEnum } from "src/enums";
 import { toDisposable } from "src/utils";
 import { onBeforeMount, onBeforeUnmount, onMounted, onScopeDispose, onUnmounted } from "vue";
 import { Disposable } from "./disposable.abstract";
+import { EventManager } from "./event-manager.abstract";
 
-export class ViewModel extends Disposable {
-    private readonly _state = new BehaviorSubject(ViewModelStateEnum.NONE);
+export class ViewModel<T> extends Disposable {
+    private readonly _eventManager = new EventManager<T>();
 
     constructor() {
         super();
@@ -48,23 +47,24 @@ export class ViewModel extends Disposable {
     }
 
     public onStop() {
-        this._state.complete();
-        this._state.unsubscribe();
+        //
     }
 
     public onDestroy() {
         //
     }
 
-    public addStateHandler(state: ViewModelStateEnum, handler: () => void) {
-        this.onChangeState(value => {
-            if (value !== state) return;
-            handler();
-        });
+    public addStateHandler(state: T, handler: () => void) {
+        this._eventManager.subscribe(state, handler);
     }
 
-    public setState(state: ViewModelStateEnum) {
-        this._state.next(state);
+    public setState(state: T) {
+        this._eventManager.notify(state);
+    }
+
+    public override dispose() {
+        super.dispose();
+        this._eventManager.dispose();
     }
 
     protected addDisposableListener(
@@ -75,10 +75,6 @@ export class ViewModel extends Disposable {
     ) {
         target.addEventListener(event, handler, options);
         this.shouldDispose(toDisposable(() => target.removeEventListener(event, handler, options)));
-    }
-
-    private onChangeState(handler: (value: ViewModelStateEnum) => void) {
-        this.shouldDispose(this._state.subscribe(handler));
     }
 
     private onVisibilityChange() {

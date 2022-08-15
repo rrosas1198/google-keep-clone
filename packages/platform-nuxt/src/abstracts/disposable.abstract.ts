@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Subscription } from "rxjs";
 import { isSubscription } from "rxjs/internal/Subscription";
 import { MultiDisposeError } from "src/exceptions";
@@ -12,13 +11,13 @@ export class Disposable implements IDisposable {
         return this._isDisposed;
     }
 
-    public shouldDispose<T = IDisposable | Subscription>(disposable: T): T {
+    public shouldDispose(disposable: IDisposable | Subscription): IDisposable | Subscription {
         if ((disposable as unknown as Disposable) === this) {
             throw new Error("Disposable: Cannot register on itself");
         }
 
         if (!this._isDisposed) {
-            this._toDispose.add(disposable as any);
+            this._toDispose.add(disposable);
         }
 
         return disposable;
