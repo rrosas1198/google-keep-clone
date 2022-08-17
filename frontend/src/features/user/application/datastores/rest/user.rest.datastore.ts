@@ -1,7 +1,10 @@
+import { Injectable } from "@keep/common";
 import { of } from "rxjs";
 
+@Injectable()
 export class UserRestDatastore {
-    public signin(_email: string, _password: string) {
-        return of("7d2abf2d0fa7c3a0c13236910f30bc43");
+    public signin(email: string, password: string) {
+        const values = Array.from(email.concat(password));
+        return of(values.map(() => Math.random().toString().substring(2)).join(""));
     }
 }

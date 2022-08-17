@@ -1,6 +1,6 @@
 import { Module } from "@keep/common";
 import { UserRestDatastore } from "./application/datastores/rest";
-import { UserRestRepositoryImpl } from "./application/repositories/rest";
+import { UserMockRepositoryImpl } from "./application/repositories/mock";
 import { IUserRepositoryToken } from "./domain/repositories";
 
 @Module({
@@ -11,7 +11,7 @@ import { IUserRepositoryToken } from "./domain/repositories";
         },
         {
             provide: IUserRepositoryToken,
-            useClass: UserRestRepositoryImpl
+            useClass: UserMockRepositoryImpl
         }
     ]
 })

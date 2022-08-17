@@ -5,5 +5,5 @@ export const IUserRepositoryToken = Symbol.for("IUserRepositoryToken");
 export const IUserRepository = Inject(IUserRepositoryToken);
 
 export interface IUserRepository {
-    signup(email: string, password: string): Observable<string>;
+    signin(email: string, password: string): Observable<string>;
 }
