@@ -1,17 +1,16 @@
-import { Subscription } from "rxjs";
-import { isSubscription } from "rxjs/internal/Subscription";
 import { MultiDisposeError } from "src/exceptions";
-import { IDisposable } from "src/interfaces";
+import { IDisposable, IDisposableLike } from "src/interfaces";
+import { isDisposable } from "src/utils";
 
-export class Disposable implements IDisposable {
-    private _toDispose = new Set<IDisposable | Subscription>();
+export class Disposable implements IDisposableLike {
+    private _toDispose = new Set<IDisposable>();
     private _isDisposed = false;
 
     public get isDisposed() {
         return this._isDisposed;
     }
 
-    public shouldDispose(disposable: IDisposable | Subscription): IDisposable | Subscription {
+    public shouldDispose<T extends IDisposable>(disposable: T): T {
         if ((disposable as unknown as Disposable) === this) {
             throw new Error("Disposable: Cannot register on itself");
         }
@@ -43,9 +42,9 @@ export class Disposable implements IDisposable {
         const disposables = this._toDispose.values();
 
         for (const disposable of disposables) {
-            const disposeFn = isSubscription(disposable)
-                ? disposable.unsubscribe
-                : disposable.dispose;
+            const disposeFn = isDisposable(disposable)
+                ? disposable.dispose
+                : disposable.unsubscribe;
 
             try {
                 disposeFn();

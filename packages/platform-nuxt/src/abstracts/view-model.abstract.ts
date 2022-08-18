@@ -1,7 +1,5 @@
-import { toDisposable } from "src/utils";
+import { Disposable, EventManager, toDisposable } from "@keep/common";
 import { onBeforeMount, onBeforeUnmount, onMounted, onScopeDispose, onUnmounted } from "vue";
-import { Disposable } from "./disposable.abstract";
-import { EventManager } from "./event-manager.abstract";
 
 export class ViewModel<T> extends Disposable {
     private readonly _eventManager = new EventManager<T>();
