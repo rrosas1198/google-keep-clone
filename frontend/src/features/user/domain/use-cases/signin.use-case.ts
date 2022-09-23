@@ -1,4 +1,4 @@
-import { Injectable, IUseCase } from "@keep/common";
+import { IUseCase } from "@keep/core";
 import { Observable } from "rxjs";
 import { IUserRepository } from "../repositories";
 
@@ -7,7 +7,6 @@ export interface ISigninUseCaseParams {
     password: string;
 }
 
-@Injectable()
 export class SigninUseCase implements IUseCase<ISigninUseCaseParams, string> {
     constructor(@IUserRepository private readonly userRepository: IUserRepository) {}
 

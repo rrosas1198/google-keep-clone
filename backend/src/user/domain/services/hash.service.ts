@@ -1,9 +1,7 @@
-import { Injectable } from "@keep/common";
-import { compareSync } from "bcryptjs";
+import { ContainerDecorator } from "@keep/core";
 
-@Injectable()
-export class HashService {
-    public compare(value: string, hash: string) {
-        return compareSync(value, hash);
-    }
+export const IHashService = ContainerDecorator("IHashService");
+
+export interface IHashService {
+    compare(value: string, hash: string): boolean;
 }

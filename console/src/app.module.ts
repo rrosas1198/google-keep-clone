@@ -1,5 +1,5 @@
-import { Module } from "@keep/common";
 import { ConfigModule } from "@keep/config";
+import { Module } from "@keep/core";
 import { MysqlModule } from "@keep/mysql";
 import { MigrationModule } from "./migration/migration.module";
 

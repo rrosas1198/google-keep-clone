@@ -13,7 +13,7 @@
     },
     "devDependencies": {
         "bauen": "^0.10.9",
-        "taze": "^0.7.6",
-        "vitest": "^0.21.1"
+        "taze": "^0.8.0",
+        "vitest": "^0.22.1"
     }
 }

@@ -19,7 +19,7 @@
         "@keep/platform-nuxt": "^0.0.1",
         "@keep/theme": "^0.0.1",
         "bauen": "^0.10.9",
-        "taze": "^0.7.6",
-        "vitest": "^0.21.1"
+        "taze": "^0.8.0",
+        "vitest": "^0.22.1"
     }
 }

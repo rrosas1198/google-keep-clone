@@ -1,4 +1,4 @@
-import { Module } from "@keep/common";
+import { Module } from "@keep/core";
 import { UserModule } from "./user/user.module";
 
 @Module({

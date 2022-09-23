@@ -1,5 +1,5 @@
-import { Application, IConstructor } from "@keep/common";
-import { ConfigService } from "@keep/config";
+import { IConfigService } from "@keep/config";
+import { Application, IConstructor } from "@keep/core";
 import { HttpContext } from "./http.context";
 import { HttpModule } from "./http.module";
 import { HttpPlatform } from "./http.platform";
@@ -18,7 +18,7 @@ export class HttpApplication extends Application<IHttpOptions, HttpPlatform, Htt
             this.platform.addRoute(route.path, route.handler, [route.method]);
         });
 
-        const configService = this.context.resolve(ConfigService);
+        const configService = this.context.resolve<IConfigService>(IConfigService);
 
         const params: IHttpOptions = {
             port: configService.get("HTTP_PORT"),

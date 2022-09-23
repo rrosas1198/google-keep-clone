@@ -1,4 +1,4 @@
-import { Disposable, EventManager, toDisposable } from "@keep/common";
+import { Disposable, EventManager, toDisposable } from "@keep/core";
 import { onBeforeMount, onBeforeUnmount, onMounted, onScopeDispose, onUnmounted } from "vue";
 
 export class ViewModel<T> extends Disposable {

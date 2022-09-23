@@ -1,4 +1,4 @@
-import { concatMetadata } from "@keep/common";
+import { concatMetadata } from "@keep/core";
 import { HEADERS_TOKEN } from "src/constants";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */

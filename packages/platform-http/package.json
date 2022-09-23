@@ -12,18 +12,17 @@
         "deps:update": "taze -w"
     },
     "dependencies": {
-        "@abraham/reflection": "latest",
-        "@keep/common": "^0.0.1",
+        "@keep/core": "^0.0.1",
         "@keep/config": "^0.0.1",
-        "h3": "^0.7.15",
+        "h3": "^0.7.17",
         "listhen": "^0.2.15",
         "ufo": "^0.8.5"
     },
     "devDependencies": {
         "bauen": "^0.10.9",
         "rxjs": "^7.5.6",
-        "taze": "^0.7.6",
-        "vitest": "^0.21.1"
+        "taze": "^0.8.0",
+        "vitest": "^0.22.1"
     },
     "peerDependencies": {
         "rxjs": ">= 7.5.0"

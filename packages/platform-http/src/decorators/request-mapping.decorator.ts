@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Reflector } from "@keep/core";
 import { METHOD_TOKEN, PATH_TOKEN } from "src/constants";
 import { HttpMethodEnum } from "src/enums";
 
@@ -12,8 +13,8 @@ export function RequestMapping(metadata: RequestMappingMetadata): MethodDecorato
     const requestMethod = metadata[METHOD_TOKEN] || HttpMethodEnum.GET;
 
     return (target: object, key: string | symbol) => {
-        Reflect.defineMetadata(PATH_TOKEN, pathMetadata, target.constructor, key);
-        Reflect.defineMetadata(METHOD_TOKEN, requestMethod, target.constructor, key);
+        Reflector.setMetadata(target.constructor, PATH_TOKEN, pathMetadata, key);
+        Reflector.setMetadata(target.constructor, METHOD_TOKEN, requestMethod, key);
     };
 }
 

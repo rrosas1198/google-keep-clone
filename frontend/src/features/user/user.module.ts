@@ -1,7 +1,7 @@
-import { Module } from "@keep/common";
+import { Module } from "@keep/core";
 import { UserRestDatastore } from "./application/datastores/rest";
 import { UserMockRepositoryImpl } from "./application/repositories/mock";
-import { IUserRepositoryToken } from "./domain/repositories";
+import { IUserRepository } from "./domain/repositories";
 
 @Module({
     providers: [
@@ -10,7 +10,7 @@ import { IUserRepositoryToken } from "./domain/repositories";
             useClass: UserRestDatastore
         },
         {
-            provide: IUserRepositoryToken,
+            provide: IUserRepository,
             useClass: UserMockRepositoryImpl
         }
     ]

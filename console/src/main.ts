@@ -1,4 +1,4 @@
-import { ApplicationContext } from "@keep/common";
+import { ApplicationContext } from "@keep/core";
 import { AppModule } from "./app.module";
 import { MigrationRunner } from "./migration/migration.runner";
 

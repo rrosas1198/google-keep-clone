@@ -1,8 +1,6 @@
-import { Injectable } from "@keep/common";
 import { ViewModel } from "@keep/platform-nuxt";
 import { CoreViewStateEnum } from "../enums";
 
-@Injectable()
 export class CoreViewModel extends ViewModel<CoreViewStateEnum> {
     constructor() {
         super();

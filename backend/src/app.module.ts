@@ -1,4 +1,4 @@
-import { Module } from "@keep/common";
+import { Module } from "@keep/core";
 import { MysqlModule } from "@keep/mysql";
 import { UserModule } from "./user/user.module";
 

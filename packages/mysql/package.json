@@ -12,13 +12,13 @@
         "deps:update": "taze -w"
     },
     "dependencies": {
-        "@keep/common": "^0.0.1",
+        "@keep/core": "^0.0.1",
         "@keep/config": "^0.0.1",
         "mysql2": "^2.3.3"
     },
     "devDependencies": {
         "bauen": "^0.10.9",
-        "taze": "^0.7.6",
-        "vitest": "^0.21.1"
+        "taze": "^0.8.0",
+        "vitest": "^0.22.1"
     }
 }

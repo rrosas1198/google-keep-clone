@@ -1,4 +1,4 @@
-import { IPlatform } from "@keep/common";
+import { IPlatform } from "@keep/core";
 
 export class NuxtPlatform implements IPlatform<void> {
     public bootstrap(): Promise<void> {

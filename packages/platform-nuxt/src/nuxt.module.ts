@@ -1,5 +1,5 @@
-import { IConstructor, IDynamicModule, Module } from "@keep/common";
 import { ConfigModule } from "@keep/config";
+import { IConstructor, IDynamicModule, Module } from "@keep/core";
 
 @Module({
     imports: [

@@ -1,4 +1,3 @@
-import { Inject } from "@keep/common";
+import { ContainerDecorator } from "@keep/core";
 
-export const IMysqlServiceToken = Symbol.for("IMysqlServiceToken");
-export const IMysqlService = Inject(IMysqlServiceToken);
+export const IMysqlService = ContainerDecorator("IMysqlService");

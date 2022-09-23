@@ -1,4 +1,4 @@
-import { Application, ApplicationContext, IPlatform } from "@keep/common";
+import { Application, ApplicationContext, IPlatform } from "@keep/core";
 import { NuxtModule } from "./nuxt.module";
 import { NuxtPlatform } from "./nuxt.platform";
 

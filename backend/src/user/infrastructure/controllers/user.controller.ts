@@ -1,13 +1,14 @@
 import { Body, Controller, Post } from "@keep/platform-http";
 import { mergeMap, of } from "rxjs";
 import { catchValueObject } from "src/common/operators";
-import { SigninUseCase } from "../../domain/use-cases";
+import { SigninUseCaseImpl } from "src/user/application/use-cases";
+import { ISigninUseCase } from "src/user/domain/use-cases";
 import { CredentialsVo } from "../../domain/value-objects";
 import { ICredentialsDto } from "../dtos";
 
 @Controller({ path: "/user" })
 export class UserController {
-    constructor(private readonly signinUseCase: SigninUseCase) {}
+    constructor(@ISigninUseCase private readonly signinUseCase: SigninUseCaseImpl) {}
 
     @Post("/signin")
     public signin(@Body() credentialsDto: ICredentialsDto) {

@@ -1,3 +1,4 @@
+import { Reflector } from "@keep/core";
 import { ROUTE_METADATA_TOKEN } from "src/constants";
 import { RouteParamtypesEnum } from "src/enums";
 import { getRouteMetadata } from "src/utils";
@@ -20,6 +21,6 @@ function createParamDecorator(
     return (data?: unknown) => (target, key, index) => {
         const metadata = getRouteMetadata(target, key);
         const newMetadata = [...metadata, [paramtype, { index, data }]];
-        Reflect.defineMetadata(ROUTE_METADATA_TOKEN, newMetadata, target.constructor, key);
+        Reflector.setMetadata(target.constructor, ROUTE_METADATA_TOKEN, newMetadata, key);
     };
 }

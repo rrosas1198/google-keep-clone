@@ -12,12 +12,12 @@
         "deps:update": "taze -w"
     },
     "dependencies": {
-        "@keep/common": "^0.0.1",
-        "dotenv": "^16.0.1"
+        "@keep/core": "^0.0.1",
+        "dotenv": "^16.0.2"
     },
     "devDependencies": {
         "bauen": "^0.10.9",
-        "taze": "^0.7.6",
-        "vitest": "^0.21.1"
+        "taze": "^0.8.0",
+        "vitest": "^0.22.1"
     }
 }

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ApplicationContext, IConstructor, IDynamicModule } from "@keep/common";
+import { ApplicationContext, IConstructor, IDynamicModule, Reflector } from "@keep/core";
 import { joinURL, withLeadingSlash } from "ufo";
 import { METHOD_TOKEN, PATH_TOKEN, VERSION_TOKEN } from "./constants";
 import { HttpMethodEnum } from "./enums";
@@ -9,7 +9,7 @@ import { getRouteMetadata } from "./utils";
 
 export class HttpContext extends ApplicationContext {
     private _routes = new Set<IControllerMethodMetadata>();
-    private httpRouteHandler = new HttpRouteHandler();
+    private _httpRouteHandler = new HttpRouteHandler();
 
     public get routes() {
         return this._routes;
@@ -30,12 +30,14 @@ export class HttpContext extends ApplicationContext {
     }
 
     protected getControllers(metatype: IConstructor | IDynamicModule): IConstructor[] {
-        return this.getDeepMetadata<IConstructor>(metatype, "controllers");
+        return this._getDeepMetadata<IConstructor>(metatype, "controllers");
     }
 
     protected getControllerRoutes(metatype: IConstructor, baseMetadata: IControllerMetadata) {
         const methods = Object.getOwnPropertyNames(metatype.prototype);
-        const metadata = methods.map(method => this.getMethodMetadata(metatype, method));
+        const metadata = methods
+            .filter(method => method !== "constructor")
+            .map(method => this.getMethodMetadata(metatype, method));
         return this.mapControllerRoute(baseMetadata, metadata);
     }
 
@@ -53,7 +55,7 @@ export class HttpContext extends ApplicationContext {
 
         const handler = baseMetadata.instance[meta.methodName].bind(baseMetadata.instance);
         const parameters = getRouteMetadata(baseMetadata.metatype.prototype, meta.methodName);
-        const routeHandler = this.httpRouteHandler.getHandler(handler, parameters);
+        const routeHandler = this._httpRouteHandler.getHandler(handler, parameters);
 
         return <IControllerMethodMetadata>{
             path: withLeadingSlash(joinedPath),
@@ -63,17 +65,17 @@ export class HttpContext extends ApplicationContext {
     }
 
     protected getControllerMetadata(metatype: IConstructor) {
-        const path = Reflect.getMetadata(PATH_TOKEN, metatype) as string;
-        const version = Reflect.getMetadata(VERSION_TOKEN, metatype) as string;
-        const instance = this.container.resolve(metatype);
+        const path = Reflector.getMetadata(metatype, PATH_TOKEN) as string;
+        const version = Reflector.getMetadata(metatype, VERSION_TOKEN) as string;
+        const instance = this.container.create(metatype);
 
         return <IControllerMetadata>{ metatype, instance, path, version };
     }
 
     protected getMethodMetadata(metatype: IConstructor, methodName: string) {
-        const path = Reflect.getMetadata(PATH_TOKEN, metatype, methodName) as string;
-        const method = Reflect.getMetadata(METHOD_TOKEN, metatype, methodName) as HttpMethodEnum;
-        const version = Reflect.getMetadata(VERSION_TOKEN, metatype, methodName) as string;
+        const path = Reflector.getMetadata(metatype, PATH_TOKEN, methodName) as string;
+        const method = Reflector.getMetadata(metatype, METHOD_TOKEN, methodName) as HttpMethodEnum;
+        const version = Reflector.getMetadata(metatype, VERSION_TOKEN, methodName) as string;
 
         return <IMethodMetadata>{ path, version, method, methodName };
     }

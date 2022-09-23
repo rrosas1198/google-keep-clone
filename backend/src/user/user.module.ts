@@ -1,32 +1,29 @@
-import { Module } from "@keep/common";
-import { UserMySqlDatastore } from "./application/datastores/mysql";
-import { UserMysqlRepositoryImpl } from "./application/repositories/mysql";
-import { IUserRepositoryToken } from "./domain/repositories";
-import { HashService, TokenService } from "./domain/services";
-import { SigninUseCase } from "./domain/use-cases";
+import { Module } from "@keep/core";
+import { UserRepositoryImpl } from "./application/repositories";
+import { HashServiceImpl, TokenServiceImpl } from "./application/services";
+import { SigninUseCaseImpl } from "./application/use-cases";
+import { IUserRepository } from "./domain/repositories";
+import { IHashService, ITokenService } from "./domain/services";
+import { ISigninUseCase } from "./domain/use-cases";
 import { UserController } from "./infrastructure/controllers";
 
 @Module({
     providers: [
         {
-            provide: UserMySqlDatastore,
-            useClass: UserMySqlDatastore
+            provide: IUserRepository,
+            useClass: UserRepositoryImpl
         },
         {
-            provide: IUserRepositoryToken,
-            useClass: UserMysqlRepositoryImpl
+            provide: IHashService,
+            useClass: HashServiceImpl
         },
         {
-            provide: HashService,
-            useClass: HashService
+            provide: ITokenService,
+            useClass: TokenServiceImpl
         },
         {
-            provide: TokenService,
-            useClass: TokenService
-        },
-        {
-            provide: SigninUseCase,
-            useClass: SigninUseCase
+            provide: ISigninUseCase,
+            useClass: SigninUseCaseImpl
         }
     ],
     controllers: [UserController]

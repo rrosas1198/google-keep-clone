@@ -1,7 +1,8 @@
-import { IDynamicModule } from "@keep/common";
+import { IDynamicModule } from "@keep/core";
 import { parse } from "dotenv";
 import { existsSync, readFileSync } from "fs";
 import { resolve } from "path";
+import { IConfigService } from "./config.interface";
 import { ConfigService } from "./config.service";
 
 export class ConfigModule {
@@ -12,7 +13,7 @@ export class ConfigModule {
 
         return {
             module: ConfigModule,
-            providers: [ConfigService]
+            providers: [{ provide: IConfigService, useClass: ConfigService }]
         };
     }
 

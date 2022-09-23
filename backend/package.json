@@ -11,8 +11,7 @@
         "deps:update": "taze -w"
     },
     "dependencies": {
-        "@abraham/reflection": "^0.10.0",
-        "@keep/common": "^0.0.1",
+        "@keep/core": "^0.0.1",
         "@keep/config": "^0.0.1",
         "@keep/mysql": "^0.0.1",
         "@keep/platform-http": "^0.0.1",
@@ -23,9 +22,9 @@
     },
     "devDependencies": {
         "@types/bcryptjs": "^2.4.2",
-        "@types/jsonwebtoken": "^8.5.8",
+        "@types/jsonwebtoken": "^8.5.9",
         "bauen": "^0.10.9",
-        "taze": "^0.7.6",
-        "vitest": "^0.21.1"
+        "taze": "^0.8.0",
+        "vitest": "^0.22.1"
     }
 }

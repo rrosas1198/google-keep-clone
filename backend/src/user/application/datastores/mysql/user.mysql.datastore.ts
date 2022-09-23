@@ -1,10 +1,8 @@
-import { Injectable } from "@keep/common";
 import { IMysqlService, MysqlService } from "@keep/mysql";
 import { from, mergeMap } from "rxjs";
 import { IUserEntity } from "src/user/domain/entities";
 import { UserMySqlQueries } from "./queries";
 
-@Injectable()
 export class UserMySqlDatastore {
     constructor(@IMysqlService private readonly mysqlService: Promise<MysqlService>) {}
 

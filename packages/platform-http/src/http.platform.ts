@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IPlatform } from "@keep/common";
+import { IPlatform } from "@keep/core";
 import {
     App,
     CompatibilityEvent,
