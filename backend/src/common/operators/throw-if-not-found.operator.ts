@@ -3,7 +3,7 @@ import { MonoTypeOperatorFunction, tap } from "rxjs";
 
 export function throwIfNotFound<T>(status: HttpStatusEnum): MonoTypeOperatorFunction<T> {
     return tap<T>(data => {
-        if (data) return;
+        if (!!data) return;
         throw HttpException.fromStatus(status);
     });
 }
