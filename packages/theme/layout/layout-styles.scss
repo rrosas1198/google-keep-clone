@@ -1,32 +1,36 @@
 /* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
-@use "./breakpoints";
+@use "../system/breakpoints";
 @use "./media-query";
 
 @mixin core-styles() {
     .container,
     .container-fluid {
-        max-inline-size: var(--layout-max-width);
+        max-inline-size: var(--sys-layout-max-width);
         inline-size: 100%;
         margin-inline: auto;
 
         @each $breakpoint in breakpoints.get-keys() {
-            $max-width: breakpoints.get-fallback($breakpoint, max-width);
+            $max-width: breakpoints.get-value($breakpoint, max-width);
 
             @include media-query.breakpoint-up($breakpoint) {
-                --layout-max-width: #{$max-width};
+                @if $max-width {
+                    --sys-layout-max-width: #{$max-width};
+                }
             }
         }
     }
 
     .container {
-        padding-inline: var(--layout-margin);
+        padding-inline: var(--sys-layout-margin);
 
         @each $breakpoint in breakpoints.get-keys() {
-            $margin: breakpoints.get-fallback($breakpoint, margin);
+            $margin: breakpoints.get-value($breakpoint, margin);
 
             @include media-query.breakpoint-up($breakpoint) {
-                --layout-margin: #{$margin};
+                @if $margin {
+                    --sys-layout-margin: #{$margin};
+                }
             }
         }
     }

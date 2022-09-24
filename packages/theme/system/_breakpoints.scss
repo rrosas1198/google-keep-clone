@@ -1,0 +1,68 @@
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable at-rule-no-unknown */
+@use "sass:map";
+@use "../modules/math-ext";
+
+$_breakpoints: (
+    xs: (
+        width: 0,
+        margin: math-ext.to-em(8px),
+        max-width: 90%
+    ),
+    sm: (
+        width: math-ext.to-em(576px),
+        margin: math-ext.to-em(12px),
+        max-width: 85%
+    ),
+    md: (
+        width: math-ext.to-em(768px),
+        margin: null,
+        max-width: 80%
+    ),
+    xmd: (
+        width: math-ext.to-em(992px),
+        margin: math-ext.to-em(32px),
+        max-width: null
+    ),
+    lg: (
+        width: math-ext.to-em(1200px),
+        margin: null,
+        max-width: null
+    ),
+    xlg: (
+        width: math-ext.to-em(1600px),
+        margin: null,
+        max-width: math-ext.to-em(1440px)
+    ),
+    x-xlg: (
+        width: math-ext.to-em(1920px),
+        margin: null,
+        max-width: math-ext.to-em(1728px)
+    )
+);
+
+@function get-keys() {
+    @return map.keys($_breakpoints);
+}
+
+@function get-value($key, $value) {
+    $key: _validate-key($key);
+    $value: _validate-value($value);
+    $breakpoint: map.get($_breakpoints, $key);
+    @return map.get($breakpoint, $value);
+}
+
+@function _validate-key($property) {
+    @if map.has-key($_breakpoints, $property) {
+        @return $property;
+    }
+    @error "breakpoints: invalid property #{$property}";
+}
+
+@function _validate-value($property) {
+    $compact: map.get($_breakpoints, xs);
+    @if map.has-key($compact, $property) {
+        @return $property;
+    }
+    @error "breakpoints: invalid property #{$prop}";
+}

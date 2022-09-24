@@ -1,9 +1,11 @@
 /* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
-@use "./breakpoints";
+@use "sass:list";
+@use "sass:map";
+@use "../system/breakpoints";
 
 @mixin breakpoint-up($name) {
-    $min: breakpoints.breakpoint-min($name);
+    $min: _breakpoint-min($name);
     @if $min and $min != 0 {
         @media (min-width: $min) {
             @content;
@@ -14,7 +16,7 @@
 }
 
 @mixin breakpoint-down($name) {
-    $max: breakpoints.breakpoint-max($name);
+    $max: _breakpoint-max($name);
     @if $max and $max != 0 {
         @media (max-width: $max) {
             @content;
@@ -25,8 +27,8 @@
 }
 
 @mixin breakpoint-between($lower, $upper) {
-    $min: breakpoints.breakpoint-min($lower);
-    $max: breakpoints.breakpoint-max($upper);
+    $min: _breakpoint-min($lower);
+    $max: _breakpoint-max($upper);
 
     @if ($min != null and $max != null) {
         @media (min-width: $min) and (max-width: $max) {
@@ -44,9 +46,9 @@
 }
 
 @mixin breakpoint-only($name) {
-    $min: breakpoints.breakpoint-min($name);
-    $next: breakpoints.breakpoint-next($name);
-    $max: breakpoints.breakpoint-max($next);
+    $min: _breakpoint-min($name);
+    $next: _breakpoint-next($name);
+    $max: _breakpoint-max($next);
 
     @if $min != null and $max != null {
         @media (min-width: $min) and (max-width: $max) {
@@ -61,4 +63,20 @@
             @content;
         }
     }
+}
+
+@function _breakpoint-next($name) {
+    $keys: breakpoints.get-keys();
+    $index: list.index($keys, $name);
+    @return if($index < list.length($keys), list.nth($keys, $index + 1), null);
+}
+
+@function _breakpoint-min($name) {
+    $min: breakpoints.get-value($name, width);
+    @return if($min != 0, $min, null);
+}
+
+@function _breakpoint-max($name) {
+    $next: _breakpoint-next($name);
+    @return if($next, _breakpoint-min($next) - 0.02, null);
 }
