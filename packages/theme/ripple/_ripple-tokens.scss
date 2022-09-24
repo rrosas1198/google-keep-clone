@@ -1,0 +1,18 @@
+/* Based on https://github.com/material-components/material-web/blob/master/ripple/lib/_ripple-theme.scss */
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable at-rule-no-unknown */
+@use "sass:string";
+@use "../system/shape";
+@use "../system/state";
+
+$theme-tokens: (
+    dragged-state-layer-opacity: state.get-fallback(dragged-state-layer-opacity),
+    focus-state-layer-opacity: state.get-fallback(focus-state-layer-opacity),
+    hover-state-layer-opacity: state.get-fallback(hover-state-layer-opacity),
+    pressed-state-layer-opacity: state.get-fallback(pressed-state-layer-opacity),
+    state-layer-shape: shape.get-fallback(corner-none),
+    focus-state-layer-color: string.unquote("currentColor"),
+    hover-state-layer-color: string.unquote("currentColor"),
+    pressed-state-layer-color: string.unquote("currentColor"),
+    dragged-state-layer-color: string.unquote("currentColor")
+) !default;

@@ -1,1 +1,70 @@
-/* TODO */
+/* Based on https://github.com/material-components/material-web/blob/master/ripple/lib/_ripple-theme.scss */
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable at-rule-no-unknown */
+@use "sass:map";
+@use "../modules/math-ext";
+@use "../system/shape";
+@use "../theme/theme";
+@use "./ripple-tokens";
+
+$_custom-property-prefix: "ripple";
+
+@mixin theme($theme) {
+    $theme: theme.validate-theme(ripple-tokens.$theme-tokens, $theme);
+    $theme: theme.define-variables($theme, $_custom-property-prefix);
+
+    @include theme.emit-variables($theme);
+}
+
+@mixin theme-styles($theme) {
+    $theme: theme.validate-theme-styles(ripple-tokens.$theme-tokens, $theme);
+    $theme: theme.define-variables($theme, $_custom-property-prefix);
+
+    @include _container-shape(map.get($theme, state-layer-shape));
+
+    &::before {
+        @include _hover-focus-color(map.get($theme, hover-state-layer-color));
+    }
+
+    &::after {
+        @include _press-color(map.get($theme, pressed-state-layer-color));
+    }
+
+    &.mdc-ripple--hovered::before {
+        @include _ripple-opacity(map.get($theme, hover-state-layer-opacity));
+        @include _hover-focus-color(map.get($theme, hover-state-layer-color));
+    }
+
+    &.mdc-ripple--focused::before {
+        @include _ripple-opacity(map.get($theme, focus-state-layer-opacity));
+        @include _hover-focus-color(map.get($theme, focus-state-layer-color));
+    }
+
+    &.mdc-ripple--pressed::after {
+        @include _ripple-opacity(map.get($theme, pressed-state-layer-opacity));
+    }
+
+    &.mdc-ripple--unbounded {
+        @include _container-shape(shape.get-fallback(corner-full));
+    }
+}
+
+@mixin _container-shape($shape) {
+    border-radius: $shape;
+}
+
+@mixin _hover-focus-color($color) {
+    background-color: $color;
+}
+
+@mixin _ripple-opacity($opacity) {
+    opacity: $opacity;
+}
+
+@mixin _press-color($color) {
+    background: radial-gradient(
+        closest-side,
+        #{$color} max(calc(100% - #{math-ext.to-rem(70px)}), 65%),
+        transparent 100%
+    );
+}

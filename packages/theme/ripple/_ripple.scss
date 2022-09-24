@@ -1,1 +1,44 @@
-/* TODO */
+/* Based on https://github.com/material-components/material-web/blob/master/ripple/lib/_ripple.scss */
+/* stylelint-disable at-rule-no-unknown */
+@mixin static-styles() {
+    .mdc-ripple-surface {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+
+        &::before,
+        &::after {
+            position: absolute;
+
+            /* z-index: -1; */
+            pointer-events: none;
+            content: "";
+            opacity: 0;
+        }
+
+        &::before {
+            inset: 0;
+            transition: opacity 15ms linear, background-color 15ms linear;
+        }
+
+        &::after {
+            transition: opacity 375ms linear;
+            transform-origin: center center;
+        }
+    }
+
+    .mdc-ripple--focused {
+        &::before {
+            transition-duration: 75ms;
+        }
+    }
+
+    .mdc-ripple--pressed {
+        &::after {
+            transition-duration: 105ms;
+        }
+    }
+}
