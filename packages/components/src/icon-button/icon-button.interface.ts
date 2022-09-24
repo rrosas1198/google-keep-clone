@@ -1,20 +1,20 @@
-import { ARIAHasPopup } from "../interfaces";
+import { IAriaHasPopup } from "../interfaces";
 
-export type IconButtonColor = "primary" | "secondary" | "tertiary";
+export type IIconButtonColor = "primary" | "secondary" | "tertiary";
 
-export type IconButtonVariant = "standard" | "filled" | "tonal" | "outlined";
+export type IIconButtonVariant = "standard" | "elevated" | "filled" | "tonal" | "outlined" | "text";
 
-export type IconButtonType = "button" | "reset" | "submit";
+export type IIconButtonType = "button" | "reset" | "submit";
 
-export interface IconButtonProps {
+export interface IIconButtonProps {
     id: string;
     name: string;
-    color: IconButtonColor;
-    variant: IconButtonVariant;
+    color: IIconButtonColor;
+    variant: IIconButtonVariant;
     ariaLabel: string;
-    ariaHasPopup: ARIAHasPopup;
+    ariaHasPopup: IAriaHasPopup;
     autofocus: boolean | string;
     disabled: boolean | string;
     link: boolean | string;
-    type: IconButtonType;
+    type: IIconButtonType;
 }
