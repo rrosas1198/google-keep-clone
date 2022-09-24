@@ -1,9 +1,15 @@
+/* Based on https://github.com/material-components/material-web/blob/master/iconbutton/lib/_icon-button-theme.scss */
 /* stylelint-disable at-rule-no-unknown */
 @use "sass:map";
+@use "../theme/state";
 
 @mixin state-layer-size($size) {
     width: $size;
     height: $size;
+}
+
+@mixin state-layer-shape($shape) {
+    border-radius: $shape;
 }
 
 @mixin icon-size($size) {
@@ -17,31 +23,30 @@
     }
 }
 
-@mixin icon-color($mapping) {
-    @include _set-icon-color(map.get($mapping, "default"));
-
-    &:disabled {
-        @include _set-icon-color(map.get($mapping, "disabled"));
+@mixin icon-color($colors) {
+    @include state.default() {
+        @include _set-icon-color(state.get-default-state($colors));
     }
-
-    &:focus {
-        @include _set-icon-color(map.get($mapping, "focus"));
+    @include state.hover() {
+        @include _set-icon-color(state.get-hover-state($colors));
     }
-
-    &:hover {
-        @include _set-icon-color(map.get($mapping, "hover"));
+    @include state.focus() {
+        @include _set-icon-color(state.get-focus-state($colors));
     }
-
-    &:not(:disabled):active {
-        @include _set-icon-color(map.get($mapping, "pressed"));
+    @include state.pressed() {
+        @include _set-icon-color(state.get-pressed-state($colors));
+    }
+    @include state.disabled() {
+        @include _set-icon-color(state.get-disabled-state($colors));
     }
 }
 
-@mixin container-color($mapping) {
-    @include _set-container-color(map.get($mapping, "default"));
-
-    &:disabled {
-        @include _set-container-color(map.get($mapping, "disabled"));
+@mixin container-color($colors) {
+    @include state.default() {
+        @include _set-container-color(state.get-default-state($colors));
+    }
+    @include state.disabled() {
+        @include _set-container-color(state.get-disabled-state($colors));
     }
 }
 

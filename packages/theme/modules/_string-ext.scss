@@ -1,6 +1,52 @@
+/* Based on https://github.com/material-components/material-web/blob/master/sass/_string-ext.scss */
+/* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
 @use "sass:string";
 
 @function has-prefix($string, $prefix) {
     @return string.slice($string, 1, string.length($prefix)) == $prefix;
+}
+
+@function has-suffix($string, $suffix) {
+    @return string.slice($string, -1 * string.length($suffix)) == $suffix;
+}
+
+@function trim-repeating-prefix($string, $prefix) {
+    @while has-prefix($string, $prefix) {
+        $string: trim-prefix($string, $prefix);
+    }
+
+    @return $string;
+}
+
+@function trim-prefix($string, $prefix) {
+    @if has-prefix($string, $prefix) {
+        $string: string.slice($string, string.length($prefix) + 1);
+    }
+
+    @return $string;
+}
+
+@function trim-repeating-suffix($string, $suffix) {
+    @while has-suffix($string, $suffix) {
+        $string: trim-suffix($string, $suffix);
+    }
+
+    @return $string;
+}
+
+@function trim-suffix($string, $suffix) {
+    @if has-suffix($string, $suffix) {
+        $string: string.slice($string, 1, -1 * string.length($suffix) - 1);
+    }
+
+    @return $string;
+}
+
+@function trim-repeating($string, $prefix, $suffix: $prefix) {
+    @return trim-repeating-prefix(trim-repeating-suffix($string, $suffix), $prefix);
+}
+
+@function trim($string, $prefix, $suffix: $prefix) {
+    @return trim-prefix(trim-suffix($string, $suffix), $prefix);
 }

@@ -1,3 +1,4 @@
+/* Based on https://github.com/material-components/material-web/blob/master/tokens/latest/_md-comp-icon-button.scss */
 /* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
 @use "sass:map";
@@ -6,7 +7,7 @@
 @use "../system/shape";
 @use "../system/state";
 
-$theme-tokens: (
+$_theme_tokens: (
     disabled-icon-color: color.get-varname(on-surface),
     disabled-icon-opacity: 0.38,
     icon-size: math-ext.to-rem(24px),
@@ -35,7 +36,7 @@ $theme-tokens: (
 ) !default;
 
 $primary-theme: map.merge(
-    $theme-tokens,
+    $_theme_tokens,
     (
         selected-focus-icon-color: color.get-varname(primary),
         selected-focus-state-layer-color: color.get-varname(primary),

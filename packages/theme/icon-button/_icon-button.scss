@@ -1,21 +1,49 @@
+/* Based on https://github.com/material-components/material-web/blob/master/iconbutton/lib/_icon-button.scss */
 /* stylelint-disable at-rule-no-unknown */
 @mixin static-styles() {
     .mdc-icon-button {
         position: relative;
         z-index: 0;
-        box-sizing: border-box;
         display: flex;
         align-items: center;
         justify-content: center;
         text-decoration: none;
-        cursor: pointer;
         user-select: none;
         border: none;
         outline: none;
         fill: currentcolor;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:disabled {
+            pointer-events: none;
+            cursor: default;
+        }
+
+        i,
+        svg,
+        img {
+            display: block;
+        }
+    }
+
+    .mdc-icon-button--on {
+        .mdc-icon-button__icon {
+            display: none;
+
+            &.mdc-icon-button__icon--on {
+                display: inline-flex;
+            }
+        }
     }
 
     .mdc-icon-button__icon {
         display: inline-flex;
+
+        &.mdc-icon-button__icon--on {
+            display: none;
+        }
     }
 }

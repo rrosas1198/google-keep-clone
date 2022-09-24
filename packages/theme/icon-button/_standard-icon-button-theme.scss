@@ -1,10 +1,12 @@
+/* Based on https://github.com/material-components/material-web/blob/master/iconbutton/lib/_standard-icon-button-theme.scss */
 /* stylelint-disable at-rule-no-unknown */
 @use "sass:map";
+@use "../ripple/ripple-theme";
 @use "./icon-button-theme";
 
 @mixin theme-styles($theme) {
     @include icon-button-theme.icon-size(map.get($theme, icon-size));
-    @include icon-button-theme.state-layer-size($size: map.get($theme, state-layer-size));
+    @include icon-button-theme.state-layer-size(map.get($theme, state-layer-size));
 
     @include icon-button-theme.icon-color(
         (
@@ -15,4 +17,38 @@
             pressed: map.get($theme, unselected-pressed-icon-color)
         )
     );
+
+    @include ripple-theme.theme(
+        (
+            focus-state-layer-color: map.get($theme, unselected-focus-state-layer-color),
+            focus-state-layer-opacity: map.get($theme, unselected-focus-state-layer-opacity),
+            hover-state-layer-color: map.get($theme, unselected-hover-state-layer-color),
+            hover-state-layer-opacity: map.get($theme, unselected-hover-state-layer-opacity),
+            pressed-state-layer-color: map.get($theme, unselected-pressed-state-layer-color),
+            pressed-state-layer-opacity: map.get($theme, unselected-pressed-state-layer-opacity)
+        )
+    );
+
+    &.mdc-icon-button--on {
+        @include icon-button-theme.icon-color(
+            (
+                default: map.get($theme, selected-icon-color),
+                disabled: map.get($theme, disabled-icon-color),
+                focus: map.get($theme, selected-focus-icon-color),
+                hover: map.get($theme, selected-hover-icon-color),
+                pressed: map.get($theme, selected-pressed-icon-color)
+            )
+        );
+
+        @include ripple-theme.theme(
+            (
+                focus-state-layer-color: map.get($theme, selected-focus-state-layer-color),
+                focus-state-layer-opacity: map.get($theme, selected-focus-state-layer-opacity),
+                hover-state-layer-color: map.get($theme, selected-hover-state-layer-color),
+                hover-state-layer-opacity: map.get($theme, selected-hover-state-layer-opacity),
+                pressed-state-layer-color: map.get($theme, selected-pressed-state-layer-color),
+                pressed-state-layer-opacity: map.get($theme, selected-pressed-state-layer-opacity)
+            )
+        );
+    }
 }
