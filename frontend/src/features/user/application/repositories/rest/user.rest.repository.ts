@@ -1,11 +1,11 @@
-import { Observable } from "rxjs";
+import { ContainerService } from "@keep/core";
 import { IUserRepository } from "src/features/user/domain/repositories";
 import { UserRestDatastore } from "../../datastores/rest";
 
 export class UserRestRepositoryImpl implements IUserRepository {
-    constructor(private readonly userRestDatastore: UserRestDatastore) {}
+    private readonly userRestDatastore = ContainerService.create(UserRestDatastore);
 
-    public signin(email: string, password: string): Observable<string> {
-        return this.userRestDatastore.signin(email, password);
+    public signIn(email: string, password: string): Promise<string> {
+        return this.userRestDatastore.signIn(email, password);
     }
 }

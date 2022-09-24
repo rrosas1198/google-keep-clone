@@ -8,15 +8,13 @@ import {
     readBody,
     ServerResponse
 } from "h3";
-import { Observable } from "rxjs";
-import { Writable } from "stream";
 import { HttpMethodEnum, HttpStatusEnum, RouteParamtypesEnum } from "./enums";
 import { IRouteMetadata } from "./interfaces";
 
-export type ObservableHandler = (...params: any[]) => Observable<unknown>;
+export type IPromiseHandler = (...params: any[]) => Promise<unknown>;
 
 export class HttpRouteHandler {
-    public getHandler(handler: ObservableHandler, routeMetadata: IRouteMetadata[]) {
+    public getHandler(handler: IPromiseHandler, routeMetadata: IRouteMetadata[]) {
         const resolveParams = this.resolveHandlerParams(handler, routeMetadata);
 
         return async (request: IncomingMessage, response: ServerResponse) => {
@@ -27,19 +25,14 @@ export class HttpRouteHandler {
 
             if (response.writableEnded) return;
 
-            const stream = new Writable();
+            const params = await resolveParams(request, response);
+            const result = await handler(...params);
 
-            const parameters = await resolveParams(request, response);
-            const observable = handler(...parameters).subscribe({
-                next: value => stream.write(value, "utf-8"),
-                complete: () => response.end(stream)
-            });
-
-            request.on("close", () => observable.unsubscribe());
+            response.end(result);
         };
     }
 
-    protected resolveHandlerParams(handler: ObservableHandler, routeMetadata: IRouteMetadata[]) {
+    protected resolveHandlerParams(handler: IPromiseHandler, routeMetadata: IRouteMetadata[]) {
         return async (request: IncomingMessage, response: ServerResponse) => {
             const params = new Array(handler.length).fill(null);
             const resolve = this.getValueByParamtype(request, response);
@@ -54,14 +47,14 @@ export class HttpRouteHandler {
     }
 
     protected getValueByParamtype(request: IncomingMessage, response: ServerResponse) {
-        return (paramtype: RouteParamtypesEnum) => {
+        return async (paramtype: RouteParamtypesEnum) => {
             switch (paramtype) {
                 case RouteParamtypesEnum.REQUEST:
                     return request;
                 case RouteParamtypesEnum.RESPONSE:
                     return response;
                 case RouteParamtypesEnum.BODY:
-                    return readBody(request);
+                    return await readBody(request);
                 case RouteParamtypesEnum.PARAM:
                     return getRouterParams(request);
                 case RouteParamtypesEnum.QUERY:

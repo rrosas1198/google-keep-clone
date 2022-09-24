@@ -1,7 +1,7 @@
-import { IDisposableLike } from "src/interfaces";
+import { IDisposable } from "src/interfaces";
 import { once } from "./once.util";
 
-export function toDisposable(fn: () => void): IDisposableLike {
+export function toDisposable(fn: () => void): IDisposable {
     return {
         dispose: once(() => fn())
     };

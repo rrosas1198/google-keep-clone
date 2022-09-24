@@ -1,15 +1,14 @@
-import { map, OperatorFunction } from "rxjs";
 import { IUserEntity } from "src/user/domain/entities";
 
-export function mapFindOne(): OperatorFunction<GenericRecord, IUserEntity> {
-    return map<GenericRecord, IUserEntity>(data => ({
-        id: data.id,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        password: data.password,
-        token: data.token,
-        createdAt: new Date(data.createdAt),
-        deletedAt: new Date(data.createdAt)
-    }));
+export function mapFindOne(rawUser: GenericRecord): IUserEntity {
+    return {
+        id: rawUser.id,
+        firstName: rawUser.firstName,
+        lastName: rawUser.lastName,
+        email: rawUser.email,
+        password: rawUser.password,
+        token: rawUser.token,
+        createdAt: new Date(rawUser.createdAt),
+        deletedAt: new Date(rawUser.createdAt)
+    };
 }

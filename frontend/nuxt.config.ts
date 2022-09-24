@@ -1,4 +1,3 @@
-import { defineNuxtConfig } from "nuxt";
 import { resolve } from "path";
 
 export default defineNuxtConfig({
@@ -10,7 +9,6 @@ export default defineNuxtConfig({
     plugins: ["@/plugins/platform.plugin.ts"],
     alias: {
         "@keep/components": resolve(__dirname, "../packages/components/src"),
-        "@keep/platform-nuxt": resolve(__dirname, "../packages/platform-nuxt/src"),
         "@keep/theme": resolve(__dirname, "../packages/theme"),
         src: resolve(__dirname, "src")
     }

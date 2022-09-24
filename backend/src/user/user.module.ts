@@ -1,10 +1,10 @@
 import { Module } from "@keep/core";
 import { UserRepositoryImpl } from "./application/repositories";
 import { HashServiceImpl, TokenServiceImpl } from "./application/services";
-import { SigninUseCaseImpl } from "./application/use-cases";
+import { SignInUseCaseImpl } from "./application/use-cases";
 import { IUserRepository } from "./domain/repositories";
 import { IHashService, ITokenService } from "./domain/services";
-import { ISigninUseCase } from "./domain/use-cases";
+import { ISignInUseCase } from "./domain/use-cases";
 import { UserController } from "./infrastructure/controllers";
 
 @Module({
@@ -22,8 +22,8 @@ import { UserController } from "./infrastructure/controllers";
             useClass: TokenServiceImpl
         },
         {
-            provide: ISigninUseCase,
-            useClass: SigninUseCaseImpl
+            provide: ISignInUseCase,
+            useClass: SignInUseCaseImpl
         }
     ],
     controllers: [UserController]

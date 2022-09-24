@@ -1,10 +1,10 @@
-import { ISigninUseCaseParams } from "../../domain/use-cases";
+import { ISignInUseCaseParams } from "../../domain/use-cases";
 
-export class SigninModel {
+export class SignInModel {
     public email = ref("");
     public password = ref("");
 
-    public getSigninParams(): ISigninUseCaseParams {
+    public getSignInParams(): ISignInUseCaseParams {
         return {
             email: unref(this.email),
             password: unref(this.password)

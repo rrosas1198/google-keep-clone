@@ -22,7 +22,6 @@
     "eslint.lintTask.enable": true,
     "eslint.format.enable": true,
     "cSpell.words": [
-        "abraham",
         "bauen",
         "commitlint",
         "composables",
@@ -36,7 +35,6 @@
         "nuxt",
         "paramtype",
         "paramtypes",
-        "signin",
         "stylelint",
         "taze",
         "techkit",

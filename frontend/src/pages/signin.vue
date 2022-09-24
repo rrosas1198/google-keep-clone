@@ -21,7 +21,7 @@
 <script setup>
 import { VButton, VTextField } from "@keep/components";
 import { AppContext } from "@keep/platform-nuxt";
-import { SigninViewModel } from "src/features/user/presentation/view-models";
+import { SignInViewModel } from "src/features/user/presentation/view-models";
 
-const viewModel = AppContext.resolve(SigninViewModel);
+const viewModel = AppContext.resolve(SignInViewModel);
 </script>

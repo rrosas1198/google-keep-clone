@@ -1,9 +1,9 @@
-import { IDisposableLike, IEventListener } from "src/interfaces";
+import { IDisposable, IEventListener } from "src/interfaces";
 import { toDisposable } from "src/utils";
 
-export class EventManager<T> implements IDisposableLike {
+export class EventManager<T> implements IDisposable {
     private _listeners = new Map<T, Set<IEventListener>>();
-    private _toDispose: IDisposableLike;
+    private _toDispose: IDisposable;
 
     constructor() {
         this._toDispose = toDisposable(() => this._listeners.clear());

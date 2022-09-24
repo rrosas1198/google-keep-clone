@@ -1,8 +1,7 @@
 import { MultiDisposeException } from "src/exceptions";
-import { IDisposable, IDisposableLike } from "src/interfaces";
-import { isDisposable } from "src/utils";
+import { IDisposable } from "src/interfaces";
 
-export class Disposable implements IDisposableLike {
+export class Disposable implements IDisposable {
     private _toDispose = new Set<IDisposable>();
     private _isDisposed = false;
 
@@ -42,12 +41,8 @@ export class Disposable implements IDisposableLike {
         const disposables = this._toDispose.values();
 
         for (const disposable of disposables) {
-            const disposeFn = isDisposable(disposable)
-                ? disposable.dispose
-                : disposable.unsubscribe;
-
             try {
-                disposeFn();
+                disposable.dispose();
             } catch (error) {
                 errors.push(error);
             }

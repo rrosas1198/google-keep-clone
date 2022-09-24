@@ -11,12 +11,12 @@
         "deps:update": "taze -w"
     },
     "dependencies": {
-        "nuxt": "^3.0.0-rc.11",
-        "rxjs": "^7.5.6"
+        "@keep/core": "^0.0.1",
+        "@keep/platform-nuxt": "^0.0.1",
+        "nuxt": "^3.0.0-rc.11"
     },
     "devDependencies": {
         "@keep/components": "^0.0.1",
-        "@keep/platform-nuxt": "^0.0.1",
         "@keep/theme": "^0.0.1",
         "bauen": "^0.10.9",
         "taze": "^0.8.1",

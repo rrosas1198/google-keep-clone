@@ -17,8 +17,7 @@
         "@keep/platform-http": "^0.0.1",
         "@keep/validations": "^0.0.1",
         "bcryptjs": "^2.4.3",
-        "jsonwebtoken": "^8.5.1",
-        "rxjs": "^7.5.6"
+        "jsonwebtoken": "^8.5.1"
     },
     "devDependencies": {
         "@types/bcryptjs": "^2.4.2",
