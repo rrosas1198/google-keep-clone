@@ -2,7 +2,7 @@ import { defineComponent, PropType, renderSlot, SetupContext } from "vue";
 import { useRender } from "../composables";
 import { coerce } from "../utils";
 import { useTextField } from "./text-field.factory";
-import { TextFieldProps, TextFieldType } from "./text-field.interface";
+import { ITextFieldProps, ITextFieldType } from "./text-field.interface";
 
 export const VTextField = defineComponent({
     name: "VTextField",
@@ -24,7 +24,7 @@ export const VTextField = defineComponent({
             default: null
         },
         type: {
-            type: String as PropType<TextFieldType>,
+            type: String as PropType<ITextFieldType>,
             default: "text"
         },
         autofocus: {
@@ -35,6 +35,10 @@ export const VTextField = defineComponent({
             type: [Boolean, String],
             default: false
         },
+        inline: {
+            type: [Boolean, String],
+            default: false
+        },
         readonly: {
             type: [Boolean, String],
             default: false
@@ -42,6 +46,10 @@ export const VTextField = defineComponent({
         required: {
             type: [Boolean, String],
             default: false
+        },
+        maxLength: {
+            type: [String, Number],
+            default: null
         },
         modelValue: {
             type: String,
@@ -58,59 +66,81 @@ export const VTextField = defineComponent({
         trailingIcon: {
             type: String,
             default: null
+        },
+        error: {
+            type: [Boolean, String],
+            default: false
+        },
+        errorText: {
+            type: String,
+            default: null
+        },
+        showSupport: {
+            type: [Boolean, String],
+            default: true
+        },
+        supportingText: {
+            type: String,
+            default: null
         }
     },
-    setup(props: TextFieldProps, { attrs, slots }: SetupContext) {
+    setup(props: ITextFieldProps, { slots }: SetupContext) {
         const { handleInput } = useTextField();
 
-        const isAutofocus = coerce<boolean>(props.autofocus);
-        const isDisabled = coerce<boolean>(props.disabled);
-        const isReadonly = coerce<boolean>(props.readonly);
-        const isRequired = coerce<boolean>(props.required);
+        useRender(() => {
+            const isAutofocus = coerce<boolean>(props.autofocus);
+            const isDisabled = coerce<boolean>(props.disabled);
+            const isReadonly = coerce<boolean>(props.readonly);
+            const isRequired = coerce<boolean>(props.required);
 
-        const hasLeading = "leading" in slots || !!props.leadingIcon;
-        const hasTrailing = "trailing" in slots || !!props.trailingIcon;
+            const hasLabel = !!props.label;
+            const hasError = coerce<boolean>(props.error);
 
-        const getLeadingContent = () => {
-            if ("leading" in slots) return renderSlot(slots, "leading");
-            return <i class="material-symbols-outlined">{props.leadingIcon}</i>;
-        };
+            const hasLeading = "leading" in slots || !!props.leadingIcon;
+            const hasTrailing = "trailing" in slots || !!props.trailingIcon;
 
-        const getTrailingContent = () => {
-            if ("trailing" in slots) return renderSlot(slots, "trailing");
-            return <i class="material-symbols-outlined">{props.trailingIcon}</i>;
-        };
+            const getLeadingContent = () => {
+                if ("leading" in slots) return renderSlot(slots, "leading");
+                return <i class="material-symbols-outlined">{props.leadingIcon}</i>;
+            };
 
-        const renderLeading = () => {
-            if (!hasLeading) return null;
-            return <span class="mdc-text-field__leading">{getLeadingContent()}</span>;
-        };
+            const getTrailingContent = () => {
+                if ("trailing" in slots) return renderSlot(slots, "trailing");
+                return <i class="material-symbols-outlined">{props.trailingIcon}</i>;
+            };
 
-        const renderTrailing = () => {
-            if (!hasTrailing) return null;
-            return <span class="mdc-text-field__trailing">{getTrailingContent()}</span>;
-        };
+            const renderLeading = () => {
+                if (!hasLeading) return null;
+                return <span class="mdc-text-field__leading">{getLeadingContent()}</span>;
+            };
 
-        useRender(() => (
-            <div class="mdc-text-field">
-                {renderLeading()}
-                <input
-                    id={props.id}
-                    name={props.name || props.id}
-                    class="mdc-text-field__input"
-                    placeholder={props.placeholder}
-                    autofocus={isAutofocus}
-                    disabled={isDisabled}
-                    readonly={isReadonly}
-                    required={isRequired}
-                    type={props.type}
-                    value={props.modelValue}
-                    onInput={handleInput}
-                    {...attrs}
-                />
-                {renderTrailing()}
-            </div>
-        ));
+            const renderTrailing = () => {
+                if (!hasTrailing) return null;
+                return <span class="mdc-text-field__trailing">{getTrailingContent()}</span>;
+            };
+
+            return (
+                <div class="mdc-text-field">
+                    {renderLeading()}
+                    <input
+                        id={props.id}
+                        name={props.name || props.id}
+                        class="mdc-text-field__input"
+                        placeholder={hasLabel ? undefined : props.placeholder}
+                        aria-label={hasLabel ? undefined : props.placeholder}
+                        aria-invalid={hasError}
+                        autofocus={isAutofocus}
+                        disabled={isDisabled}
+                        readonly={isReadonly}
+                        required={isRequired}
+                        type={props.type}
+                        value={props.modelValue}
+                        onInput={handleInput}
+                    />
+                    {renderTrailing()}
+                </div>
+            );
+        });
 
         return {};
     }

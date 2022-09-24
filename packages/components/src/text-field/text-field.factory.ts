@@ -1,7 +1,7 @@
-import { ComponentInternalInstance, getCurrentInstance } from "vue";
+import { getCurrentInstance } from "../utils";
 
 export function useTextField() {
-    const { emit } = getCurrentInstance() as ComponentInternalInstance;
+    const { emit } = getCurrentInstance("text-field");
 
     const handleInput = (event: Event) => {
         const target = event.target as HTMLInputElement;
