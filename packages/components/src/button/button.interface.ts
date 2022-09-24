@@ -1,17 +1,17 @@
-export type ButtonColor = "primary" | "secondary" | "tertiary";
+export type IButtonColor = "primary" | "secondary" | "tertiary";
 
-export type ButtonVariant = "standard" | "filled" | "tonal" | "outlined";
+export type IButtonVariant = "elevated" | "filled" | "tonal" | "outlined" | "text";
 
-export type ButtonType = "button" | "reset" | "submit";
+export type IButtonType = "button" | "reset" | "submit";
 
-export interface ButtonProps {
+export interface IButtonProps {
     id: string;
     name: string;
-    color: ButtonColor;
-    variant: ButtonVariant;
+    color: IButtonColor;
+    variant: IButtonVariant;
     autofocus: boolean | string;
     disabled: boolean | string;
-    type: ButtonType;
+    type: IButtonType;
     leadingIcon: string;
     trailingIcon: string;
 }
