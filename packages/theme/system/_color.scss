@@ -1,8 +1,10 @@
 /* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
 @use "sass:map";
+@use "sass:meta";
+@use "../modules/string-ext";
 @use "../references/palette";
-@use "./kernel";
+@use "../theme/custom-properties";
 
 $light-theme: (
     background: palette.get-fallback(neutral-100),
@@ -74,19 +76,35 @@ $dark-theme: (
 
 @function get-varname($property) {
     $property: get-custom-property($property, $light-theme);
-    $varname: kernel.get-varname($property);
+    $varname: custom-properties.get-name($property);
     @return var($varname);
+}
+
+@function get-fallback($property, $show-warn: true) {
+    $property: get-custom-property($property, $light-theme);
+    $fallback: custom-properties.get-fallback($property);
+    @if $show-warn {
+        $varname: custom-properties.get-name($property);
+        @warn "color: use variable var(#{$varname}) instead of raw value #{$fallback}";
+    }
+    @return $fallback;
 }
 
 @function get-custom-property($property, $theme: $light-theme) {
     $property: _validate-color($property);
     $fallback: map.get($theme, $property);
-    @return kernel.create-custom-property("md-sys-color-#{$property}", $fallback);
+    @return custom-properties.define("sys-color-#{$property}", $fallback);
 }
 
 @function _validate-color($property) {
-    @if map.has-key($light-theme, $property) {
+    @if map.has-key($light-theme, $property) or _is-valid-color($property) {
         @return $property;
     }
     @error "color: invalid property #{$property}";
+}
+
+@function _is-valid-color($style) {
+    @return meta.type-of($style) == "color" or $style == "currentColor" or
+        string-ext.has-prefix($style, "var(") or $style == "inherit" or $style == "transparent" or
+        $style == "GrayText";
 }

@@ -1,0 +1,27 @@
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable at-rule-no-unknown */
+@use "sass:meta";
+@use "sass:string";
+
+@mixin declaration($property, $value, $important: false) {
+    @if $value != null {
+        $important-rule: if($important, " !important", "");
+        @include property($property, "#{$value}#{$important-rule}");
+    }
+}
+
+@mixin selector($name, $modifier: null) {
+    @if meta.type-of($modifier) == "string" {
+        #{string.unquote($name) string.unquote($modifier)} {
+            @content;
+        }
+    } @else {
+        #{string.unquote($name)} {
+            @content;
+        }
+    }
+}
+
+@mixin property($name, $value) {
+    #{string.unquote($name)}: #{string.unquote($value)};
+}

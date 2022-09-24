@@ -1,0 +1,95 @@
+/* Based on https://github.com/material-components/material-web/blob/master/sass/_var.scss */
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable at-rule-no-unknown */
+@use "sass:map";
+@use "sass:meta";
+@use "sass:string";
+@use "../modules/string-ext";
+@use "./css";
+
+@function get-name($var) {
+    $parsed: parse($var);
+    @return map.get($parsed, "name");
+}
+
+@function get-fallback($var) {
+    $parsed: parse($var);
+    @return map.get($parsed, "fallback");
+}
+
+@function define($name, $fallback: null) {
+    $name: _create-name($name);
+    @return (name: $name, fallback: $fallback);
+}
+
+@function define-variable($name, $fallback: null) {
+    $name: _create-name($name);
+
+    @if meta.type-of($fallback) != "map" and $fallback != null {
+        @return var(#{$name}, $fallback);
+    }
+    @return var(#{$name});
+}
+
+@function parse($var) {
+    @if is-custom-property($var) {
+        @return $var;
+    }
+    @if not _is-variable($var) {
+        @return null;
+    }
+
+    $var: string-ext.trim($var, "var(", ")");
+    $name: string-ext.trim-repeating($var, " ");
+    $fallback: null;
+    $comma: string.index($var, ",");
+
+    @if $comma != null {
+        $name: string-ext.trim-repeating(string.slice($var, 1, $comma - 1), " ");
+        $fallback: string-ext.trim-repeating(string.slice($var, $comma + 1), " ");
+
+        @if _is-variable($fallback) {
+            $fallback: parse($fallback);
+
+            @if $fallback == null {
+                @return null;
+            }
+        }
+    }
+
+    @if $name == "" or $fallback == "" {
+        @return null;
+    }
+
+    @return define($name, $fallback);
+}
+
+@function is-custom-property($property) {
+    @return meta.type-of($property) == "map" and map.has-key($property, "name") and
+        map.has-key($property, "fallback");
+}
+
+@function _create-name($name) {
+    @if string-ext.has-prefix($name, "--") {
+        @return $name;
+    }
+    @return string.unquote("--#{$name}");
+}
+
+@function _is-variable($var) {
+    @return meta.type-of($var) == "string" and string-ext.has-prefix($var, "var(");
+}
+
+@mixin declaration($property) {
+    $varname: get-name($property);
+    $fallback: get-fallback($property);
+
+    @if is-custom-property($fallback) {
+        $fallback: get-name($fallback);
+        $fallback: var(#{$fallback});
+    }
+
+    @if $varname != null and $fallback != null {
+        @include css.declaration($varname, $fallback);
+    }
+}

@@ -1,0 +1,99 @@
+/* Based on https://github.com/material-components/material-web/blob/master/sass/_theme.scss */
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable at-rule-no-unknown */
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+@use "sass:string";
+@use "./custom-properties";
+
+@mixin emit-variables($theme) {
+    @each $token, $value in $theme {
+        @if $value {
+            @if meta.type-of($value) == "map" {
+                @include emit-variables($value);
+            } @else {
+                @include custom-properties.declaration($value);
+            }
+        }
+    }
+}
+
+@function define-variables($theme, $prefix) {
+    @each $key, $value in $theme {
+        @if $value != null {
+            $token: combine-tokens($prefix, $key);
+
+            @if meta.type-of($value) == "map" {
+                $value: define-variables($value, $token);
+            } @else {
+                $value: custom-properties.define-variable($token, $value);
+            }
+
+            $theme: map.set($theme, $key, $value);
+        }
+    }
+
+    @return $theme;
+}
+
+@function combine-tokens($parts...) {
+    $unused: meta.keywords($parts);
+    $token: "";
+
+    @each $part in $parts {
+        @if $part {
+            @if $token == "" {
+                $token: $part;
+            } @else {
+                $token: string.unquote("#{$token}-#{$part}");
+            }
+        }
+    }
+
+    @return $token;
+}
+
+@function validate-theme($reference-theme, $theme) {
+    $theme: _validate-theme-tokens(map.keys($reference-theme), $theme, $require-all: false);
+    @return $theme;
+}
+
+@function validate-theme-styles($reference-theme, $theme, $require-all: true) {
+    $valid-tokens: $reference-theme;
+    @if meta.type-of($reference-theme) == "map" {
+        $valid-tokens: map.keys($reference-theme);
+    }
+    @return _validate-theme-tokens($valid-tokens, $theme, $require-all: $require-all);
+}
+
+@function _validate-theme-tokens($valid-tokens, $theme, $require-all: false) {
+    $missing-tokens: ();
+    $unsupported-tokens: ();
+
+    @each $token, $value in $theme {
+        @if list.index($valid-tokens, $token) == null {
+            $unsupported-tokens: list.append($unsupported-tokens, $token, $separator: comma);
+        }
+    }
+
+    @if $require-all {
+        @each $token in $valid-tokens {
+            $missing: map.get($theme, $token) == null;
+
+            @if $missing {
+                $missing-tokens: list.append($missing-tokens, $token, $separator: comma);
+            }
+        }
+    }
+
+    @if list.length($unsupported-tokens) > 0 {
+        @error "theme: the following tokens are invalid: #{$unsupported-tokens}.";
+    }
+
+    @if list.length($missing-tokens) > 0 {
+        @error "theme: the following required tokens are missing: #{$missing-tokens}.";
+    }
+
+    @return $theme;
+}

@@ -38,13 +38,12 @@
     h4,
     h5,
     h6 {
-        margin-top: 0;
-        margin-bottom: 0;
+        margin-block: 0;
         line-height: 1;
     }
 
     p {
-        margin-top: 0;
+        margin-block-start: 0;
     }
 
     a {
@@ -58,8 +57,16 @@
 
     img {
         display: block;
-        height: auto;
+        block-size: auto;
         max-inline-size: 100%;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+        background-color: transparent;
+        border-style: none;
     }
 
     @media (prefers-reduced-motion: reduce) {

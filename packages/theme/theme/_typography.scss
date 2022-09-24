@@ -1,0 +1,51 @@
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable at-rule-no-unknown */
+@use "sass:map";
+@use "sass:meta";
+@use "sass:string";
+@use "../system/typescale";
+@use "./theme";
+
+$_reference-theme: (
+    font: null,
+    line-height: null,
+    size: null,
+    tracking: null,
+    weight: null
+);
+
+@mixin theme-styles($theme, $excludes: ()) {
+    $theme: _resolve-theme($theme, $excludes);
+    $theme: theme.validate-theme-styles($_reference-theme, $theme, $require-all: false);
+    @include _font($theme);
+}
+
+@function _resolve-theme($themeOrName, $excludes: (), $mapping: typescale.$typescale) {
+    @if (meta.type-of($themeOrName) == "map") {
+        @return $themeOrName;
+    }
+
+    @if (meta.type-of($themeOrName) != "string") {
+        @error "typography: invalid input #{$themeOrName}.";
+    }
+
+    $theme: (
+        font: map.get($mapping, string.unquote("#{$themeOrName}-font")),
+        weight: map.get($mapping, string.unquote("#{$themeOrName}-weight")),
+        size: map.get($mapping, string.unquote("#{$themeOrName}-size")),
+        line-height: map.get($mapping, string.unquote("#{$themeOrName}-line-height")),
+        tracking: map.get($mapping, string.unquote("#{$themeOrName}-tracking"))
+    );
+
+    $theme: map-remove($theme, $excludes);
+
+    @return $theme;
+}
+
+@mixin _font($font) {
+    font-family: map.get($font, font);
+    font-size: map.get($font, size);
+    font-weight: map.get($font, weight);
+    line-height: map.get($font, line-height);
+    letter-spacing: map.get($font, tracking);
+}

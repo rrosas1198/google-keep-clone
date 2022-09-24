@@ -1,0 +1,169 @@
+/* Based on https://github.com/material-components/material-components-web/blob/master/packages/mdc-theme/_state.scss */
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable at-rule-no-unknown */
+@use "sass:map";
+@use "sass:meta";
+@use "./css";
+@use "./custom-properties";
+
+$_default-states: (
+    enabled: ":not(:disabled)",
+    disabled: ":disabled",
+    dragged: "",
+    error: ":invalid",
+    focus: ":focus",
+    hover: ":hover",
+    opened: "",
+    pressed: ":active",
+    selected: "",
+    unselected: ""
+);
+
+@mixin default($selectors: ()) {
+    @include enabled($selectors) {
+        @content;
+    }
+}
+
+@mixin enabled($selectors: ()) {
+    @include _selector(enabled, $selectors) {
+        @content;
+    }
+}
+
+@mixin disabled($selectors: ()) {
+    @include _selector(disabled, $selectors) {
+        @content;
+    }
+}
+
+@mixin dragged($selectors: ()) {
+    @include enabled($selectors) {
+        @include _selector(dragged, $selectors) {
+            @content;
+        }
+    }
+}
+
+@mixin error($selectors: ()) {
+    @include _selector(error, $selectors) {
+        @content;
+    }
+}
+
+@mixin focus($selectors: ()) {
+    @include enabled($selectors) {
+        @include _selector(focus, $selectors) {
+            @content;
+        }
+    }
+}
+
+@mixin hover($selectors: ()) {
+    @include enabled($selectors) {
+        @include _selector(hover, $selectors) {
+            @content;
+        }
+    }
+}
+
+@mixin opened($selectors: ()) {
+    @include _selector(opened, $selectors) {
+        @content;
+    }
+}
+
+@mixin pressed($selectors: ()) {
+    @include enabled($selectors) {
+        @include _selector(pressed, $selectors) {
+            @content;
+        }
+    }
+}
+
+@mixin selected($selectors: ()) {
+    @include _selector(selected, $selectors) {
+        @content;
+    }
+}
+
+@mixin unselected($selectors: ()) {
+    @include _selector(unselected, $selectors) {
+        @content;
+    }
+}
+
+@function get-default-state($mapping) {
+    $state: _get-state($mapping, default);
+    @if $state == null and not _is-state-map($mapping) {
+        @return $mapping;
+    }
+    @return $state;
+}
+
+@function get-enabled-state($mapping) {
+    @return _get-state($mapping, enabled);
+}
+
+@function get-disabled-state($mapping) {
+    @return _get-state($mapping, disabled);
+}
+
+@function get-dragged-state($mapping) {
+    @return _get-state($mapping, dragged);
+}
+
+@function get-error-state($mapping) {
+    @return _get-state($mapping, error);
+}
+
+@function get-focus-state($mapping) {
+    @return _get-state($mapping, focus);
+}
+
+@function get-hover-state($mapping) {
+    @return _get-state($mapping, hover);
+}
+
+@function get-opened-state($mapping) {
+    @return _get-state($mapping, opened);
+}
+
+@function get-pressed-state($mapping) {
+    @return _get-state($mapping, pressed);
+}
+
+@function get-selected-state($mapping) {
+    @return _get-state($mapping, selected);
+}
+
+@function get-unselected-state($mapping) {
+    @return _get-state($mapping, unselected);
+}
+
+@mixin _selector($state, $selectors) {
+    $selectors: map.merge($selectors, $_default-states);
+
+    @if not map.has-key($selectors, $state) {
+        @error "state: missing #{$state} from #{$selectors}";
+    }
+
+    @at-root {
+        @include css.selector("&#{map.get($selectors, $state)}") {
+            @content;
+        }
+    }
+}
+
+@function _get-state($mapping, $state) {
+    @if _is-state-map($mapping) {
+        @return map.get($mapping, $state);
+    } @else {
+        @return null;
+    }
+}
+
+@function _is-state-map($default-or-map) {
+    @return meta.type-of($default-or-map) == "map" and not
+        custom-properties.is-custom-property($default-or-map);
+}

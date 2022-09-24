@@ -3,37 +3,41 @@
 @use "sass:map";
 @use "../system/color";
 @use "../system/typescale";
+@use "../theme/typography";
 
 $body-theme: (
     container-color: color.get-varname(background),
-    text-font: typescale.get-fallback(body-medium-font),
-    text-weight: typescale.get-fallback(body-medium-weight),
-    text-size: typescale.get-fallback(body-medium-size),
-    text-tracking: typescale.get-fallback(body-medium-line-height),
-    text-color: color.get-varname(on-background)
+    body-text-font: typescale.get-fallback(body-medium-font),
+    body-text-weight: typescale.get-fallback(body-medium-weight),
+    body-text-size: typescale.get-fallback(body-medium-size),
+    body-text-line-height: typescale.get-fallback(body-medium-line-height),
+    body-text-tracking: typescale.get-fallback(body-medium-tracking),
+    body-text-color: color.get-varname(on-background)
 );
 
 @mixin body-styles($theme: $body-theme) {
-    @include _static-theme-base($theme);
-    @include _static-typography-base($theme);
+    @include _set-body-text-color(map.get($theme, body-text-color));
+    @include _set-body-color(map.get($theme, container-color));
+
+    @include _static-typography-base(
+        (
+            font: map.get($theme, body-text-font),
+            line-height: map.get($theme, body-text-line-height),
+            size: map.get($theme, body-text-size),
+            tracking: map.get($theme, body-text-tracking),
+            weight: map.get($theme, body-text-weight)
+        )
+    );
 }
 
-@mixin _static-theme-base($theme) {
-    $text-color: map.get($theme, text-color);
-    $container-color: map.get($theme, container-color);
-
-    color: $text-color;
-    background-color: $container-color;
+@mixin _set-body-text-color($color) {
+    color: $color;
 }
 
-@mixin _static-typography-base($theme) {
-    $font-family: map.get($theme, text-font);
-    $font-weight: map.get($theme, text-weight);
-    $font-size: map.get($theme, text-size);
-    $letter-spacing: map.get($theme, text-tracking);
+@mixin _set-body-color($color) {
+    background-color: $color;
+}
 
-    font-family: $font-family;
-    font-size: $font-size;
-    font-weight: $font-weight;
-    line-height: $letter-spacing;
+@mixin _static-typography-base($font) {
+    @include typography.theme-styles($font);
 }
