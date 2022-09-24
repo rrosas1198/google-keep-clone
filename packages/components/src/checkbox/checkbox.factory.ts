@@ -1,28 +1,23 @@
-import { ComponentInternalInstance, computed, getCurrentInstance } from "vue";
-import { toString } from "../utils";
-import { CheckboxProps } from "./checkbox.interface";
+import { getCurrentInstance } from "../utils";
+import { ICheckboxProps } from "./checkbox.interface";
 
-export function useCheckbox(props: CheckboxProps) {
-    const { emit } = getCurrentInstance() as ComponentInternalInstance;
-
-    const isChecked = computed(() => {
-        if (toString(props.modelValue) === "[object Boolean]") {
-            return props.modelValue as boolean;
-        }
-        if (Array.isArray(props.modelValue)) {
-            return props.modelValue.includes(props.value);
-        }
-        if (props.modelValue !== null && props.modelValue !== undefined) {
-            return props.modelValue === props.value;
-        }
-        return !!props.modelValue;
-    });
+// TODO: Verify indeterminate support
+export function useCheckbox(props: ICheckboxProps) {
+    const { emit } = getCurrentInstance("checkbox");
 
     const handleChange = (event: Event) => {
-        const changeValue = _getChangeValue(event);
         const modelValue = _getModelValue(event);
+        const changeValue = _getChangeValue(event);
+        const indeterminateValue = _getIndeterminateValue(event);
+
         emit("change", changeValue);
         emit("update:modelValue", modelValue);
+        emit("update:indeterminate", indeterminateValue);
+    };
+
+    const _getIndeterminateValue = (event: Event) => {
+        const target = event.target as HTMLInputElement;
+        return target.indeterminate;
     };
 
     const _getChangeValue = (event: Event) => {
@@ -36,13 +31,11 @@ export function useCheckbox(props: CheckboxProps) {
         if (!Array.isArray(props.modelValue)) {
             return _getChangeValue(event);
         }
-
         if (target.checked) {
             return [...props.modelValue, props.value];
-        } else {
-            return [...props.modelValue].filter(val => val !== props.value);
         }
+        return [...props.modelValue].filter(value => value !== props.value);
     };
 
-    return { isChecked, handleChange };
+    return { handleChange };
 }

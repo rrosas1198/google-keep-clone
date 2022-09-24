@@ -1,8 +1,9 @@
-import { defineComponent, PropType, SetupContext } from "vue";
+import { defineComponent, PropType, Ref, ref } from "vue";
 import { useRender } from "../composables";
+import { useRipple } from "../ripple";
 import { coerce } from "../utils";
 import { useCheckbox } from "./checkbox.factory";
-import { CheckboxColor, CheckboxProps, CheckboxValue } from "./checkbox.interface";
+import { ICheckboxProps, ICheckboxValue } from "./checkbox.interface";
 
 export const VCheckbox = defineComponent({
     name: "VCheckbox",
@@ -15,8 +16,8 @@ export const VCheckbox = defineComponent({
             type: String,
             default: null
         },
-        color: {
-            type: String as PropType<CheckboxColor>,
+        label: {
+            type: String,
             default: null
         },
         autofocus: {
@@ -36,11 +37,11 @@ export const VCheckbox = defineComponent({
             default: false
         },
         value: {
-            type: [Number, String, Boolean] as PropType<CheckboxValue>,
+            type: [Number, String, Boolean] as PropType<ICheckboxValue>,
             default: true
         },
         modelValue: {
-            type: [Number, String, Boolean] as PropType<CheckboxValue>,
+            type: [Number, String, Boolean] as PropType<ICheckboxValue>,
             default: null
         },
         ariaLabel: {
@@ -48,50 +49,91 @@ export const VCheckbox = defineComponent({
             default: null
         }
     },
-    setup(props: CheckboxProps, { attrs }: SetupContext) {
-        const { isChecked, handleChange } = useCheckbox(props);
+    setup(props: ICheckboxProps) {
+        const proxy = ref<HTMLInputElement>() as Ref<HTMLInputElement>;
 
-        const isAutofocus = coerce<boolean>(props.autofocus);
-        const isDisabled = coerce<boolean>(props.disabled);
-        const isIndeterminate = coerce<boolean>(props.indeterminate);
+        const { handleChange } = useCheckbox(props);
 
-        const ariaChecked = isIndeterminate ? "mixed" : undefined;
+        const ripple = useRipple(proxy, {
+            disabled: props.disabled,
+            unbounded: true
+        });
 
-        const classList = {
-            "mdc-checkbox": true,
-            "mdc-checkbox--primary": props.color === "primary",
-            "mdc-checkbox--secondary": props.color === "secondary",
-            "mdc-checkbox--tertiary": props.color === "tertiary"
-        };
+        useRender(() => {
+            const isDisabled = coerce<boolean>(props.disabled);
 
-        useRender(() => (
-            <div class={classList}>
-                <input
-                    id={props.id}
-                    name={props.name || props.id}
-                    class="mdc-checkbox__native-control"
-                    type="checkbox"
-                    autofocus={isAutofocus}
-                    disabled={isDisabled}
-                    indeterminate={isIndeterminate}
-                    checked={isChecked.value}
-                    aria-checked={ariaChecked}
-                    aria-label={props.ariaLabel}
-                    onChange={handleChange}
-                    {...attrs}
-                />
+            const classList = {
+                "mdc-checkbox": true,
+                "mdc-checkbox--disabled": isDisabled
+            };
+
+            const renderInput = () => {
+                const isAutofocus = coerce<boolean>(props.autofocus);
+                const isChecked = coerce<boolean>(props.checked);
+                const isIndeterminate = coerce<boolean>(props.indeterminate);
+
+                const ariaChecked = isIndeterminate ? "mixed" : undefined;
+                const coercedValue = coerce(props.value);
+
+                return (
+                    <input
+                        id={props.id}
+                        name={props.name || props.id}
+                        class="mdc-checkbox__native-control"
+                        type="checkbox"
+                        autofocus={isAutofocus}
+                        disabled={isDisabled}
+                        indeterminate={isIndeterminate}
+                        checked={isChecked}
+                        value={coercedValue}
+                        aria-checked={ariaChecked}
+                        aria-label={props.ariaLabel}
+                        data-indeterminate={isIndeterminate}
+                        onChange={handleChange}
+                        {...ripple.listeners}
+                    />
+                );
+            };
+
+            const renderBackground = () => (
                 <div class="mdc-checkbox__background">
-                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg class="mdc-checkbox__check-mark" viewBox="0 0 24 24" aria-hidden="true">
                         <path
-                            class="md3-checkbox__checkmark-path"
-                            fill="none"
+                            class="mdc-checkbox__checkmark-path"
+                            fill="currentColor"
                             d="M1.73,12.91 8.1,19.28 22.79,4.59"
                         ></path>
                     </svg>
-                    <div class="mdc-checkbox__mixedmark"></div>
+                    <div class="mdc-checkbox__mixed-mark"></div>
                 </div>
-            </div>
-        ));
+            );
+
+            const renderRipple = () => {
+                const rippleClassList = { "mdc-checkbox__ripple": true, ...ripple.classList.value };
+                return <span ref={proxy} class={rippleClassList}></span>;
+            };
+
+            const renderLabel = () => {
+                if (!props.label) return null;
+                return (
+                    <label class="mdc-checkbox__label" for={props.name || props.id}>
+                        {props.label}
+                    </label>
+                );
+            };
+
+            return (
+                <div class={classList}>
+                    <div class="mdc-checkbox__control">
+                        {renderInput()}
+                        {renderBackground()}
+                        {renderRipple()}
+                    </div>
+
+                    {renderLabel()}
+                </div>
+            );
+        });
 
         return {};
     }

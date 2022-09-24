@@ -1,16 +1,14 @@
-export type CheckboxValue = number | string | boolean;
+export type ICheckboxValue = number | string | boolean;
 
-export type CheckboxColor = "primary" | "secondary" | "tertiary";
-
-export interface CheckboxProps {
+export interface ICheckboxProps {
     id: string;
     name: string;
-    color: CheckboxColor;
+    label: string;
     autofocus: boolean | string;
     checked: boolean | string;
     disabled: boolean | string;
     indeterminate: boolean | string;
-    value: CheckboxValue;
-    modelValue: CheckboxValue;
+    value: ICheckboxValue;
+    modelValue: ICheckboxValue;
     ariaLabel: string;
 }
