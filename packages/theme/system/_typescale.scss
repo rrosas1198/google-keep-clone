@@ -4,7 +4,7 @@
 @use "../modules/math-ext";
 @use "../references/typeface";
 
-$typescale: (
+$_typescale: (
     // body large
     body-large: null,
     body-large-font: typeface.get-fallback(plain),
@@ -115,11 +115,11 @@ $typescale: (
 
 @function get-fallback($property) {
     $property: _validate-typescale($property);
-    @return map.get($typescale, $property);
+    @return map.get($_typescale, $property);
 }
 
 @function _validate-typescale($property) {
-    @if map.has-key($typescale, $property) {
+    @if map.has-key($_typescale, $property) {
         @return $property;
     }
     @error "typescale: invalid property #{$property}";

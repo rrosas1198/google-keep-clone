@@ -2,7 +2,7 @@
 /* stylelint-disable at-rule-no-unknown */
 @use "sass:map";
 
-$state: (
+$_state: (
     dragged-state-layer-opacity: 0.16,
     focus-state-layer-opacity: 0.12,
     hover-state-layer-opacity: 0.08,
@@ -11,11 +11,11 @@ $state: (
 
 @function get-fallback($property) {
     $property: _validate-state($property);
-    @return map.get($state, $property);
+    @return map.get($_state, $property);
 }
 
 @function _validate-state($property) {
-    @if map.has-key($state, $property) {
+    @if map.has-key($_state, $property) {
         @return $property;
     }
     @error "state: invalid property #{$property}";

@@ -3,7 +3,7 @@
 @use "sass:map";
 @use "../modules/math-ext";
 
-$shape: (
+$_shape: (
     // corner extra large
     corner-extra-large: math-ext.to-em(28px),
     corner-extra-large-top: math-ext.to-em(28px) math-ext.to-em(28px) 0 0,
@@ -26,11 +26,11 @@ $shape: (
 
 @function get-fallback($property) {
     $property: _validate-shape($property);
-    @return map.get($shape, $property);
+    @return map.get($_shape, $property);
 }
 
 @function _validate-shape($property) {
-    @if map.has-key($shape, $property) {
+    @if map.has-key($_shape, $property) {
         @return $property;
     }
     @error "shape: invalid property #{$property}";

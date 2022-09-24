@@ -2,7 +2,7 @@
 /* stylelint-disable at-rule-no-unknown */
 @use "sass:map";
 
-$motion: (
+$_motion: (
     // duration
     duration-50: 50ms,
     duration-100: 100ms,
@@ -34,11 +34,11 @@ $motion: (
 
 @function get-fallback($property) {
     $property: _validate-motion($property);
-    @return map.get($motion, $property);
+    @return map.get($_motion, $property);
 }
 
 @function _validate-motion($property) {
-    @if map.has-key($motion, $property) {
+    @if map.has-key($_motion, $property) {
         @return $property;
     }
     @error "motion: invalid property #{$property}";

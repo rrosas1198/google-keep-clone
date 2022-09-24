@@ -20,7 +20,7 @@ $_reference-theme: (
     @include _font($theme);
 }
 
-@function _resolve-theme($themeOrName, $excludes: (), $mapping: typescale.$typescale) {
+@function _resolve-theme($themeOrName, $excludes: ()) {
     @if (meta.type-of($themeOrName) == "map") {
         @return $themeOrName;
     }
@@ -30,11 +30,11 @@ $_reference-theme: (
     }
 
     $theme: (
-        font: map.get($mapping, string.unquote("#{$themeOrName}-font")),
-        weight: map.get($mapping, string.unquote("#{$themeOrName}-weight")),
-        size: map.get($mapping, string.unquote("#{$themeOrName}-size")),
-        line-height: map.get($mapping, string.unquote("#{$themeOrName}-line-height")),
-        tracking: map.get($mapping, string.unquote("#{$themeOrName}-tracking"))
+        font: typescale.get-fallback(string.unquote("#{$themeOrName}-font")),
+        weight: typescale.get-fallback(string.unquote("#{$themeOrName}-weight")),
+        size: typescale.get-fallback(string.unquote("#{$themeOrName}-size")),
+        line-height: typescale.get-fallback(string.unquote("#{$themeOrName}-line-height")),
+        tracking: typescale.get-fallback(string.unquote("#{$themeOrName}-tracking"))
     );
 
     $theme: map-remove($theme, $excludes);
