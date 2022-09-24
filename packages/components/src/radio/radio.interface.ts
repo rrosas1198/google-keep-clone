@@ -1,15 +1,15 @@
-export type RadioValue = number | string;
+export type IRadioValue = number | string;
 
-export type RadioColor = "primary" | "secondary" | "tertiary";
+export type IRadioColor = "primary" | "secondary" | "tertiary";
 
-export interface RadioProps {
+export interface IRadioProps {
     id: string;
     name: string;
-    color: RadioColor;
+    color: IRadioColor;
     autofocus: boolean | string;
     selected: boolean | string;
     disabled: boolean | string;
-    value: RadioValue;
-    modelValue: RadioValue;
+    value: IRadioValue;
+    modelValue: IRadioValue;
     ariaLabel: string;
 }

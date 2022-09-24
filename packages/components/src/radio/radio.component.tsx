@@ -1,8 +1,8 @@
-import { defineComponent, PropType, SetupContext } from "vue";
+import { defineComponent, PropType } from "vue";
 import { useRender } from "../composables";
 import { coerce } from "../utils";
 import { useRadio } from "./radio.factory";
-import { RadioColor, RadioProps, RadioValue } from "./radio.interface";
+import { IRadioColor, IRadioProps, IRadioValue } from "./radio.interface";
 
 export const VRadio = defineComponent({
     name: "VRadio",
@@ -16,7 +16,7 @@ export const VRadio = defineComponent({
             required: true
         },
         color: {
-            type: String as PropType<RadioColor>,
+            type: String as PropType<IRadioColor>,
             default: null
         },
         autofocus: {
@@ -32,11 +32,11 @@ export const VRadio = defineComponent({
             default: false
         },
         value: {
-            type: [Number, String] as PropType<RadioValue>,
+            type: [Number, String] as PropType<IRadioValue>,
             default: null
         },
         modelValue: {
-            type: [Number, String] as PropType<RadioValue>,
+            type: [Number, String] as PropType<IRadioValue>,
             default: null
         },
         ariaLabel: {
@@ -44,40 +44,41 @@ export const VRadio = defineComponent({
             default: null
         }
     },
-    setup(props: RadioProps, { attrs }: SetupContext) {
+    setup(props: IRadioProps) {
         const { isSelected, handleChange } = useRadio(props);
 
-        const isAutofocus = coerce<boolean>(props.autofocus);
-        const isDisabled = coerce<boolean>(props.disabled);
+        useRender(() => {
+            const isAutofocus = coerce<boolean>(props.autofocus);
+            const isDisabled = coerce<boolean>(props.disabled);
 
-        const classList = {
-            "mdc-radio": true,
-            "mdc-radio--primary": props.color === "primary",
-            "mdc-radio--secondary": props.color === "secondary",
-            "mdc-radio--tertiary": props.color === "tertiary"
-        };
+            const classList = {
+                "mdc-radio": true,
+                "mdc-radio--primary": props.color === "primary",
+                "mdc-radio--secondary": props.color === "secondary",
+                "mdc-radio--tertiary": props.color === "tertiary"
+            };
 
-        useRender(() => (
-            <div class={classList}>
-                <input
-                    id={props.id}
-                    name={props.name}
-                    class="mdc-radio__native-control"
-                    type="radio"
-                    autofocus={isAutofocus}
-                    disabled={isDisabled}
-                    checked={isSelected.value}
-                    value={props.value}
-                    aria-label={props.ariaLabel}
-                    onChange={handleChange}
-                    {...attrs}
-                />
-                <div class="mdc-radio__background">
-                    <div class="mdc-radio__outer-circle"></div>
-                    <div class="mdc-radio__inner-circle"></div>
+            return (
+                <div class={classList}>
+                    <input
+                        id={props.id}
+                        name={props.name}
+                        class="mdc-radio__native-control"
+                        type="radio"
+                        autofocus={isAutofocus}
+                        disabled={isDisabled}
+                        checked={isSelected.value}
+                        value={props.value}
+                        aria-label={props.ariaLabel}
+                        onChange={handleChange}
+                    />
+                    <div class="mdc-radio__background">
+                        <div class="mdc-radio__outer-circle"></div>
+                        <div class="mdc-radio__inner-circle"></div>
+                    </div>
                 </div>
-            </div>
-        ));
+            );
+        });
 
         return {};
     }

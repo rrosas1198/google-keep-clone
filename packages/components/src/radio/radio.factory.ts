@@ -1,8 +1,9 @@
-import { ComponentInternalInstance, computed, getCurrentInstance } from "vue";
-import { RadioProps } from "./radio.interface";
+import { computed } from "vue";
+import { getCurrentInstance } from "../utils";
+import { IRadioProps } from "./radio.interface";
 
-export function useRadio(props: RadioProps) {
-    const { emit } = getCurrentInstance() as ComponentInternalInstance;
+export function useRadio(props: IRadioProps) {
+    const { emit } = getCurrentInstance("radio");
 
     const isSelected = computed(() => {
         if (props.modelValue !== null && props.modelValue !== undefined) {
