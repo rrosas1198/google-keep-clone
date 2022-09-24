@@ -1,14 +1,14 @@
-import { IconButtonColor, IconButtonVariant } from "../icon-button";
+import { IIconButtonColor, IIconButtonVariant } from "../icon-button";
 
-export type IconButtonToggleColor = IconButtonColor;
+export type IIconButtonToggleColor = IIconButtonColor;
 
-export type IconButtonToggleVariant = IconButtonVariant;
+export type IIconButtonToggleVariant = IIconButtonVariant;
 
-export interface IconButtonToggleProps {
+export interface IIconButtonToggleProps {
     id: string;
     name: string;
-    color: IconButtonToggleColor;
-    variant: IconButtonToggleVariant;
+    color: IIconButtonToggleColor;
+    variant: IIconButtonToggleVariant;
     autofocus: boolean | string;
     disabled: boolean | string;
     modelValue: boolean;

@@ -1,11 +1,12 @@
-import { defineComponent, PropType, renderSlot, SetupContext } from "vue";
+import { computed, defineComponent, PropType, Ref, ref, renderSlot, SetupContext } from "vue";
 import { useRender } from "../composables";
+import { useRipple } from "../ripple";
 import { coerce } from "../utils";
 import { useIconButtonToggle } from "./icon-button-toggle.factory";
 import {
-    IconButtonToggleColor,
-    IconButtonToggleProps,
-    IconButtonToggleVariant
+    IIconButtonToggleColor,
+    IIconButtonToggleProps,
+    IIconButtonToggleVariant
 } from "./icon-button-toggle.interface";
 
 export const VIconButtonToggle = defineComponent({
@@ -24,11 +25,11 @@ export const VIconButtonToggle = defineComponent({
             default: null
         },
         color: {
-            type: String as PropType<IconButtonToggleColor>,
+            type: String as PropType<IIconButtonToggleColor>,
             default: null
         },
         variant: {
-            type: String as PropType<IconButtonToggleVariant>,
+            type: String as PropType<IIconButtonToggleVariant>,
             default: "standard"
         },
         autofocus: {
@@ -57,56 +58,68 @@ export const VIconButtonToggle = defineComponent({
         },
         dataIconOn: {
             type: String,
-            default: true
+            default: null
         },
         dataIconOff: {
             type: String,
-            default: false
+            default: null
         }
     },
-    setup(props: IconButtonToggleProps, { attrs, slots }: SetupContext) {
+    setup(props: IIconButtonToggleProps, { slots }: SetupContext) {
+        const proxy = ref<HTMLElement>() as Ref<HTMLElement>;
+
         const { isOn, handleChange } = useIconButtonToggle(props);
 
-        const isAutofocus = coerce<boolean>(props.autofocus);
-        const isDisabled = coerce<boolean>(props.disabled);
+        const ripple = useRipple(proxy, {
+            disabled: props.disabled,
+            unbounded: true
+        });
 
-        const hasAriaLabel = props.ariaLabelOn && props.ariaLabelOff;
+        useRender(() => {
+            const isAutofocus = coerce<boolean>(props.autofocus);
+            const isDisabled = coerce<boolean>(props.disabled);
 
-        const ariaPressed = hasAriaLabel ? undefined : isOn.value;
-        const ariaLabel = hasAriaLabel
-            ? isOn.value
-                ? props.ariaLabelOn
-                : props.ariaLabelOff
-            : props.ariaLabel;
+            const hasAriaLabel = props.ariaLabelOn && props.ariaLabelOff;
 
-        const classList = {
-            "mdc-icon-button": true,
-            "mdc-icon-button--on": isOn.value,
-            "mdc-icon-button--primary": props.color === "primary",
-            "mdc-icon-button--secondary": props.color === "secondary",
-            "mdc-icon-button--tertiary": props.color === "tertiary",
-            "mdc-icon-button--standard": props.variant === "standard",
-            "mdc-icon-button--filled": props.variant === "filled",
-            "mdc-icon-button--tonal": props.variant === "tonal",
-            "mdc-icon-button--outlined": props.variant === "outlined"
-        };
+            const ariaPressed = hasAriaLabel ? undefined : isOn.value;
+            const ariaLabel = computed(() => {
+                if (!hasAriaLabel) return props.ariaLabel;
+                return isOn.value ? props.ariaLabelOn : props.ariaLabelOff;
+            });
 
-        useRender(() => (
-            <button
-                id={props.id}
-                name={props.name || props.id}
-                class={classList}
-                autofocus={isAutofocus}
-                disabled={isDisabled}
-                type="button"
-                aria-pressed={ariaPressed}
-                aria-label={ariaLabel}
-                onClick={handleChange}
-                {...attrs}
-            >
-                <span class="mdc-icon-button__icon">{renderSlot(slots, "default")}</span>
-            </button>
-        ));
+            const classList = {
+                "mdc-icon-button": true,
+                "mdc-icon-button--on": isOn.value,
+                "mdc-icon-button--primary": props.color === "primary",
+                "mdc-icon-button--secondary": props.color === "secondary",
+                "mdc-icon-button--tertiary": props.color === "tertiary",
+                "mdc-icon-button--standard": props.variant === "standard",
+                "mdc-icon-button--elevated": props.variant === "elevated",
+                "mdc-icon-button--filled": props.variant === "filled",
+                "mdc-icon-button--tonal": props.variant === "tonal",
+                "mdc-icon-button--outlined": props.variant === "outlined",
+                "mdc-icon-button--text": props.variant === "text"
+            };
+
+            return (
+                <button
+                    id={props.id}
+                    name={props.name || props.id}
+                    class={classList}
+                    autofocus={isAutofocus}
+                    disabled={isDisabled}
+                    type="button"
+                    aria-pressed={ariaPressed}
+                    aria-label={ariaLabel.value}
+                    onClick={handleChange}
+                    {...ripple.listeners}
+                >
+                    <span class="mdc-icon-button__icon">{renderSlot(slots, "off-icon")}</span>
+                    <span class="mdc-icon-button__icon--on">{renderSlot(slots, "on-icon")}</span>
+                    <span ref={proxy} class={ripple.classList.value}></span>
+                </button>
+            );
+        });
 
         return {};
     }
