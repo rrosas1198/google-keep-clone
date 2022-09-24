@@ -5,4 +5,3 @@ export * from "./event-listener.interface";
 export * from "./module-metadata.interface";
 export * from "./platform.interface";
 export * from "./use-case.interface";
-export * from "./value-object.interface";

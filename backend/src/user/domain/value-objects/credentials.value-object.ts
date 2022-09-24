@@ -1,4 +1,4 @@
-import { ValueObject } from "@keep/core";
+import { ValueObject } from "@keep/platform-http";
 import { flushErrors } from "@keep/validations";
 import { IValueObjectReturn } from "src/common/interfaces";
 import { EmailVo } from "src/common/value-objects";

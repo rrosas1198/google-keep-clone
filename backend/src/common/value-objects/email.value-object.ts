@@ -1,4 +1,4 @@
-import { ValueObject } from "@keep/core";
+import { ValueObject } from "@keep/platform-http";
 import { flushRules, isString, isValidEmail, notBlank } from "@keep/validations";
 import { IMonoValueObjectReturn } from "../interfaces";
 

@@ -1,13 +1,18 @@
 import { ScopeEnum } from "src/enums";
 import { IConstructor } from "src/interfaces";
-import { isClassFunction, isConstructor } from "src/utils";
 import {
     CannotBeInstantiatedException,
     MultiResolveDependencyException,
     UnregisteredDependencyException
 } from "./exceptions";
 import { IContainerProvider, IContainerService, IContainerToken } from "./interfaces";
-import { getDependencies, isClassProvider, isFactoryProvider } from "./utils";
+import {
+    getDependencies,
+    isClassFunction,
+    isClassProvider,
+    isConstructor,
+    isFactoryProvider
+} from "./utils";
 
 interface IContainerBinding {
     factory: unknown;
