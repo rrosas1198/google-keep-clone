@@ -60,7 +60,7 @@ class ContainerServiceStatic implements IContainerService {
         }
 
         try {
-            return this._doInstance(ctor);
+            return this._doInstance(ctor, [...params, ...boundParams]);
         } catch (error) {
             throw new CannotBeInstantiatedException(ctor, { cause: error });
         }
