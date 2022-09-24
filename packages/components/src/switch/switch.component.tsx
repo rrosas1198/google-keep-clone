@@ -2,7 +2,7 @@ import { defineComponent, PropType, SetupContext } from "vue";
 import { useRender } from "../composables";
 import { coerce } from "../utils";
 import { useSwitch } from "./switch.factory";
-import { SwitchColor, SwitchProps } from "./switch.interface";
+import { ISwitchColor, ISwitchProps } from "./switch.interface";
 
 export const VSwitch = defineComponent({
     name: "VSwitch",
@@ -16,7 +16,7 @@ export const VSwitch = defineComponent({
             default: null
         },
         color: {
-            type: String as PropType<SwitchColor>,
+            type: String as PropType<ISwitchColor>,
             default: null
         },
         active: {
@@ -40,47 +40,49 @@ export const VSwitch = defineComponent({
             default: null
         }
     },
-    setup(props: SwitchProps, { attrs }: SetupContext) {
+    setup(props: ISwitchProps, { attrs }: SetupContext) {
         const { isActive, handleChange } = useSwitch(props);
 
-        const isAutofocus = coerce<boolean>(props.autofocus);
-        const isDisabled = coerce<boolean>(props.disabled);
+        useRender(() => {
+            const isAutofocus = coerce<boolean>(props.autofocus);
+            const isDisabled = coerce<boolean>(props.disabled);
 
-        const classList = {
-            "mdc-switch": true,
-            "mdc-switch--primary": props.color === "primary",
-            "mdc-switch--secondary": props.color === "secondary",
-            "mdc-switch--tertiary": props.color === "tertiary"
-        };
+            const classList = {
+                "mdc-switch": true,
+                "mdc-switch--primary": props.color === "primary",
+                "mdc-switch--secondary": props.color === "secondary",
+                "mdc-switch--tertiary": props.color === "tertiary"
+            };
 
-        useRender(() => (
-            <div class={classList}>
-                <button
-                    id={props.id}
-                    name={props.name || props.id}
-                    class="mdc-switch__background"
-                    type="button"
-                    role="switch"
-                    autofocus={isAutofocus}
-                    disabled={isDisabled}
-                    aria-checked={isActive.value}
-                    aria-label={props.ariaLabel}
-                    onClick={handleChange}
-                    {...attrs}
-                >
-                    <div class="mdc-switch__track"></div>
-                </button>
+            return (
+                <div class={classList}>
+                    <button
+                        id={props.id}
+                        name={props.name || props.id}
+                        class="mdc-switch__background"
+                        type="button"
+                        role="switch"
+                        autofocus={isAutofocus}
+                        disabled={isDisabled}
+                        aria-checked={isActive.value}
+                        aria-label={props.ariaLabel}
+                        onClick={handleChange}
+                        {...attrs}
+                    >
+                        <div class="mdc-switch__track"></div>
+                    </button>
 
-                <input
-                    id={props.id}
-                    name={props.name || props.id}
-                    class="mdc-switch__input"
-                    type="checkbox"
-                    aria-hidden="true"
-                    checked={isActive.value}
-                />
-            </div>
-        ));
+                    <input
+                        id={props.id}
+                        name={props.name || props.id}
+                        class="mdc-switch__input"
+                        type="checkbox"
+                        aria-hidden="true"
+                        checked={isActive.value}
+                    />
+                </div>
+            );
+        });
 
         return {};
     }

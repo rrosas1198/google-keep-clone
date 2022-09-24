@@ -1,9 +1,9 @@
-import { ComponentInternalInstance, computed, getCurrentInstance } from "vue";
-import { toString } from "../utils";
-import { SwitchProps } from "./switch.interface";
+import { computed } from "vue";
+import { getCurrentInstance, toString } from "../utils";
+import { ISwitchProps } from "./switch.interface";
 
-export function useSwitch(props: SwitchProps) {
-    const { emit } = getCurrentInstance() as ComponentInternalInstance;
+export function useSwitch(props: ISwitchProps) {
+    const { emit } = getCurrentInstance("switch");
 
     const isActive = computed(() => {
         if (toString(props.modelValue) === "[object Boolean]") {

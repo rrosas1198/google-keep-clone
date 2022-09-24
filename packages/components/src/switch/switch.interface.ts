@@ -1,9 +1,9 @@
-export type SwitchColor = "primary" | "secondary" | "tertiary";
+export type ISwitchColor = "primary" | "secondary" | "tertiary";
 
-export interface SwitchProps {
+export interface ISwitchProps {
     id: string;
     name: string;
-    color: SwitchColor;
+    color: ISwitchColor;
     active: boolean | string;
     autofocus: boolean | string;
     disabled: boolean | string;
