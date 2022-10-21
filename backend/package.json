@@ -7,8 +7,7 @@
         "watch": "bauen watch",
         "test": "vitest",
         "test:watch": "vitest --watch",
-        "test:coverage": "vitest --coverage",
-        "deps:update": "taze -w"
+        "test:coverage": "vitest --coverage"
     },
     "dependencies": {
         "@keep/core": "^0.0.1",
@@ -23,7 +22,6 @@
         "@types/bcryptjs": "^2.4.2",
         "@types/jsonwebtoken": "^8.5.9",
         "bauen": "^0.10.9",
-        "taze": "^0.8.1",
         "vitest": "^0.23.4"
     }
 }

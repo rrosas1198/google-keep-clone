@@ -8,8 +8,7 @@
         "watch": "bauen watch",
         "test": "vitest",
         "test:watch": "vitest --watch",
-        "test:coverage": "vitest --coverage",
-        "deps:update": "taze -w"
+        "test:coverage": "vitest --coverage"
     },
     "dependencies": {
         "@keep/core": "^0.0.1",
@@ -17,7 +16,6 @@
     },
     "devDependencies": {
         "bauen": "^0.10.9",
-        "taze": "^0.8.1",
         "vitest": "^0.23.4"
     }
 }

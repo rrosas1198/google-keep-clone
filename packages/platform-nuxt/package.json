@@ -8,8 +8,7 @@
         "watch": "bauen watch",
         "test": "vitest",
         "test:watch": "vitest --watch",
-        "test:coverage": "vitest --coverage",
-        "deps:update": "taze -w"
+        "test:coverage": "vitest --coverage"
     },
     "dependencies": {
         "@keep/core": "^0.0.1",
@@ -18,7 +17,6 @@
     "devDependencies": {
         "bauen": "^0.10.9",
         "nuxt": "^3.0.0-rc.8",
-        "taze": "^0.8.1",
         "vitest": "^0.23.4",
         "vue": "^3.2.39"
     },
