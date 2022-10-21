@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ILoggerService {
-    trace(message: string, ...params: any[]): void;
-    debug(message: string, ...params: any[]): void;
-    info(message: string, ...params: any[]): void;
-    warn(message: string, ...params: any[]): void;
-    error(message: string | Error, ...params: any[]): void;
-    critical(message: string | Error, ...params: any[]): void;
+    trace(message: string, ...params: unknown[]): void;
+    debug(message: string, ...params: unknown[]): void;
+    info(message: string, ...params: unknown[]): void;
+    warn(message: string, ...params: unknown[]): void;
+    error(message: string | Error, ...params: unknown[]): void;
+    critical(message: string | Error, ...params: unknown[]): void;
 }

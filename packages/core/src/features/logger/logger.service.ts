@@ -1,47 +1,49 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { LogLevelEnum } from "src/enums";
-import { ILoggerService } from "./logger.interface";
+import type { ILoggerService } from "./logger.interface";
 
 export class LoggerService implements ILoggerService {
-    private level: LogLevelEnum = LogLevelEnum.INFO;
+    private _level: LogLevelEnum;
 
-    public getLevel() {
-        return this.level;
+    constructor(level: LogLevelEnum = LogLevelEnum.INFO) {
+        this._level = level;
+    }
+
+    public get level() {
+        return this._level;
     }
 
     public setLevel(level: LogLevelEnum) {
-        if (this.level !== level) return;
-
-        this.level = level;
+        if (this._level === level) return;
+        this._level = level;
     }
 
-    public trace(message: string, ...params: any[]): void {
-        if (this.getLevel() <= LogLevelEnum.TRACE) return;
+    public trace(message: string, ...params: unknown[]): void {
+        if (this._level <= LogLevelEnum.TRACE) return;
         console.log(message, ...params);
     }
 
-    public debug(message: string, ...params: any[]): void {
-        if (this.getLevel() <= LogLevelEnum.DEBUG) return;
+    public debug(message: string, ...params: unknown[]): void {
+        if (this._level <= LogLevelEnum.DEBUG) return;
         console.log(message, ...params);
     }
 
-    public info(message: string, ...params: any[]): void {
-        if (this.getLevel() <= LogLevelEnum.INFO) return;
+    public info(message: string, ...params: unknown[]): void {
+        if (this._level <= LogLevelEnum.INFO) return;
         console.log(message, ...params);
     }
 
-    public warn(message: string, ...params: any[]): void {
-        if (this.getLevel() <= LogLevelEnum.WARNING) return;
+    public warn(message: string, ...params: unknown[]): void {
+        if (this._level <= LogLevelEnum.WARNING) return;
         console.warn(message, ...params);
     }
 
-    public error(message: string | Error, ...params: any[]): void {
-        if (this.getLevel() <= LogLevelEnum.ERROR) return;
+    public error(message: string | Error, ...params: unknown[]): void {
+        if (this._level <= LogLevelEnum.ERROR) return;
         console.error(message, ...params);
     }
 
-    public critical(message: string | Error, ...params: any[]): void {
-        if (this.getLevel() <= LogLevelEnum.CRITICAL) return;
+    public critical(message: string | Error, ...params: unknown[]): void {
+        if (this._level <= LogLevelEnum.CRITICAL) return;
         console.error(message, ...params);
     }
 }
