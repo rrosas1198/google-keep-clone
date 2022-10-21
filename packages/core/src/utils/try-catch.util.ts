@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-type ArgumentsType<T> = T extends (...args: infer U) => any ? U : never;
-type UnwrapPromisify<T> = T extends Promise<infer U> ? U : T;
+import type { UnwrapPromise } from "src/interfaces";
 
-export function tryCatch<T extends (...args: any) => any>(func: T) {
-    return async (...args: ArgumentsType<T>): Promise<[UnwrapPromisify<ReturnType<T>>, Error]> => {
-        try {
-            return [await func(...(args as any)), null as any];
-        } catch (error) {
-            return [null as any, error as any];
-        }
-    };
+export async function tryCatch<T, V extends Error>(
+    value: PromiseLike<T>
+): Promise<[UnwrapPromise<T>, V]> {
+    try {
+        return [(await value) as UnwrapPromise<T>, null as unknown as V];
+    } catch (error) {
+        return [null as UnwrapPromise<T>, error as V];
+    }
 }
