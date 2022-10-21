@@ -27,6 +27,7 @@
         "composables",
         "dtos",
         "esbuild",
+        "histoire",
         "lage",
         "listbox",
         "listhen",
@@ -39,7 +40,6 @@
         "techkit",
         "typescale",
         "varname",
-        "vitebook",
         "yorkie"
     ]
 }
