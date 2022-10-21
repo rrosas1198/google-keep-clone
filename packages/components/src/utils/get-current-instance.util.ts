@@ -4,7 +4,7 @@ import { getCurrentInstance as _getCurrentInstance } from "vue";
 export function getCurrentInstance(name: string) {
     const instance = _getCurrentInstance();
     if (!instance) {
-        throw new Error(`${name} ${"must be called from inside a setup function"}`);
+        throw new Error(`${name} must be called from inside a setup function`);
     }
     return instance;
 }
