@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const Reflector = new (class Reflector {
     public hasMetadata(target: Function, key: symbol | string) {
-        return !!(target as any)?.[key];
+        return Reflect.has(target, key);
     }
 
     public getMetadata<T = unknown>(
@@ -9,8 +9,8 @@ export const Reflector = new (class Reflector {
         key: symbol | string,
         property?: string | symbol
     ) {
-        const _target = !!property ? target.prototype?.[property] : target;
-        return _target?.[key] as T;
+        const _target = !!property ? Reflect.get(target.prototype, property) : target;
+        return Reflect.get(_target, key) as T;
     }
 
     public setMetadata<T = unknown>(
@@ -19,7 +19,7 @@ export const Reflector = new (class Reflector {
         value: T,
         property?: string | symbol
     ) {
-        const _target = !!property ? target.prototype?.[property] : target;
-        Object.defineProperty(_target, key, { value, writable: true });
+        const _target = !!property ? Reflect.get(target.prototype, property) : target;
+        Reflect.defineProperty(_target, key, { value, writable: true });
     }
 })();
