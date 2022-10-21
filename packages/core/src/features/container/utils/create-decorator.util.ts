@@ -13,9 +13,9 @@ export function getDependencies(ctor: IConstructor) {
     return dependencies as { param: IContainerDecorator; index: number }[];
 }
 
-export function ContainerDecorator(token: string) {
+export function ContainerDecorator<T>(token: string): IContainerDecorator<T> {
     if (registry.has(token)) {
-        return registry.get(token) as IContainerDecorator;
+        return registry.get(token) as IContainerDecorator<T>;
     }
 
     const identifier = (target: Function, _key: string | symbol, index: number) => {
@@ -30,5 +30,5 @@ export function ContainerDecorator(token: string) {
 
     registry.set(token, identifier as IContainerDecorator);
 
-    return identifier as IContainerDecorator;
+    return identifier as IContainerDecorator<T>;
 }

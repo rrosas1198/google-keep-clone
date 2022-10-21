@@ -1,6 +1,6 @@
 import { ContainerDecorator } from "@keep/core";
 
-export const IHashService = ContainerDecorator("IHashService");
+export const IHashService = ContainerDecorator<IHashService>("IHashService");
 
 export interface IHashService {
     compare(value: string, hash: string): boolean;

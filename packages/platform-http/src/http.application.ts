@@ -18,7 +18,7 @@ export class HttpApplication extends Application<IHttpOptions, HttpPlatform, Htt
             this.platform.addRoute(route.path, route.handler, [route.method]);
         });
 
-        const configService = this.context.resolve<IConfigService>(IConfigService);
+        const configService = this.context.resolve(IConfigService);
 
         const params: IHttpOptions = {
             port: configService.get("HTTP_PORT"),

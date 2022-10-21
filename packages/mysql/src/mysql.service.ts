@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createPool as MysqlCreatePool, Pool, PoolOptions } from "mysql2/promise";
 import type { IConnectionCallback, IConnectionOptions } from "./interfaces";
+import { IMysqlService } from "./interfaces/mysql-service.interface";
 import { MysqlConnection } from "./mysql.connection";
 
-export class MysqlService {
+export class MysqlService implements IMysqlService {
     public readonly connections = new Set<MysqlConnection>();
     private pool!: Pool;
 
@@ -23,7 +24,7 @@ export class MysqlService {
         this.connections.clear();
     }
 
-    public async request<T = any>(callback: IConnectionCallback<T>) {
+    public async request<T = unknown>(callback: IConnectionCallback<T>) {
         const connection = await this.getConnection();
 
         try {
@@ -36,7 +37,7 @@ export class MysqlService {
         }
     }
 
-    public async transaction<T = any>(callback: IConnectionCallback<T>) {
+    public async transaction<T = unknown>(callback: IConnectionCallback<T>) {
         const connection = await this.getConnection();
 
         try {

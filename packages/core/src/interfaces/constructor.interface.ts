@@ -1,4 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export interface IConstructor<T = any> extends Function {
+export interface IConstructor<T = any> {
     new (...params: any[]): T;
 }

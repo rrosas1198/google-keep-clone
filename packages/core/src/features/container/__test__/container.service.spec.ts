@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { ContainerService } from "../container.service";
 import { ContainerDecorator } from "../utils";
 
-const IService1 = ContainerDecorator("IService1");
+const IService1 = ContainerDecorator<IService1>("IService1");
 
 interface IService1 {
     value: string;
@@ -13,7 +13,7 @@ class Service1 implements IService1 {
     public readonly value = "Service1";
 }
 
-const IService2 = ContainerDecorator("IService2");
+const IService2 = ContainerDecorator<IService2>("IService2");
 
 interface IService2 {
     value: string;

@@ -1,11 +1,10 @@
 import { IConfigService } from "@keep/config";
 import { IContainerService, IDynamicModule } from "@keep/core";
-import { IMysqlService } from "./decorators";
-import { IConnectionOptions } from "./interfaces";
+import { IConnectionOptions, IMysqlService } from "./interfaces";
 import { MysqlService } from "./mysql.service";
 
 export class MysqlModule {
-    private static instance: MysqlService;
+    private static _instance: MysqlService;
 
     public static forRoot(): IDynamicModule {
         return {
@@ -20,11 +19,11 @@ export class MysqlModule {
     }
 
     private static async connect(container: IContainerService) {
-        if (!!this.instance) {
-            return this.instance;
+        if (!!this._instance) {
+            return this._instance;
         }
 
-        const configService = container.resolve<IConfigService>(IConfigService);
+        const configService = container.resolve(IConfigService);
 
         const options = <IConnectionOptions>{
             host: configService.get("MYSQL_HOST"),
@@ -37,7 +36,7 @@ export class MysqlModule {
         const mysqlService = new MysqlService(options);
         await mysqlService.connect();
 
-        this.instance = mysqlService;
+        this._instance = mysqlService;
 
         return mysqlService;
     }
