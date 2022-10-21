@@ -1,4 +1,4 @@
-import { IValidationError, ValidationCodeEnum } from "@keep/validations";
+import { IValidationError, ValidationCodeEnum } from "@keep/validators";
 
 export type IMonoValueObjectReturn<T> = [ValidationCodeEnum[], T | null];
 

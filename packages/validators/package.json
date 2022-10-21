@@ -1,5 +1,5 @@
 {
-    "name": "@keep/validations",
+    "name": "@keep/validators",
     "version": "0.0.1",
     "main": "./dist/index.js",
     "typings": "./dist/index.d.ts",

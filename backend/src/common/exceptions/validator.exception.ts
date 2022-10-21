@@ -1,5 +1,5 @@
 import { HttpException, HttpStatusEnum } from "@keep/platform-http";
-import { IValidationError } from "@keep/validations";
+import { IValidationError } from "@keep/validators";
 
 export class ValidationException<T> extends HttpException {
     constructor(public readonly errors: IValidationError<T>[]) {
