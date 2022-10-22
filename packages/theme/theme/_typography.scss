@@ -49,3 +49,22 @@ $_reference-theme: (
     line-height: map.get($font, line-height);
     letter-spacing: map.get($font, tracking);
 }
+
+@mixin line-clamp($lines, $orient: "vertical") {
+    @if $lines == null {
+        @error "typography: $lines must be passed in line-clamp";
+    }
+
+    /* stylelint-disable-next-line value-no-vendor-prefix */
+    display: -webkit-box;
+    overflow: hidden;
+    white-space: normal;
+    -webkit-box-orient: string.unquote($orient);
+    -webkit-line-clamp: $lines;
+}
+
+@mixin text-overflow($overflow: "ellipsis") {
+    overflow: hidden;
+    text-overflow: string.unquote($overflow);
+    white-space: nowrap;
+}

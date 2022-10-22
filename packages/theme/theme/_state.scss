@@ -141,8 +141,8 @@ $_default-states: (
     @return _get-state($mapping, unselected);
 }
 
-@mixin _selector($state, $selectors) {
-    $selectors: map.merge($selectors, $_default-states);
+@mixin _selector($state, $selectors: ()) {
+    $selectors: map.merge($_default-states, $selectors);
 
     @if not map.has-key($selectors, $state) {
         @error "state: missing #{$state} from #{$selectors}";

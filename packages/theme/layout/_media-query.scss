@@ -5,7 +5,7 @@
 @use "../system/breakpoints";
 
 @mixin breakpoint-up($name) {
-    $min: _breakpoint-min($name);
+    $min: breakpoints.min($name);
     @if $min and $min != 0 {
         @media (min-width: $min) {
             @content;
@@ -16,7 +16,7 @@
 }
 
 @mixin breakpoint-down($name) {
-    $max: _breakpoint-max($name);
+    $max: breakpoints.max($name);
     @if $max and $max != 0 {
         @media (max-width: $max) {
             @content;
@@ -27,8 +27,8 @@
 }
 
 @mixin breakpoint-between($lower, $upper) {
-    $min: _breakpoint-min($lower);
-    $max: _breakpoint-max($upper);
+    $min: breakpoints.min($lower);
+    $max: breakpoints.max($upper);
 
     @if ($min != null and $max != null) {
         @media (min-width: $min) and (max-width: $max) {
@@ -46,37 +46,21 @@
 }
 
 @mixin breakpoint-only($name) {
-    $min: _breakpoint-min($name);
-    $next: _breakpoint-next($name);
-    $max: _breakpoint-max($next);
+    $min: breakpoints.min($name);
+    $next: breakpoints.next($name);
+    $max: breakpoints.max($next);
 
     @if $min != null and $max != null {
         @media (min-width: $min) and (max-width: $max) {
             @content;
         }
     } @else if $max == null {
-        @include breakpoint-up($name, $breakpoints) {
+        @include breakpoint-up($name) {
             @content;
         }
     } @else if $min == null {
-        @include breakpoint-down($next, $breakpoints) {
+        @include breakpoint-down($next) {
             @content;
         }
     }
-}
-
-@function _breakpoint-next($name) {
-    $keys: breakpoints.get-keys();
-    $index: list.index($keys, $name);
-    @return if($index < list.length($keys), list.nth($keys, $index + 1), null);
-}
-
-@function _breakpoint-min($name) {
-    $min: breakpoints.get-value($name, width);
-    @return if($min != 0, $min, null);
-}
-
-@function _breakpoint-max($name) {
-    $next: _breakpoint-next($name);
-    @return if($next, _breakpoint-min($next) - 0.02, null);
 }

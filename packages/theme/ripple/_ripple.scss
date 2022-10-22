@@ -30,15 +30,11 @@
         }
     }
 
-    .mdc-ripple--focused {
-        &::before {
-            transition-duration: 75ms;
-        }
+    .mdc-ripple--focused::before {
+        transition-duration: 75ms;
     }
 
-    .mdc-ripple--pressed {
-        &::after {
-            transition-duration: 105ms;
-        }
+    .mdc-ripple--pressed::after {
+        transition-duration: 105ms;
     }
 }
