@@ -21,7 +21,7 @@
     "devDependencies": {
         "@types/bcryptjs": "^2.4.2",
         "@types/jsonwebtoken": "^8.5.9",
-        "bauen": "^0.10.9",
-        "vitest": "^0.23.4"
+        "bauen": "^0.10.11",
+        "vitest": "^0.24.3"
     }
 }

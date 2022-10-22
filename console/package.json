@@ -15,7 +15,7 @@
         "@keep/mysql": "^0.0.1"
     },
     "devDependencies": {
-        "bauen": "^0.10.9",
-        "vitest": "^0.23.4"
+        "bauen": "^0.10.11",
+        "vitest": "^0.24.3"
     }
 }

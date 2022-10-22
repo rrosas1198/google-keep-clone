@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+    defineEventHandler,
     getMethod,
     getQuery,
     getRouterParams,
-    IncomingMessage,
+    H3Event,
     MIMES,
-    readBody,
-    ServerResponse
+    readBody
 } from "h3";
 import { HttpMethodEnum, HttpStatusEnum, RouteParamtypesEnum } from "./enums";
 import { IRouteMetadata } from "./interfaces";
@@ -17,25 +17,25 @@ export class HttpRouteHandler {
     public getHandler(handler: IPromiseHandler, routeMetadata: IRouteMetadata[]) {
         const resolveParams = this.resolveHandlerParams(handler, routeMetadata);
 
-        return async (request: IncomingMessage, response: ServerResponse) => {
-            const httpMethod = getMethod(request) as HttpMethodEnum;
-            response.statusCode = this.getStatusByMethod(httpMethod);
-            response.setHeader("Content-Type", MIMES.json);
+        return defineEventHandler(async h3Event => {
+            const httpMethod = getMethod(h3Event) as HttpMethodEnum;
+            h3Event.res.statusCode = this.getStatusByMethod(httpMethod);
+            h3Event.res.setHeader("Content-Type", MIMES.json);
             // response.flushHeaders();
 
-            if (response.writableEnded) return;
+            if (h3Event.res.writableEnded) return;
 
-            const params = await resolveParams(request, response);
+            const params = await resolveParams(h3Event);
             const result = await handler(...params);
 
-            response.end(result);
-        };
+            h3Event.res.end(result);
+        });
     }
 
     protected resolveHandlerParams(handler: IPromiseHandler, routeMetadata: IRouteMetadata[]) {
-        return async (request: IncomingMessage, response: ServerResponse) => {
+        return async (h3Event: H3Event) => {
             const params = new Array(handler.length).fill(null);
-            const resolve = this.getValueByParamtype(request, response);
+            const resolve = this.getValueByParamtype(h3Event);
 
             for (const [paramtype, payload] of routeMetadata) {
                 const value = await resolve(paramtype);
@@ -46,19 +46,19 @@ export class HttpRouteHandler {
         };
     }
 
-    protected getValueByParamtype(request: IncomingMessage, response: ServerResponse) {
+    protected getValueByParamtype(h3Event: H3Event) {
         return async (paramtype: RouteParamtypesEnum) => {
             switch (paramtype) {
                 case RouteParamtypesEnum.REQUEST:
-                    return request;
+                    return h3Event.req;
                 case RouteParamtypesEnum.RESPONSE:
-                    return response;
+                    return h3Event.res;
                 case RouteParamtypesEnum.BODY:
-                    return await readBody(request);
+                    return await readBody(h3Event);
                 case RouteParamtypesEnum.PARAM:
-                    return getRouterParams(request);
+                    return getRouterParams(h3Event);
                 case RouteParamtypesEnum.QUERY:
-                    return getQuery(request);
+                    return getQuery(h3Event);
                 default:
                     return null;
             }

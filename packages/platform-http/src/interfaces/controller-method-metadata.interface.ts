@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IncomingMessage, ServerResponse } from "h3";
+import { EventHandler } from "h3";
+import { IncomingMessage, ServerResponse } from "http";
 import { HttpMethodEnum } from "src/enums";
 
 export type IControllerMethodHandler = (
@@ -10,5 +11,5 @@ export type IControllerMethodHandler = (
 export interface IControllerMethodMetadata {
     path: string;
     method: HttpMethodEnum;
-    handler: IControllerMethodHandler;
+    handler: EventHandler;
 }

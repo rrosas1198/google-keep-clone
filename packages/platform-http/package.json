@@ -13,12 +13,12 @@
     "dependencies": {
         "@keep/core": "^0.0.1",
         "@keep/config": "^0.0.1",
-        "h3": "^0.7.21",
+        "h3": "^0.8.5",
         "listhen": "^0.3.4",
-        "ufo": "^0.8.5"
+        "ufo": "^0.8.6"
     },
     "devDependencies": {
-        "bauen": "^0.10.9",
-        "vitest": "^0.23.4"
+        "bauen": "^0.10.11",
+        "vitest": "^0.24.3"
     }
 }

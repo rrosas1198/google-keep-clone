@@ -2,13 +2,14 @@
 import { IPlatform } from "@keep/core";
 import {
     App,
-    CompatibilityEvent,
-    CompatibilityEventHandler,
     createApp,
     createRouter,
+    EventHandlerResponse,
     H3Error,
+    H3Event,
     MIMES,
-    Router
+    Router,
+    toNodeListener
 } from "h3";
 import { listen } from "listhen";
 import { HttpMethodEnum, HttpStatusEnum } from "./enums";
@@ -28,19 +29,15 @@ export class HttpPlatform implements IPlatform<IHttpOptions> {
 
     public async bootstrap(options?: Partial<IHttpOptions>) {
         this.server.use(this.router);
-        await listen(this.server, options);
+        await listen(toNodeListener(this.server), options);
     }
 
-    public addRoute(
-        path: string,
-        handler: CompatibilityEventHandler,
-        methods: HttpMethodEnum[] = []
-    ) {
+    public addRoute(path: string, handler: EventHandlerResponse, methods: HttpMethodEnum[] = []) {
         const _methods = methods.map(method => method.toLocaleLowerCase() as any);
         this.router.add(path, handler, _methods);
     }
 
-    private handleError(error: H3Error, event: CompatibilityEvent) {
+    private handleError(error: H3Error, event: H3Event) {
         if (event.res.writableEnded) {
             return;
         }
