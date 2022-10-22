@@ -1,5 +1,5 @@
+import { getCurrentInstance, toString } from "src/utils";
 import { computed } from "vue";
-import { getCurrentInstance, toString } from "../utils";
 import { IIconButtonToggleProps } from "./icon-button-toggle.interface";
 
 export function useIconButtonToggle(props: IIconButtonToggleProps) {

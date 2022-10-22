@@ -1,5 +1,5 @@
+import { getCurrentInstance } from "src/utils";
 import { computed } from "vue";
-import { getCurrentInstance } from "../utils";
 import { IRadioProps } from "./radio.interface";
 
 export function useRadio(props: IRadioProps) {

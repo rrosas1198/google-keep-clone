@@ -1,7 +1,7 @@
+import { useRender } from "src/composables";
+import { useRipple } from "src/ripple";
+import { coerce } from "src/utils";
 import { defineComponent, PropType, Ref, ref } from "vue";
-import { useRender } from "../composables";
-import { useRipple } from "../ripple";
-import { coerce } from "../utils";
 import { useCheckbox } from "./checkbox.factory";
 import { ICheckboxProps, ICheckboxValue } from "./checkbox.interface";
 

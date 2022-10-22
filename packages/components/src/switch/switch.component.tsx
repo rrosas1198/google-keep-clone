@@ -1,6 +1,6 @@
+import { useRender } from "src/composables";
+import { coerce } from "src/utils";
 import { defineComponent, PropType, SetupContext } from "vue";
-import { useRender } from "../composables";
-import { coerce } from "../utils";
 import { useSwitch } from "./switch.factory";
 import { ISwitchColor, ISwitchProps } from "./switch.interface";
 

@@ -1,8 +1,8 @@
+import { useRender } from "src/composables";
+import { IAriaHasPopup } from "src/interfaces";
+import { useRipple } from "src/ripple";
+import { coerce } from "src/utils";
 import { defineComponent, PropType, Ref, ref, renderSlot, SetupContext } from "vue";
-import { useRender } from "../composables";
-import { IAriaHasPopup } from "../interfaces";
-import { useRipple } from "../ripple";
-import { coerce } from "../utils";
 import {
     IIconButtonColor,
     IIconButtonProps,

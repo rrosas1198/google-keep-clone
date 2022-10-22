@@ -1,6 +1,6 @@
+import { useRender } from "src/composables";
+import { coerce } from "src/utils";
 import { defineComponent, PropType } from "vue";
-import { useRender } from "../composables";
-import { coerce } from "../utils";
 import { useRadio } from "./radio.factory";
 import { IRadioColor, IRadioProps, IRadioValue } from "./radio.interface";
 

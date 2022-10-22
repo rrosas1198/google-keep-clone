@@ -1,7 +1,8 @@
 // Based on https://github.com/material-components/material-web/blob/master/ripple/lib/ripple.ts
-import { computed, Ref, ref, watch } from "vue";
-import { EasingEnum, useAnimationSignal } from "../composables";
-import { coerce } from "../utils";
+import { useAnimationSignal } from "src/composables";
+import { EasingEnum } from "src/enums";
+import { coerce } from "src/utils";
+import { computed, reactive, Ref, watch } from "vue";
 import {
     ANIMATION_FILL,
     INITIAL_ORIGIN_SCALE,
@@ -15,10 +16,13 @@ import {
 import { IRippleProps } from "./ripple.interface";
 
 export function useRipple(proxy: Ref<HTMLElement>, props: IRippleProps) {
-    const hovered = ref(false);
-    const focused = ref(false);
-    const pressed = ref(false);
     const pressAnimationSignal = useAnimationSignal();
+
+    const states = reactive({
+        hovered: false,
+        focused: false,
+        pressed: false
+    });
 
     const isDisabled = computed(() => coerce(props.disabled ?? false));
     const isUnbounded = computed(() => coerce(props.unbounded ?? false));
@@ -31,49 +35,49 @@ export function useRipple(proxy: Ref<HTMLElement>, props: IRippleProps) {
 
     const classList = computed(() => ({
         "mdc-ripple-surface": true,
-        "mdc-ripple--hovered": hovered.value,
-        "mdc-ripple--focused": focused.value,
-        "mdc-ripple--pressed": pressed.value,
+        "mdc-ripple--hovered": states.hovered,
+        "mdc-ripple--focused": states.focused,
+        "mdc-ripple--pressed": states.pressed,
         "mdc-ripple--unbounded": isUnbounded.value
     }));
 
     const beginHover = (hoverEvent?: Event) => {
         if ((hoverEvent as PointerEvent)?.pointerType !== "touch") {
-            hovered.value = true;
+            states.hovered = true;
         }
     };
 
     const endHover = () => {
-        hovered.value = false;
+        states.hovered = false;
     };
 
     const beginFocus = () => {
-        focused.value = true;
+        states.focused = true;
     };
 
     const endFocus = () => {
-        focused.value = false;
+        states.focused = false;
     };
 
-    const beginPress = (positionEvent?: Event | null) => {
-        pressed.value = true;
+    const beginPress = (ev?: Event | null) => {
+        states.pressed = true;
 
         if (_delayedEndPressHandle !== null) {
             window.clearTimeout(_delayedEndPressHandle);
             _delayedEndPressHandle = null;
         }
 
-        _startPressAnimation(positionEvent);
+        _startPressAnimation(ev);
     };
 
     const endPress = () => {
-        const pressAnimationPlayState = _growAnimation?.currentTime ?? Infinity;
+        const pressAnimationPlayState = _growAnimation?.currentTime ?? Number.POSITIVE_INFINITY;
 
         if (pressAnimationPlayState >= MINIMUM_PRESS_MS) {
-            pressed.value = false;
+            states.pressed = false;
         } else {
             _delayedEndPressHandle = window.setTimeout(() => {
-                pressed.value = false;
+                states.pressed = false;
                 _delayedEndPressHandle = null;
             }, MINIMUM_PRESS_MS - pressAnimationPlayState);
         }
@@ -81,6 +85,7 @@ export function useRipple(proxy: Ref<HTMLElement>, props: IRippleProps) {
 
     const _determineRippleSize = () => {
         const { height, width } = _getComputeBoundingRect();
+
         const maxDim = Math.max(height, width);
         const softEdgeSize = Math.max(SOFT_EDGE_CONTAINER_RATIO * maxDim, SOFT_EDGE_MINIMUM_SIZE);
 
@@ -99,18 +104,18 @@ export function useRipple(proxy: Ref<HTMLElement>, props: IRippleProps) {
         _rippleSize = `${_initialSize}px`;
     };
 
-    const _getNormalizedPointerEventCoords = (pointerEvent: PointerEvent) => {
-        const { scrollX, scrollY } = window;
+    const _getNormalizedPointerEventCoords = (ev: PointerEvent) => {
         const { left, top } = _getComputeBoundingRect();
-        const documentX = scrollX + left;
-        const documentY = scrollY + top;
-        const { pageX, pageY } = pointerEvent;
-        return { x: pageX - documentX, y: pageY - documentY };
+
+        const documentX = window.scrollX + left;
+        const documentY = window.scrollY + top;
+
+        return { x: ev.pageX - documentX, y: ev.pageY - documentY };
     };
 
-    const _getTranslationCoordinates = (positionEvent?: Event | null) => {
+    const _getTranslationCoordinates = (ev?: Event | null) => {
         const { height, width } = _getComputeBoundingRect();
-        // end in the center
+
         const endPoint = {
             x: (width - _initialSize) / 2,
             y: (height - _initialSize) / 2
@@ -118,13 +123,10 @@ export function useRipple(proxy: Ref<HTMLElement>, props: IRippleProps) {
 
         let startPoint;
 
-        if (positionEvent instanceof PointerEvent) {
-            startPoint = _getNormalizedPointerEventCoords(positionEvent);
+        if (ev instanceof PointerEvent) {
+            startPoint = _getNormalizedPointerEventCoords(ev);
         } else {
-            startPoint = {
-                x: width / 2,
-                y: height / 2
-            };
+            startPoint = { x: width / 2, y: height / 2 };
         }
 
         // center around start point
@@ -136,10 +138,10 @@ export function useRipple(proxy: Ref<HTMLElement>, props: IRippleProps) {
         return { startPoint, endPoint };
     };
 
-    const _startPressAnimation = (positionEvent?: Event | null) => {
+    const _startPressAnimation = (ev?: Event | null) => {
         _determineRippleSize();
 
-        const { startPoint, endPoint } = _getTranslationCoordinates(positionEvent);
+        const { startPoint, endPoint } = _getTranslationCoordinates(ev);
         const translateStart = `${startPoint.x}px, ${startPoint.y}px`;
         const translateEnd = `${endPoint.x}px, ${endPoint.y}px`;
 
@@ -201,11 +203,10 @@ export function useRipple(proxy: Ref<HTMLElement>, props: IRippleProps) {
     };
 
     watch(isDisabled, value => {
-        if (value) {
-            endHover();
-            endFocus();
-            endPress();
-        }
+        if (!value) return;
+        endHover();
+        endFocus();
+        endPress();
     });
 
     return { classList, listeners };

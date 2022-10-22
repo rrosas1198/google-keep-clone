@@ -1,4 +1,4 @@
-import { IAriaHasPopup } from "../interfaces";
+import { IAriaHasPopup } from "src/interfaces";
 
 export type IIconButtonColor = "primary" | "secondary" | "tertiary";
 

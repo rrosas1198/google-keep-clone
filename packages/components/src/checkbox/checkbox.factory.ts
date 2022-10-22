@@ -1,4 +1,4 @@
-import { getCurrentInstance } from "../utils";
+import { getCurrentInstance } from "src/utils";
 import { ICheckboxProps } from "./checkbox.interface";
 
 // TODO: Verify indeterminate support
