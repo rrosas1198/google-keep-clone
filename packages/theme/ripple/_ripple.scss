@@ -9,6 +9,10 @@
         outline: none;
         -webkit-tap-highlight-color: transparent;
 
+        @media screen and (forced-colors: active) {
+            display: none;
+        }
+
         &::before,
         &::after {
             position: absolute;
