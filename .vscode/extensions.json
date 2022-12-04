@@ -1,10 +1,12 @@
 {
     "recommendations": [
+        "streetsidesoftware.code-spell-checker-spanish",
         "streetsidesoftware.code-spell-checker",
+        "rvest.vs-code-prettier-eslint",
         "editorconfig.editorconfig",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "hediet.vscode-drawio",
-        "Vue.volar"
+        "vue.volar"
     ]
 }
