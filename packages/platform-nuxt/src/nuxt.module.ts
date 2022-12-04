@@ -1,5 +1,5 @@
-import { ConfigModule } from "@keep/config";
-import { IConstructor, IDynamicModule } from "@keep/core";
+import type { IConstructor, IDynamicModule } from "@keep/core";
+import { EnvironmentModule } from "@keep/environment";
 
 export class NuxtModule {
     public static forRoot(appModule: IConstructor): IDynamicModule {
@@ -8,7 +8,7 @@ export class NuxtModule {
 
         return {
             module: NuxtModule,
-            imports: [ConfigModule.forRoot(filePaths), appModule]
+            imports: [EnvironmentModule.forRoot(filePaths), appModule]
         };
     }
 }

@@ -1,4 +1,4 @@
-import { IValueObjectProps } from "src/interfaces";
+import type { IValueObjectProps } from "src/interfaces";
 
 export abstract class ValueObject<T> {
     protected readonly props: IValueObjectProps<T>;

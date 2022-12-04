@@ -1,9 +1,10 @@
 import { useRender } from "src/composables";
 import { useRipple } from "src/ripple";
 import { coerce } from "src/utils";
-import { computed, defineComponent, PropType, Ref, ref, renderSlot, SetupContext } from "vue";
+import type { PropType, Ref, SetupContext } from "vue";
+import { computed, defineComponent, ref, renderSlot } from "vue";
 import { useIconButtonToggle } from "./icon-button-toggle.factory";
-import {
+import type {
     IIconButtonToggleColor,
     IIconButtonToggleProps,
     IIconButtonToggleVariant

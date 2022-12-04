@@ -1,4 +1,5 @@
-import { IConstructor, Reflector } from "@keep/core";
+import type { IConstructor } from "@keep/core";
+import { Reflector } from "@keep/core";
 import { CONTROLLER_TOKEN, PATH_TOKEN, VERSION_TOKEN } from "src/constants";
 
 export interface ControllerOptions {

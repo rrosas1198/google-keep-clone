@@ -1,6 +1,7 @@
-import { IConfigService } from "@keep/config";
-import { IContainerService, IDynamicModule } from "@keep/core";
-import { IConnectionOptions, IMysqlService } from "./interfaces";
+import type { IContainerService, IDynamicModule } from "@keep/core";
+import { IEnvironmentService } from "@keep/environment";
+import type { IConnectionOptions } from "./interfaces";
+import { IMysqlService } from "./interfaces";
 import { MysqlService } from "./mysql.service";
 
 export class MysqlModule {
@@ -23,14 +24,14 @@ export class MysqlModule {
             return this._instance;
         }
 
-        const configService = container.resolve(IConfigService);
+        const environmentService = container.resolve(IEnvironmentService);
 
         const options = <IConnectionOptions>{
-            host: configService.get("MYSQL_HOST"),
-            port: Number.parseInt(configService.get("MYSQL_PORT")),
-            username: configService.get("MYSQL_USERNAME"),
-            password: configService.get("MYSQL_PASSWORD"),
-            database: configService.get("MYSQL_DATABASE")
+            host: environmentService.get("MYSQL_HOST"),
+            port: Number.parseInt(environmentService.get("MYSQL_PORT")),
+            username: environmentService.get("MYSQL_USERNAME"),
+            password: environmentService.get("MYSQL_PASSWORD"),
+            database: environmentService.get("MYSQL_DATABASE")
         };
 
         const mysqlService = new MysqlService(options);

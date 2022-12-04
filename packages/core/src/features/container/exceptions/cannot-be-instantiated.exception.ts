@@ -1,4 +1,4 @@
-import { IConstructor } from "src/interfaces";
+import type { IConstructor } from "src/interfaces";
 
 export class CannotBeInstantiatedException extends Error {
     constructor(public readonly ctor: IConstructor, readonly options?: Record<string, unknown>) {

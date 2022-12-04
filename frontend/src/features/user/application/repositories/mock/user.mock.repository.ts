@@ -1,4 +1,4 @@
-import { IUserRepository } from "src/features/user/domain/repositories";
+import type { IUserRepository } from "src/features/user/domain/repositories";
 
 export class UserMockRepositoryImpl implements IUserRepository {
     public signIn(email: string, password: string): Promise<string> {

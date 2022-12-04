@@ -1,7 +1,7 @@
-import { ScopeEnum } from "src/enums";
-import { IConstructor } from "src/interfaces";
-import { IContainerService } from "./container-service.interface";
-import { IContainerToken } from "./container-token.interface";
+import type { ScopeEnum } from "src/enums";
+import type { IConstructor } from "src/interfaces";
+import type { IContainerService } from "./container-service.interface";
+import type { IContainerToken } from "./container-token.interface";
 
 export interface IClassProvider<T = unknown> {
     useClass: IConstructor<T>;

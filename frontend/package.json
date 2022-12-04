@@ -2,22 +2,22 @@
     "name": "app-frontend",
     "version": "0.0.0",
     "scripts": {
-        "start": "nuxi preview",
-        "build": "nuxi build",
-        "watch": "nuxi dev",
-        "test": "vitest",
-        "test:watch": "vitest --watch",
-        "test:coverage": "vitest --coverage"
+        "build": "nuxt build",
+        "watch": "nuxt dev",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare",
+        "test:e2e": "echo test:e2e",
+        "test:unit": "vitest"
     },
     "dependencies": {
         "@keep/core": "^0.0.1",
-        "@keep/platform-nuxt": "^0.0.1",
-        "nuxt": "^3.0.0-rc.12"
+        "@keep/platform-nuxt": "^0.0.1"
     },
     "devDependencies": {
         "@keep/components": "^0.0.1",
         "@keep/theme": "^0.0.1",
-        "bauen": "^0.10.11",
-        "vitest": "^0.24.3"
+        "nuxt": "^3.0.0",
+        "vitest": "^0.25.3"
     }
 }

@@ -1,4 +1,4 @@
-import { HttpMethodEnum } from "src/enums";
+import type { HttpMethodEnum } from "src/enums";
 
 export interface IMethodMetadata {
     path: string;

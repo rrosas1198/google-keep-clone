@@ -1,5 +1,6 @@
-import { IMysqlService, MysqlService } from "@keep/mysql";
-import { IUserEntity } from "src/user/domain/entities";
+import type { MysqlService } from "@keep/mysql";
+import { IMysqlService } from "@keep/mysql";
+import type { IUserEntity } from "src/user/domain/entities";
 import { UserMySqlQueries } from "./queries";
 
 export class UserMySqlDatastore {

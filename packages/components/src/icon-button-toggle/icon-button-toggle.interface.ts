@@ -1,4 +1,4 @@
-import { IIconButtonColor, IIconButtonVariant } from "src/icon-button";
+import type { IIconButtonColor, IIconButtonVariant } from "src/icon-button";
 
 export type IIconButtonToggleColor = IIconButtonColor;
 

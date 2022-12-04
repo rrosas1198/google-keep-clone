@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createPool as MysqlCreatePool, Pool, PoolOptions } from "mysql2/promise";
+import type { Pool, PoolOptions } from "mysql2/promise";
+import { createPool as MysqlCreatePool } from "mysql2/promise";
 import type { IConnectionCallback, IConnectionOptions } from "./interfaces";
-import { IMysqlService } from "./interfaces/mysql-service.interface";
+import type { IMysqlService } from "./interfaces/mysql-service.interface";
 import { MysqlConnection } from "./mysql.connection";
 
 export class MysqlService implements IMysqlService {

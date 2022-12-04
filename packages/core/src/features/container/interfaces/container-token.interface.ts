@@ -1,4 +1,4 @@
-import { IConstructor } from "src/interfaces";
+import type { IConstructor } from "src/interfaces";
 
 export interface IContainerDecorator<T = unknown> {
     (...params: unknown[]): void;

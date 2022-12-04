@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IConstructor } from "src/interfaces";
+import type { IConstructor } from "src/interfaces";
 import { Reflector } from "src/polyfills";
-import { IContainerDecorator } from "../interfaces";
+import type { IContainerDecorator } from "../interfaces";
 
 const registry = new Map<string, IContainerDecorator>();
 

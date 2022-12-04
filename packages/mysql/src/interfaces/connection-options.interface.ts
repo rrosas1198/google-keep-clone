@@ -1,4 +1,4 @@
-import { IConstructor } from "@keep/core";
+import type { IConstructor } from "@keep/core";
 
 export interface IConnectionOptions {
     host?: string;

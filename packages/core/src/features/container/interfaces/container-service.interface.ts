@@ -1,7 +1,7 @@
-import { IConstructor } from "src/interfaces";
+import type { IConstructor } from "src/interfaces";
 import { ContainerDecorator } from "../utils";
-import { IContainerProvider } from "./container-provider.interface";
-import { IContainerToken } from "./container-token.interface";
+import type { IContainerProvider } from "./container-provider.interface";
+import type { IContainerToken } from "./container-token.interface";
 
 export const IContainerService = ContainerDecorator<IContainerService>("IContainerService");
 

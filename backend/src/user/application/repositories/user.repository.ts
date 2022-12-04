@@ -1,6 +1,6 @@
 import { ContainerService } from "@keep/core";
-import { IUserEntity } from "src/user/domain/entities";
-import { IUserRepository } from "src/user/domain/repositories";
+import type { IUserEntity } from "src/user/domain/entities";
+import type { IUserRepository } from "src/user/domain/repositories";
 import { UserMySqlDatastore } from "../datastores/mysql";
 import { UserMySqlMapper } from "../mappers/mysql";
 

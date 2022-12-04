@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { EventHandler } from "h3";
-import { IncomingMessage, ServerResponse } from "http";
-import { HttpMethodEnum } from "src/enums";
+import type { EventHandler } from "h3";
+import type { IncomingMessage, ServerResponse } from "http";
+import type { HttpMethodEnum } from "src/enums";
 
 export type IControllerMethodHandler = (
     request: IncomingMessage,

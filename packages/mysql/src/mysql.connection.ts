@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { PoolConnection } from "mysql2/promise";
-import { MysqlService } from "./mysql.service";
+import type { PoolConnection } from "mysql2/promise";
+import type { MysqlService } from "./mysql.service";
 
 export class MysqlConnection {
     constructor(

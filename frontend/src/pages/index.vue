@@ -96,7 +96,7 @@ function toggleViewMode() {
     inset-block-start: 0;
     display: none;
 
-    @include media-query.breakpoint-up(medium) {
+    @include media-query.breakpoint-up(md) {
         display: flex;
     }
 }
@@ -113,7 +113,7 @@ function toggleViewMode() {
 .home__settings {
     display: none;
 
-    @include media-query.breakpoint-up(medium) {
+    @include media-query.breakpoint-up(md) {
         display: flex;
     }
 }

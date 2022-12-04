@@ -1,4 +1,4 @@
-import { IValidationResult, IValidationRule } from "src/interfaces";
+import type { IValidationResult, IValidationRule } from "src/interfaces";
 
 export function flushRules<T>(rules: IValidationRule[]) {
     return (value: T): IValidationResult<T> => {

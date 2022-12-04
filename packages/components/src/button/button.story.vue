@@ -49,8 +49,8 @@
             </template>
 
             <template #controls="{ state }">
-                <HstCheckbox title="Disabled" v-model="state.disabled" />
-                <HstSelect title="Color" v-model="state.color" :options="colors" />
+                <HstCheckbox v-model="state.disabled" title="Disabled" />
+                <HstSelect v-model="state.color" title="Color" :options="colors" />
             </template>
         </Variant>
     </Story>

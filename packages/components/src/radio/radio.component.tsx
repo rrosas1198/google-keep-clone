@@ -1,8 +1,9 @@
 import { useRender } from "src/composables";
 import { coerce } from "src/utils";
-import { defineComponent, PropType } from "vue";
+import type { PropType } from "vue";
+import { defineComponent } from "vue";
 import { useRadio } from "./radio.factory";
-import { IRadioColor, IRadioProps, IRadioValue } from "./radio.interface";
+import type { IRadioColor, IRadioProps, IRadioValue } from "./radio.interface";
 
 export const VRadio = defineComponent({
     name: "VRadio",

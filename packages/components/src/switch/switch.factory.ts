@@ -1,6 +1,6 @@
 import { getCurrentInstance, toString } from "src/utils";
 import { computed } from "vue";
-import { ISwitchProps } from "./switch.interface";
+import type { ISwitchProps } from "./switch.interface";
 
 export function useSwitch(props: ISwitchProps) {
     const { emit } = getCurrentInstance("switch");

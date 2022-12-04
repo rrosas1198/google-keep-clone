@@ -1,4 +1,4 @@
-import { IUserEntity } from "src/user/domain/entities";
+import type { IUserEntity } from "src/user/domain/entities";
 
 export function findOneQuery(params?: Partial<IUserEntity>) {
     const conditions = getConditions(params);

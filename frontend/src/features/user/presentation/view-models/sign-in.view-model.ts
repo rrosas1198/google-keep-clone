@@ -1,5 +1,5 @@
 import { ViewModel } from "@keep/platform-nuxt";
-import { SignInUseCase } from "../../domain/use-cases";
+import type { SignInUseCase } from "../../domain/use-cases";
 import { SignInModel } from "../models";
 
 export class SignInViewModel extends ViewModel<never> {

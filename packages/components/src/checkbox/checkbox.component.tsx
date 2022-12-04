@@ -1,9 +1,10 @@
 import { useRender } from "src/composables";
 import { useRipple } from "src/ripple";
 import { coerce } from "src/utils";
-import { defineComponent, PropType, Ref, ref } from "vue";
+import type { PropType, Ref } from "vue";
+import { defineComponent, ref } from "vue";
 import { useCheckbox } from "./checkbox.factory";
-import { ICheckboxProps, ICheckboxValue } from "./checkbox.interface";
+import type { ICheckboxProps, ICheckboxValue } from "./checkbox.interface";
 
 export const VCheckbox = defineComponent({
     name: "VCheckbox",

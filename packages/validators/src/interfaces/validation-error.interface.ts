@@ -1,4 +1,4 @@
-import { ValidationCodeEnum } from "src/enums";
+import type { ValidationCodeEnum } from "src/enums";
 
 export interface IValidationError<T> {
     property: keyof T;

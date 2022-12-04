@@ -1,8 +1,9 @@
 import { useRender } from "src/composables";
 import { coerce } from "src/utils";
-import { defineComponent, PropType, SetupContext } from "vue";
+import type { PropType, SetupContext } from "vue";
+import { defineComponent } from "vue";
 import { useSwitch } from "./switch.factory";
-import { ISwitchColor, ISwitchProps } from "./switch.interface";
+import type { ISwitchColor, ISwitchProps } from "./switch.interface";
 
 export const VSwitch = defineComponent({
     name: "VSwitch",

@@ -1,5 +1,5 @@
 import { getCurrentInstance } from "src/utils";
-import { ICheckboxProps } from "./checkbox.interface";
+import type { ICheckboxProps } from "./checkbox.interface";
 
 // TODO: Verify indeterminate support
 export function useCheckbox(props: ICheckboxProps) {

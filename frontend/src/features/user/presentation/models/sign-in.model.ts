@@ -1,4 +1,4 @@
-import { ISignInUseCaseParams } from "../../domain/use-cases";
+import type { ISignInUseCaseParams } from "../../domain/use-cases";
 
 export class SignInModel {
     public email = ref("");

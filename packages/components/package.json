@@ -1,32 +1,40 @@
 {
     "name": "@keep/components",
     "version": "0.0.1",
-    "main": "./dist/index.js",
-    "typings": "./dist/index.d.ts",
+    "type": "module",
+    "main": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
     "scripts": {
-        "build": "bauen",
-        "watch": "bauen watch",
-        "test": "vitest",
-        "test:watch": "vitest --watch",
-        "test:coverage": "vitest --coverage",
+        "prepack": "node tools/build.script.mjs",
         "story:dev": "histoire dev",
         "story:build": "histoire build",
-        "story:preview": "histoire preview"
-    },
-    "devDependencies": {
-        "@histoire/plugin-vue": "^0.11.5",
-        "@keep/theme": "^0.0.1",
-        "@vitejs/plugin-vue": "^3.1.2",
-        "@vitejs/plugin-vue-jsx": "^2.0.1",
-        "@vue/compiler-sfc": "^3.2.41",
-        "bauen": "^0.10.11",
-        "histoire": "^0.11.5",
-        "sass": "^1.55.0",
-        "vite": "^3.1.8",
-        "vitest": "^0.24.3",
-        "vue": "^3.2.41"
+        "story:preview": "histoire preview",
+        "test:unit": "vitest"
     },
     "peerDependencies": {
-        "vue": ">= 3.2.0"
+        "vue": "^3.2.45"
+    },
+    "devDependencies": {
+        "@histoire/plugin-vue": "^0.11.9",
+        "@keep/theme": "^0.0.1",
+        "@rollup/plugin-alias": "^4.0.2",
+        "@rollup/plugin-json": "^5.0.2",
+        "@rollup/plugin-node-resolve": "^15.0.1",
+        "@types/lodash.merge": "^4.6.7",
+        "@vitejs/plugin-vue": "^3.2.0",
+        "@vitejs/plugin-vue-jsx": "^2.1.1",
+        "@vue/compiler-sfc": "^3.2.45",
+        "@vue/test-utils": "^2.2.5",
+        "esbuild": "^0.15.17",
+        "histoire": "^0.11.9",
+        "lodash.merge": "^4.6.2",
+        "rollup": "^3.5.1",
+        "rollup-plugin-dts": "^5.0.0",
+        "rollup-plugin-esbuild": "^5.0.0",
+        "sass": "^1.56.1",
+        "typescript": "^4.9.3",
+        "vite": "^3.2.4",
+        "vitest": "^0.25.3",
+        "vue": "^3.2.45"
     }
 }

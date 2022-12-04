@@ -1,4 +1,4 @@
-import { IContainerToken } from "../interfaces";
+import type { IContainerToken } from "../interfaces";
 
 export class UnregisteredDependencyException extends ReferenceError {
     constructor(public readonly token: IContainerToken) {

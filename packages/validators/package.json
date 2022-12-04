@@ -1,21 +1,19 @@
 {
     "name": "@keep/validators",
     "version": "0.0.1",
-    "main": "./dist/index.js",
-    "typings": "./dist/index.d.ts",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
     "scripts": {
-        "prepack": "bauen",
-        "watch": "bauen watch",
-        "test": "vitest",
-        "test:watch": "vitest --watch",
-        "test:coverage": "vitest --coverage"
+        "prepack": "unbuild",
+        "test:unit": "vitest"
     },
     "dependencies": {
         "validator": "13.7.0"
     },
     "devDependencies": {
-        "@types/validator": "^13.7.8",
-        "bauen": "^0.10.11",
-        "vitest": "^0.24.3"
+        "@types/validator": "^13.7.10",
+        "unbuild": "^1.0.1",
+        "vitest": "^0.25.3"
     }
 }

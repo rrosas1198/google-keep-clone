@@ -1,4 +1,4 @@
-import { IDisposable, IEventListener } from "src/interfaces";
+import type { IDisposable, IEventListener } from "src/interfaces";
 import { toDisposable } from "src/utils";
 
 export class EventManager<T> implements IDisposable {

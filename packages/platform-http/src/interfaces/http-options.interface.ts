@@ -1,3 +1,3 @@
-import { ListenOptions } from "listhen";
+import type { ListenOptions } from "listhen";
 
 export type IHttpOptions = Partial<ListenOptions>;

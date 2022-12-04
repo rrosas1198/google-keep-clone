@@ -1,0 +1,19 @@
+{
+    "name": "@keep/environment",
+    "version": "0.0.1",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "scripts": {
+        "prepack": "unbuild",
+        "test:unit": "vitest"
+    },
+    "dependencies": {
+        "@keep/core": "^0.0.1",
+        "dotenv": "^16.0.3"
+    },
+    "devDependencies": {
+        "unbuild": "^1.0.1",
+        "vitest": "^0.25.3"
+    }
+}

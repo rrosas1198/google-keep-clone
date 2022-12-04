@@ -1,24 +1,22 @@
 {
     "name": "@keep/platform-http",
     "version": "0.0.1",
-    "main": "./dist/index.js",
-    "typings": "./dist/index.d.ts",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
     "scripts": {
-        "prepack": "bauen",
-        "watch": "bauen watch",
-        "test": "vitest",
-        "test:watch": "vitest --watch",
-        "test:coverage": "vitest --coverage"
+        "prepack": "unbuild",
+        "test:unit": "vitest"
     },
     "dependencies": {
         "@keep/core": "^0.0.1",
-        "@keep/config": "^0.0.1",
-        "h3": "^0.8.5",
-        "listhen": "^0.3.4",
-        "ufo": "^0.8.6"
+        "@keep/environment": "^0.0.1",
+        "h3": "^1.0.1",
+        "listhen": "^1.0.1",
+        "ufo": "^1.0.1"
     },
     "devDependencies": {
-        "bauen": "^0.10.11",
-        "vitest": "^0.24.3"
+        "unbuild": "^1.0.1",
+        "vitest": "^0.25.3"
     }
 }

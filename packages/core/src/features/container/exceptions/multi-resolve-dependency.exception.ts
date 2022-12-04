@@ -1,4 +1,4 @@
-import { IConstructor } from "src/interfaces";
+import type { IConstructor } from "src/interfaces";
 
 export class MultiResolveDependencyException extends ReferenceError {
     constructor(public readonly ctor: IConstructor, public readonly errors: unknown[]) {

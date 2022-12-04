@@ -1,5 +1,6 @@
-import { IMysqlService, MysqlService } from "@keep/mysql";
-import { IRunner } from "src/interfaces";
+import type { MysqlService } from "@keep/mysql";
+import { IMysqlService } from "@keep/mysql";
+import type { IRunner } from "src/interfaces";
 import MigrationDatabase from "./migration.database.sql";
 
 export class MigrationRunner implements IRunner {

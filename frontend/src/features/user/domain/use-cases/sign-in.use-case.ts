@@ -1,4 +1,4 @@
-import { IUseCase } from "@keep/core";
+import type { IUseCase } from "@keep/core";
 import { IUserRepository } from "../repositories";
 
 export interface ISignInUseCaseParams {

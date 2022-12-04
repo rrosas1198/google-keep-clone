@@ -2,7 +2,8 @@
 import { useAnimationSignal } from "src/composables";
 import { EasingEnum } from "src/enums";
 import { coerce } from "src/utils";
-import { computed, reactive, Ref, watch } from "vue";
+import type { Ref } from "vue";
+import { computed, reactive, watch } from "vue";
 import {
     ANIMATION_FILL,
     INITIAL_ORIGIN_SCALE,
@@ -13,7 +14,7 @@ import {
     SOFT_EDGE_CONTAINER_RATIO,
     SOFT_EDGE_MINIMUM_SIZE
 } from "./ripple.constants";
-import { IRippleProps } from "./ripple.interface";
+import type { IRippleProps } from "./ripple.interface";
 
 export function useRipple(proxy: Ref<HTMLElement>, props: IRippleProps) {
     const pressAnimationSignal = useAnimationSignal();

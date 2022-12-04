@@ -2,20 +2,18 @@
     "name": "app-console",
     "version": "0.0.0",
     "scripts": {
-        "start": "node ./dist/main.js",
-        "build": "bauen",
-        "watch": "bauen watch",
-        "test": "vitest",
-        "test:watch": "vitest --watch",
-        "test:coverage": "vitest --coverage"
+        "start": "node dist/main.cjs",
+        "build": "unbuild",
+        "test:unit": "vitest"
     },
     "dependencies": {
         "@keep/core": "^0.0.1",
-        "@keep/config": "^0.0.1",
+        "@keep/environment": "^0.0.1",
         "@keep/mysql": "^0.0.1"
     },
     "devDependencies": {
-        "bauen": "^0.10.11",
-        "vitest": "^0.24.3"
+        "@rollup/pluginutils": "^5.0.2",
+        "unbuild": "^1.0.1",
+        "vitest": "^0.25.3"
     }
 }

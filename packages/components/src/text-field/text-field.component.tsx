@@ -1,8 +1,9 @@
 import { useRender } from "src/composables";
 import { coerce } from "src/utils";
-import { defineComponent, PropType, renderSlot, SetupContext } from "vue";
+import type { PropType, SetupContext } from "vue";
+import { defineComponent, renderSlot } from "vue";
 import { useTextField } from "./text-field.factory";
-import { ITextFieldProps, ITextFieldType } from "./text-field.interface";
+import type { ITextFieldProps, ITextFieldType } from "./text-field.interface";
 
 export const VTextField = defineComponent({
     name: "VTextField",

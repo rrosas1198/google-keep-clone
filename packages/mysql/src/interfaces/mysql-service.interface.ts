@@ -1,6 +1,6 @@
 import { ContainerDecorator } from "@keep/core";
-import { MysqlConnection } from "src/mysql.connection";
-import { IConnectionCallback } from "./connection-callback.interface";
+import type { MysqlConnection } from "src/mysql.connection";
+import type { IConnectionCallback } from "./connection-callback.interface";
 
 export const IMysqlService = ContainerDecorator<IMysqlService>("IMysqlService");
 

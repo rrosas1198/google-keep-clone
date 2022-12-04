@@ -1,16 +1,7 @@
-const {
-    mergeEslintConfig,
-    EslintBaseConfig,
-    EslintPrettierConfig,
-    EslintTsConfig
-} = require("@techkit/linter-config");
+const { mergeEslintConfig, EslintBaseConfig, EslintVue3Config } = require("@keep/config");
 
-module.exports = mergeEslintConfig(EslintBaseConfig, EslintTsConfig, EslintPrettierConfig, {
-    overrides: [
-        {
-            rules: {
-                "@typescript-eslint/indent": "off"
-            }
-        }
-    ]
+module.exports = mergeEslintConfig(EslintBaseConfig, EslintVue3Config, {
+    rules: {
+        "vue/multi-word-component-names": "off"
+    }
 });

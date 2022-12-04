@@ -1,5 +1,5 @@
-import { ApplicationContext } from "./application.context";
-import { IConstructor, IPlatform } from "./interfaces";
+import type { ApplicationContext } from "./application.context";
+import type { IConstructor, IPlatform } from "./interfaces";
 
 export abstract class Application<K, T extends IPlatform<K>, V extends ApplicationContext> {
     constructor(

@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ApplicationContext, IConstructor, IDynamicModule, Reflector } from "@keep/core";
+import type { IConstructor, IDynamicModule } from "@keep/core";
+import { ApplicationContext, Reflector } from "@keep/core";
 import { joinURL, withLeadingSlash } from "ufo";
 import { METHOD_TOKEN, PATH_TOKEN, VERSION_TOKEN } from "./constants";
-import { HttpMethodEnum } from "./enums";
+import type { HttpMethodEnum } from "./enums";
 import { HttpRouteHandler } from "./http.route-handler";
-import { IControllerMetadata, IControllerMethodMetadata, IMethodMetadata } from "./interfaces";
+import type { IControllerMetadata, IControllerMethodMetadata, IMethodMetadata } from "./interfaces";
 import { getRouteMetadata } from "./utils";
 
 export class HttpContext extends ApplicationContext {

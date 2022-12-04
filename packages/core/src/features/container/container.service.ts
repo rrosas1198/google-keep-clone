@@ -1,11 +1,12 @@
 import { ScopeEnum } from "src/enums";
-import { IConstructor } from "src/interfaces";
+import type { IConstructor } from "src/interfaces";
 import {
     CannotBeInstantiatedException,
     MultiResolveDependencyException,
     UnregisteredDependencyException
 } from "./exceptions";
-import { IContainerProvider, IContainerService, IContainerToken } from "./interfaces";
+import type { IContainerProvider, IContainerToken } from "./interfaces";
+import { IContainerService } from "./interfaces";
 import {
     getDependencies,
     isClassFunction,

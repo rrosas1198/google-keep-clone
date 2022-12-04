@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IContainerProvider, IFactoryProvider } from "../interfaces";
+import type { IContainerProvider, IFactoryProvider } from "../interfaces";
 
 export function isFactoryProvider<T>(
     provider: IContainerProvider<T>

@@ -1,6 +1,6 @@
 import { ValueObject } from "@keep/platform-http";
 import { flushRules, isString, isValidEmail, notBlank } from "@keep/validators";
-import { IMonoValueObjectReturn } from "../interfaces";
+import type { IMonoValueObjectReturn } from "../interfaces";
 
 export class EmailVo extends ValueObject<string> {
     private constructor(value: string) {

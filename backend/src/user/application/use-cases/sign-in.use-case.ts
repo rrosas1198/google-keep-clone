@@ -1,8 +1,8 @@
 import { HttpException, HttpStatusEnum } from "@keep/platform-http";
 import { IUserRepository } from "src/user/domain/repositories";
 import { IHashService, ITokenService } from "src/user/domain/services";
-import { ISignInUseCase } from "src/user/domain/use-cases";
-import { CredentialsVo } from "src/user/domain/value-objects";
+import type { ISignInUseCase } from "src/user/domain/use-cases";
+import type { CredentialsVo } from "src/user/domain/value-objects";
 
 export class SignInUseCaseImpl implements ISignInUseCase {
     constructor(

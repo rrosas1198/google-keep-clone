@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IModuleMetadata } from "src/interfaces";
+import type { IModuleMetadata } from "src/interfaces";
 import { Reflector } from "src/polyfills";
 
 export function Module(metadata: IModuleMetadata): ClassDecorator {

@@ -1,5 +1,5 @@
 import { ContainerDecorator } from "@keep/core";
-import { IUserEntity } from "../entities";
+import type { IUserEntity } from "../entities";
 
 export const IUserRepository = ContainerDecorator<IUserRepository>("IUserRepositoryToken");
 

@@ -1,6 +1,6 @@
 import { ValueObject } from "@keep/platform-http";
 import { flushErrors } from "@keep/validators";
-import { IValueObjectReturn } from "src/common/interfaces";
+import type { IValueObjectReturn } from "src/common/interfaces";
 import { EmailVo } from "src/common/value-objects";
 
 export interface ICredentialsProps {

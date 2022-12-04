@@ -1,11 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-    ContainerService,
-    IContainerProvider,
-    IContainerService,
-    IContainerToken
-} from "./features";
-import { IConstructor, IDynamicModule, IModuleMetadata } from "./interfaces";
+import type { IContainerProvider, IContainerService, IContainerToken } from "./features";
+import { ContainerService } from "./features";
+import type { IConstructor, IDynamicModule, IModuleMetadata } from "./interfaces";
 import { Reflector } from "./polyfills";
 import { isDynamicModule } from "./utils";
 

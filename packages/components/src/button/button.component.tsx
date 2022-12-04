@@ -1,8 +1,9 @@
 import { useRender } from "src/composables";
 import { useRipple } from "src/ripple";
 import { coerce } from "src/utils";
-import { defineComponent, PropType, Ref, ref, renderSlot, SetupContext } from "vue";
-import { IButtonColor, IButtonProps, IButtonType, IButtonVariant } from "./button.interface";
+import type { PropType, Ref, SetupContext } from "vue";
+import { defineComponent, ref, renderSlot } from "vue";
+import type { IButtonColor, IButtonProps, IButtonType, IButtonVariant } from "./button.interface";
 
 export const VButton = defineComponent({
     name: "VButton",

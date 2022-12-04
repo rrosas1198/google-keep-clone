@@ -1,15 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-    defineEventHandler,
-    getMethod,
-    getQuery,
-    getRouterParams,
-    H3Event,
-    MIMES,
-    readBody
-} from "h3";
+import type { H3Event } from "h3";
+import { defineEventHandler, getMethod, getQuery, getRouterParams, MIMES, readBody } from "h3";
 import { HttpMethodEnum, HttpStatusEnum, RouteParamtypesEnum } from "./enums";
-import { IRouteMetadata } from "./interfaces";
+import type { IRouteMetadata } from "./interfaces";
 
 export type IPromiseHandler = (...params: any[]) => Promise<unknown>;
 

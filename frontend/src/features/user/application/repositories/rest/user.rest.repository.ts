@@ -1,5 +1,5 @@
 import { ContainerService } from "@keep/core";
-import { IUserRepository } from "src/features/user/domain/repositories";
+import type { IUserRepository } from "src/features/user/domain/repositories";
 import { UserRestDatastore } from "../../datastores/rest";
 
 export class UserRestRepositoryImpl implements IUserRepository {

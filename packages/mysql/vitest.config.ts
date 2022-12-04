@@ -1,3 +1,3 @@
-import { defineVitestConfig } from "../../tools/define-vitest-config";
+import { defineVitestConfig } from "@keep/config";
 
 export default defineVitestConfig(__dirname);

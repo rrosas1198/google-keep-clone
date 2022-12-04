@@ -1,5 +1,5 @@
 import { MultiDisposeException } from "src/exceptions";
-import { IDisposable } from "src/interfaces";
+import type { IDisposable } from "src/interfaces";
 
 export class Disposable implements IDisposable {
     private _toDispose = new Set<IDisposable>();
