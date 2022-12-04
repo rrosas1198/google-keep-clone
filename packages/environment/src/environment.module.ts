@@ -1,7 +1,7 @@
 import type { IDynamicModule } from "@keep/core";
 import { parse } from "dotenv";
-import { existsSync, readFileSync } from "fs";
-import { resolve } from "path";
+import { existsSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { IEnvironmentService } from "./environment.interface";
 import { EnvironmentService } from "./environment.service";
 

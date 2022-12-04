@@ -31,8 +31,6 @@ export class MysqlService implements IMysqlService {
         try {
             const result = await callback(connection);
             return result as unknown as T;
-        } catch (error) {
-            throw error;
         } finally {
             connection.release();
         }

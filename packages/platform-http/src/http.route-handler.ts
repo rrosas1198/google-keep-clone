@@ -59,11 +59,9 @@ export class HttpRouteHandler {
     }
 
     protected getStatusByMethod(httpMethod: HttpMethodEnum) {
-        switch (httpMethod) {
-            case HttpMethodEnum.POST:
-                return HttpStatusEnum.CREATED;
-            default:
-                return HttpStatusEnum.OK;
+        if (httpMethod === HttpMethodEnum.POST) {
+            return HttpStatusEnum.CREATED;
         }
+        return HttpStatusEnum.OK;
     }
 }

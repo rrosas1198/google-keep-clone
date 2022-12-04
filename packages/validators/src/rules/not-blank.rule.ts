@@ -9,9 +9,9 @@ export const notBlank = defineRule({
 function validationFunc<T>(value: T) {
     if (Array.isArray(value) && value.length <= 0) {
         return false;
-    }
-    if (typeof value === "string" && value.length <= 0) {
+    } else if (typeof value === "string" && value.length <= 0) {
         return false;
+    } else {
+        return true;
     }
-    return true;
 }
