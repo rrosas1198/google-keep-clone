@@ -9,6 +9,7 @@
         "test:unit": "vitest"
     },
     "devDependencies": {
+        "@keep/config": "^0.0.1",
         "unbuild": "^1.0.1",
         "vitest": "^0.25.3"
     }

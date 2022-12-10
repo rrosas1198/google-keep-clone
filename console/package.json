@@ -12,6 +12,7 @@
         "@keep/mysql": "^0.0.1"
     },
     "devDependencies": {
+        "@keep/config": "^0.0.1",
         "@rollup/pluginutils": "^5.0.2",
         "unbuild": "^1.0.1",
         "vitest": "^0.25.3"

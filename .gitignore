@@ -20,6 +20,7 @@ dist
 .nuxt
 .nuxt-*
 .output
+.turbo
 
 # Generated files
 /tsconfig.build.tsbuildinfo

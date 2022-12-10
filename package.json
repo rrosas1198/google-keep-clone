@@ -1,28 +1,28 @@
 {
     "name": "root",
     "private": true,
-    "license": "MIT",
-    "packageManager": "pnpm@7.16.1",
+    "license": "UNLICENSED",
+    "workspaces": [
+        "backend",
+        "console",
+        "frontend",
+        "packages/**",
+        "tools/**"
+    ],
     "scripts": {
-        "build": "cross-env FORCE_COLOR=1 pnpm --filter './tools/**' --filter './packages/**' prepack",
-        "build:stub": "pnpm --filter './packages/**' prepack --stub",
-        "cleanup": "rimraf 'backend/node_modules' 'frontend/node_modules' 'console/node_modules' 'packages/**/node_modules' 'node_modules'",
+        "build": "turbo run prepack",
         "lint": "npm run lint:ts && npm run lint:scss",
         "lint:ts": "eslint */**/*.{ts,tsx,vue} --fix",
         "lint:scss": "stylelint */**/*.scss --fix"
     },
-    "resolutions": {
-        "@keep/config": "workspace:*"
-    },
     "devDependencies": {
-        "@keep/config": "workspace:*",
+        "@keep/config": "^0.0.1",
         "@types/node": "^18.11.10",
-        "@types/rimraf": "^3.0.2",
         "cross-env": "^7.0.3",
         "eslint": "^8.29.0",
         "prettier": "^2.8.0",
-        "rimraf": "^3.0.2",
         "stylelint": "^14.16.0",
+        "turbo": "^1.6.3",
         "typescript": "^4.9.3"
     }
 }

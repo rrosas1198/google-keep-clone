@@ -8,18 +8,19 @@
         "prepack": "unbuild",
         "test:unit": "vitest"
     },
+    "peerDependencies": {
+        "nuxt": "^3.0.0",
+        "vue": ">= 3.2.0"
+    },
     "dependencies": {
         "@keep/core": "^0.0.1",
         "@keep/environment": "^0.0.1"
     },
     "devDependencies": {
+        "@keep/config": "^0.0.1",
         "nuxt": "^3.0.0",
         "unbuild": "^1.0.1",
         "vitest": "^0.25.3",
         "vue": "^3.2.45"
-    },
-    "peerDependencies": {
-        "nuxt": "^3.0.0",
-        "vue": ">= 3.2.0"
     }
 }

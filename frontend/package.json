@@ -16,6 +16,7 @@
     },
     "devDependencies": {
         "@keep/components": "^0.0.1",
+        "@keep/config": "^0.0.1",
         "@keep/theme": "^0.0.1",
         "nuxt": "^3.0.0",
         "vitest": "^0.25.3"

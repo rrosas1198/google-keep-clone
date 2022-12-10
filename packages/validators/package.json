@@ -12,6 +12,7 @@
         "validator": "13.7.0"
     },
     "devDependencies": {
+        "@keep/config": "^0.0.1",
         "@types/validator": "^13.7.10",
         "unbuild": "^1.0.1",
         "vitest": "^0.25.3"

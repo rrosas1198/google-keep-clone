@@ -1,6 +1,7 @@
 {
     "files.exclude": {
         "**/.nuxt": true,
+        "**/.turbo": true,
         "**/.DS_Store": true,
         "**/node_modules": true
     },

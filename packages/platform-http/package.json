@@ -16,6 +16,7 @@
         "ufo": "^1.0.1"
     },
     "devDependencies": {
+        "@keep/config": "^0.0.1",
         "unbuild": "^1.0.1",
         "vitest": "^0.25.3"
     }
