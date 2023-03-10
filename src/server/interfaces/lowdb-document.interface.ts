@@ -1,5 +1,5 @@
 import type { Note } from "src/features/notes/domain/entities";
 
-export interface LowDbDocument {
+export interface ILowDbDocument {
     notes: Note[];
 }
