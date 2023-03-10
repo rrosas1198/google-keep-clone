@@ -1,4 +1,5 @@
 import type { IUseCase } from "src/interfaces";
+import { tryCatch } from "src/utils";
 import type { Note } from "../entities";
 import type { NoteRepository } from "../repositories";
 

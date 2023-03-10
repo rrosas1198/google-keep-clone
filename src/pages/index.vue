@@ -55,10 +55,22 @@
 </template>
 
 <script setup>
-import { VIconButton, VTextField } from "@keep/components";
+import { ListNotesUseCase } from "src/features/notes/domain/use-cases";
+import { NoteModule } from "src/features/notes/note.module";
+import { VIconButton, VTextField } from "src/libs/components";
+
+const listNotesUseCase = NoteModule.resolve(ListNotesUseCase);
 
 useHead({
     title: "Guarda tus ideas estés donde estés"
+});
+
+useFetch(async () => {
+    const response = await listNotesUseCase.execute();
+
+    console.log(response);
+
+    return {};
 });
 
 const isSingleView = ref(false);
@@ -74,9 +86,9 @@ function toggleViewMode() {
 </script>
 
 <style lang="scss">
-@use "@keep/theme/modules/math-ext";
-@use "@keep/theme/layout/media-query";
-@use "@keep/theme/system/shape";
+@use "src/libs/theme/modules/math-ext";
+@use "src/libs/theme/layout/media-query";
+@use "src/libs/theme/system/shape";
 
 .home__header {
     inline-size: 100%;

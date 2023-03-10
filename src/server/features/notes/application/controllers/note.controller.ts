@@ -7,7 +7,13 @@ export class NoteController {
         this.#_listNotesUseCase = listNotesUseCase;
     }
 
-    listNotes() {
-        return this.#_listNotesUseCase.execute();
+    async listNotes() {
+        const [response, error] = await this.#_listNotesUseCase.execute();
+
+        if (error) {
+            throw error;
+        }
+
+        return response;
     }
 }

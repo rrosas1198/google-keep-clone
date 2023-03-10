@@ -2,6 +2,7 @@ import { NoteRepository } from "src/features/notes/domain/repositories";
 import { ListNotesUseCase } from "src/features/notes/domain/use-cases";
 import { Container, defineModule } from "src/libs/container";
 import { LowDbService } from "src/libs/lowdb";
+import { NoteController } from "./application/controllers";
 import { NoteLowDbDatastore } from "./infrastructure/databases/lowdb/datastores";
 import { NoteLowDbRepository } from "./infrastructure/databases/lowdb/repositories";
 
@@ -15,5 +16,9 @@ export const NoteModule = defineModule(container => {
 
     container.registerLazySingleton(ListNotesUseCase, () => {
         return new ListNotesUseCase(container.resolve(NoteRepository));
+    });
+
+    container.registerLazySingleton(NoteController, () => {
+        return new NoteController(container.resolve(ListNotesUseCase));
     });
 });

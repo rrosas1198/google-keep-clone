@@ -102,7 +102,7 @@ export class HttpService implements IHttpService {
                 throw new HttpException(
                     error.status ?? HttpStatusEnum.INTERNAL_SERVER_ERROR,
                     error.data?.code,
-                    error.data?.message
+                    error.data?.message || error.message
                 );
             }
             throw HttpException.fromError(error);
