@@ -1,136 +1,29 @@
 <template>
-    <header class="home__header container-fluid">
-        <VIconButton id="menu" link aria-label="Abrir menú">
-            <i class="material-symbols-outlined">menu</i>
-        </VIconButton>
+    <header class="home__header"></header>
 
-        <form id="search" class="home__search">
-            <VIconButton
-                id="search-submit"
-                class="home__search-submit"
-                aria-label="Buscar"
-                type="submit"
-            >
-                <i class="material-symbols-outlined">search</i>
-            </VIconButton>
+    <section class="home__featured">
+        <VButton id="tryNotes" color="primary" variant="filled">Probar Google Keep</VButton>
+    </section>
 
-            <VTextField id="search-input" label="Buscar" placeholder="Buscar" />
+    <section class="home__capture-ideas"></section>
 
-            <VIconButton
-                id="search-reset"
-                class="home__search-reset"
-                aria-label="Borrar búsqueda"
-                type="reset"
-            >
-                <i class="material-symbols-outlined">close</i>
-            </VIconButton>
-        </form>
+    <section class="home__all-places"></section>
 
-        <VIconButton id="refresh" class="home__refresh" link aria-label="Actualizar">
-            <i class="material-symbols-outlined">refresh</i>
-        </VIconButton>
+    <section class="home__share-ideas"></section>
 
-        <VIconButton id="view" link :aria-label="gridViewLabel" @click.prevent="toggleViewMode">
-            <i class="material-symbols-outlined">{{ gridViewIcon }}</i>
-        </VIconButton>
+    <section class="home__find-notes"></section>
 
-        <VIconButton id="settings" class="home__settings" link aria-label="Configuración">
-            <i class="material-symbols-outlined">settings</i>
-        </VIconButton>
+    <section class="home__devices"></section>
 
-        <VIconButton id="avatar" link aria-label="Cuenta de Google: Jhon Doe (jhondoe@example.com)">
-            <i class="material-symbols-outlined">person_filled</i>
-        </VIconButton>
-    </header>
+    <section class="home__store-notes"></section>
 
-    <main class="container-fluid">
-        <article>Card 1</article>
-        <article>Card 2</article>
-        <article>Card 3</article>
-        <article>Card 4</article>
-        <article>Card 5</article>
-        <article>Card 6</article>
-        <article>Card 7</article>
-    </main>
+    <footer class="home__footer"></footer>
 </template>
 
 <script setup>
-import { ListNotesUseCase } from "src/features/notes/domain/use-cases";
-import { NoteModule } from "src/features/notes/note.module";
-import { VIconButton, VTextField } from "src/libs/components";
-
-const listNotesUseCase = NoteModule.resolve(ListNotesUseCase);
-
-useHead({
-    title: "Guarda tus ideas estés donde estés"
-});
-
-useFetch(async () => {
-    const response = await listNotesUseCase.execute();
-
-    console.log(response);
-
-    return {};
-});
-
-const isSingleView = ref(false);
-
-const gridViewIcon = computed(() => (isSingleView.value ? "grid_view" : "view_agenda"));
-const gridViewLabel = computed(() =>
-    isSingleView.value ? "Vista de cuadrícula" : "Vista de lista"
-);
-
-function toggleViewMode() {
-    isSingleView.value = !isSingleView.value;
-}
+import { VButton } from "src/libs/components";
 </script>
 
 <style lang="scss">
-@use "src/libs/theme/modules/math-ext";
-@use "src/libs/theme/layout/media-query";
-@use "src/libs/theme/system/shape";
-
-.home__header {
-    inline-size: 100%;
-    display: flex;
-    align-items: center;
-    padding-inline: math-ext.to-rem(8px);
-    padding-block: math-ext.to-rem(4px);
-    margin-block: math-ext.to-rem(8px);
-    border-radius: shape.get-fallback(corner-extra-large);
-}
-
-.home__search {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.home__search-submit,
-.home__search-reset {
-    position: absolute;
-    inset-block-start: 0;
-    display: none;
-
-    @include media-query.breakpoint-up(md) {
-        display: flex;
-    }
-}
-
-.home__search-submit {
-    inset-inline-start: 0;
-}
-
-.home__search-reset {
-    inset-inline-end: 0;
-}
-
-.home__refresh,
-.home__settings {
-    display: none;
-
-    @include media-query.breakpoint-up(md) {
-        display: flex;
-    }
-}
+//
 </style>
