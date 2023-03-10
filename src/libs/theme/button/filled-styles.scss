@@ -1,0 +1,7 @@
+/* stylelint-disable at-rule-no-unknown */
+@use "./filled-button";
+@use "./filled-tokens";
+
+.mdc-button--filled.mdc-button--primary {
+    @include filled-button.theme(filled-tokens.$primary-theme);
+}

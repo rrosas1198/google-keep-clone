@@ -1,0 +1,26 @@
+/* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
+@use "sass:map";
+@use "../system/color";
+@use "../system/elevation";
+@use "../system/shape";
+@use "../system/state";
+@use "../system/typescale";
+
+$theme-tokens: (
+    container-height: 48px,
+    container-shape: shape.get-fallback("corner-full"),
+    label-text-font: typescale.get-fallback("label-large-font"),
+    label-text-line-height: typescale.get-fallback("label-large-line-height"),
+    label-text-size: typescale.get-fallback("label-large-size"),
+    label-text-tracking: typescale.get-fallback("label-large-tracking"),
+    label-text-type: null,
+    label-text-weight: typescale.get-fallback("label-large-weight"),
+    spacing-leading: 24px,
+    spacing-trailing: 24px,
+    with-icon-icon-size: 24px,
+    with-icon-spacing-leading: 16px,
+    with-icon-spacing-trailing: 24px,
+    with-trailing-icon-spacing-leading: 24px,
+    with-trailing-icon-spacing-trailing: 16px
+);

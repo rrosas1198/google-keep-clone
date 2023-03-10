@@ -1,0 +1,12 @@
+/* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
+@use "sass:map";
+@use "../theme/theme";
+@use "./filled-tokens";
+
+@mixin theme($theme) {
+    $theme: theme.validate-theme(filled-tokens.$primary-theme, $theme);
+    $theme: theme.define-variables($theme, button);
+
+    @include theme.emit-variables($theme);
+}

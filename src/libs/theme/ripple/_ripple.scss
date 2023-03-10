@@ -37,7 +37,7 @@
     &::after {
         background: radial-gradient(
             closest-side,
-            var(--ripple-pressed-state-layer-color) max(calc(100% - #{math-ext.to-rem(70px)}), 65%),
+            var(--ripple-pressed-state-layer-color) max(calc(100% - 70px), 65%),
             transparent 100%
         );
         transition: animation.linear(opacity, 375ms);

@@ -25,5 +25,9 @@ import { VButton } from "src/libs/components";
 </script>
 
 <style lang="scss">
-//
+@use "src/libs/theme/polyfill";
+
+.home__featured {
+    @include polyfill.aspect-ratio(9, 16);
+}
 </style>

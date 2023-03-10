@@ -86,7 +86,6 @@ function toggleViewMode() {
 </script>
 
 <style lang="scss">
-@use "src/libs/theme/modules/math-ext";
 @use "src/libs/theme/layout/media-query";
 @use "src/libs/theme/system/shape";
 
@@ -94,9 +93,9 @@ function toggleViewMode() {
     inline-size: 100%;
     display: flex;
     align-items: center;
-    padding-inline: math-ext.to-rem(8px);
-    padding-block: math-ext.to-rem(4px);
-    margin-block: math-ext.to-rem(8px);
+    padding-inline: 8px;
+    padding-block: 4px;
+    margin-block: 8px;
     border-radius: shape.get-fallback(corner-extra-large);
 }
 

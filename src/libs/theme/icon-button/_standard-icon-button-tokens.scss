@@ -9,7 +9,7 @@
 $_theme_tokens: (
     disabled-icon-color: color.get-varname(on-surface),
     disabled-icon-opacity: 0.38,
-    icon-size: math-ext.to-rem(24px),
+    icon-size: 24px,
     selected-focus-icon-color: null,
     selected-focus-state-layer-color: null,
     selected-focus-state-layer-opacity: state.get-fallback(focus-state-layer-opacity),
@@ -21,7 +21,7 @@ $_theme_tokens: (
     selected-pressed-state-layer-color: null,
     selected-pressed-state-layer-opacity: state.get-fallback(pressed-state-layer-opacity),
     state-layer-shape: shape.get-fallback(corner-full),
-    state-layer-size: math-ext.to-rem(40px),
+    state-layer-size: 40px,
     unselected-focus-icon-color: color.get-varname(on-surface-variant),
     unselected-focus-state-layer-color: color.get-varname(on-surface-variant),
     unselected-focus-state-layer-opacity: state.get-fallback(hover-state-layer-opacity),

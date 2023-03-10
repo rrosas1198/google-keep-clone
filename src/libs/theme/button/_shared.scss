@@ -1,0 +1,94 @@
+/* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
+@use "../ripple/ripple-theme";
+@use "../theme/dom";
+@use "./shared-theme";
+@use "./shared-tokens";
+
+.mdc-button {
+    position: relative;
+    z-index: 0;
+    box-sizing: border-box;
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    padding-inline-start: var(--button-spacing-leading);
+    padding-inline-end: var(--button-spacing-trailing);
+    font-family: var(--button-label-text-font);
+    font-size: var(--button-label-text-size);
+    font-weight: var(--button-label-text-weight);
+    line-height: inherit;
+    color: var(--button-label-text-color);
+    text-decoration: none;
+    letter-spacing: var(--button-label-text-tracking);
+    vertical-align: middle;
+    user-select: none;
+    background: transparent;
+    background-color: var(--button-container-color);
+    border: none;
+    border-radius: var(--button-container-shape);
+    outline: none;
+    min-inline-size: 64px;
+    appearance: none;
+    block-size: var(--button-container-height);
+
+    @include dom.forced-colors-mode() {
+        @include dom.transparent-border();
+    }
+
+    @include shared-theme.theme(shared-tokens.$theme-tokens);
+
+    @include ripple-theme.theme(
+        (
+            state-layer-shape: var(--button-container-shape),
+            hover-state-layer-color: var(--button-hover-state-layer-color),
+            focus-state-layer-color: var(--button-focus-state-layer-color),
+            pressed-state-layer-color: var(--button-pressed-state-layer-color),
+            hover-state-layer-opacity: var(--button-hover-state-layer-opacity),
+            focus-state-layer-opacity: var(--button-focus-state-layer-opacity),
+            pressed-state-layer-opacity: var(--button-pressed-state-layer-opacity)
+        )
+    );
+
+    &::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+    }
+
+    &:hover {
+        color: var(--button-hover-label-text-color);
+    }
+
+    &:hover:not(:disabled) {
+        cursor: pointer;
+    }
+
+    &:focus {
+        color: var(--button-focus-label-text-color);
+    }
+
+    &:active {
+        color: var(--button-pressed-label-text-color);
+        outline: none;
+    }
+
+    &:disabled {
+        color: var(--button-disabled-label-text-color);
+        background-color: var(--button-disabled-container-color);
+    }
+}
+
+.mdc-button__ripple {
+    z-index: -1;
+}
+
+.mdc-button--icon-leading {
+    padding-inline-start: var(--button-with-icon-spacing-leading);
+    padding-inline-end: var(--button-with-icon-spacing-trailing);
+}
+
+.mdc-button--icon-trailing {
+    padding-inline-start: var(--button-with-trailing-icon-spacing-leading);
+    padding-inline-end: var(--button-with-trailing-icon-spacing-trailing);
+}
