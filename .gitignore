@@ -13,6 +13,7 @@ package-lock.json
 .temp
 .tmp
 .cache
+temp
 tmp
 
 # Generated dirs

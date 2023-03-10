@@ -17,25 +17,9 @@
     },
     "javascript.suggest.autoImports": false,
     "prettier.configPath": ".prettierrc.js",
-    "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue"],
-    "eslint.alwaysShowStatus": true,
+    "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
     "eslint.lintTask.enable": true,
     "eslint.format.enable": true,
     "cSpell.language": "en,es",
-    "cSpell.words": [
-        "commitlint",
-        "composables",
-        "dtos",
-        "histoire",
-        "listbox",
-        "listhen",
-        "metatype",
-        "nuxt",
-        "paramtype",
-        "paramtypes",
-        "sonarjs",
-        "stylelint",
-        "typescale",
-        "varname"
-    ]
+    "cSpell.words": ["nuxt"]
 }

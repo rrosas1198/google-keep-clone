@@ -1,0 +1,17 @@
+@use "src/libs/theme/icon-button/shared-styles" as shared-icon-button-styles;
+@use "src/libs/theme/icon-button/standard-styles" as standard-icon-button-styles;
+@use "src/libs/theme/layout/layout-styles";
+@use "src/libs/theme/reboot/fonts";
+@use "src/libs/theme/reboot/reboot";
+@use "src/libs/theme/reboot/root";
+
+/* reboot */
+@include root.core-styles();
+@include reboot.core-styles();
+
+/* layout */
+@include layout-styles.core-styles();
+
+/* icon button */
+@include shared-icon-button-styles.core-styles();
+@include standard-icon-button-styles.core-styles();

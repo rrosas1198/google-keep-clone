@@ -1,3 +1,16 @@
-const { mergeStylelintConfig, StylelintBaseConfig } = require("@keep/config");
+const configTwbsBootstrap = require("stylelint-config-twbs-bootstrap");
 
-module.exports = mergeStylelintConfig(StylelintBaseConfig);
+const twbsConfig = Object.assign({}, configTwbsBootstrap);
+
+Object.assign(twbsConfig.rules, {
+    indentation: 4,
+    "string-quotes": "double",
+    "number-leading-zero": "always",
+    "declaration-colon-newline-after": null,
+    "selector-class-pattern": "",
+    "no-invalid-double-slash-comments": null,
+    "scss/at-function-pattern": null,
+    "scss/dollar-variable-pattern": null
+});
+
+module.exports = twbsConfig;

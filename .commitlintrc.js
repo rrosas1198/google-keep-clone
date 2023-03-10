@@ -1,3 +1,3 @@
-const { mergeCommitlintConfig, CommitlintBaseConfig } = require("@keep/config");
-
-module.exports = mergeCommitlintConfig(CommitlintBaseConfig);
+module.exports = {
+    extends: ["@commitlint/config-conventional"]
+};
