@@ -1,5 +1,5 @@
-/* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
 @use "sass:map";
 @use "sass:meta";
 @use "sass:string";
@@ -37,7 +37,7 @@ $_reference-theme: (
         tracking: typescale.get-fallback(string.unquote("#{$themeOrName}-tracking"))
     );
 
-    $theme: map-remove($theme, $excludes);
+    $theme: map.remove($theme, $excludes...);
 
     @return $theme;
 }

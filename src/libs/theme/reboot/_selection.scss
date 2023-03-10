@@ -1,5 +1,5 @@
-/* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
 @use "sass:map";
 @use "../system/color";
 
@@ -12,7 +12,7 @@ $selection-theme: (
     $container-color: map.get($theme, container-color);
     $text-color: map.get($theme, text-color);
 
-    ::selection {
+    &::selection {
         color: $text-color;
         background-color: $container-color;
     }

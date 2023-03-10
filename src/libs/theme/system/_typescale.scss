@@ -1,8 +1,9 @@
-/* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
 @use "sass:map";
 @use "../modules/math-ext";
 @use "../references/typeface";
+@use "../theme/custom-properties";
 
 $_typescale: (
     // body large
@@ -111,11 +112,32 @@ $_typescale: (
     title-small-size: math-ext.to-rem(14px),
     title-small-tracking: math-ext.to-rem(0.1px),
     title-small-weight: typeface.get-fallback(weight-medium)
-) !default;
+);
 
-@function get-fallback($property) {
+@function get-keys() {
+    @return map.keys($_typescale);
+}
+
+@function get-varname($property) {
+    $property: get-custom-property($property, $_typescale);
+    $varname: custom-properties.get-name($property);
+    @return var($varname);
+}
+
+@function get-fallback($property, $show-warn: false) {
+    $property: get-custom-property($property);
+    $fallback: custom-properties.get-fallback($property);
+    @if $show-warn {
+        $varname: custom-properties.get-name($property);
+        @warn "typescale: use variable var(#{$varname}) instead of raw value #{$fallback}";
+    }
+    @return $fallback;
+}
+
+@function get-custom-property($property, $theme: $_typescale) {
     $property: _validate-typescale($property);
-    @return map.get($_typescale, $property);
+    $fallback: map.get($theme, $property);
+    @return custom-properties.define("sys-typescale-#{$property}", $fallback);
 }
 
 @function _validate-typescale($property) {

@@ -1,6 +1,5 @@
-/* Based on https://github.com/material-components/material-web/blob/master/sass/_string-ext.scss */
-/* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
 @use "sass:string";
 
 @function has-prefix($string, $prefix) {

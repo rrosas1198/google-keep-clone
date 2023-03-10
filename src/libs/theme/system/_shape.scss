@@ -1,28 +1,28 @@
-/* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
 @use "sass:map";
 @use "../modules/math-ext";
 
 $_shape: (
     // corner extra large
-    corner-extra-large: math-ext.to-rem(28px),
-    corner-extra-large-top: math-ext.to-rem(28px) math-ext.to-rem(28px) 0 0,
+    corner-extra-large: 28px,
+    corner-extra-large-top: 28px 28px 0 0,
     // corner extra small
-    corner-extra-small: math-ext.to-rem(4px),
-    corner-extra-small-top: math-ext.to-rem(4px) math-ext.to-rem(4px) 0 0,
+    corner-extra-small: 4px,
+    corner-extra-small-top: 4px 4px 0 0,
     // corner full
     corner-full: 9999px,
     // corner large
-    corner-large: math-ext.to-rem(16px),
-    corner-large-end: 0 math-ext.to-rem(16px) math-ext.to-rem(16px) 0,
-    corner-large-top: math-ext.to-rem(16px) math-ext.to-rem(16px) 0 0,
+    corner-large: 16px,
+    corner-large-end: 0 16px 16px 0,
+    corner-large-top: 16px 16px 0 0,
     // corner medium
-    corner-medium: math-ext.to-rem(12px),
+    corner-medium: 12px,
     // corner none
     corner-none: 0,
     // corner small
-    corner-small: math-ext.to-rem(8px)
-) !default;
+    corner-small: 8px
+);
 
 @function get-fallback($property) {
     $property: _validate-shape($property);

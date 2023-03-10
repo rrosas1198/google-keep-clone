@@ -1,12 +1,11 @@
-/* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
 @use "sass:map";
-@use "../modules/math-ext";
 @use "../system/color";
 @use "../system/shape";
 
 $scrollbar-theme: (
-    container-width: math-ext.to-rem(5px),
+    container-width: 4px,
     container-shape: shape.get-fallback(corner-small),
     container-color: color.get-varname(outline)
 );
@@ -16,12 +15,12 @@ $scrollbar-theme: (
     $container-shape: map.get($theme, container-shape);
     $container-color: map.get($theme, container-color);
 
-    ::-webkit-scrollbar {
+    &::-webkit-scrollbar {
         width: $container-width;
         height: $container-width;
     }
 
-    ::-webkit-scrollbar-thumb {
+    &::-webkit-scrollbar-thumb {
         background-color: $container-color;
         border-radius: $container-shape;
     }

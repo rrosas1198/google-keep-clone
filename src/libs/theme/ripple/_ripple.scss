@@ -1,44 +1,66 @@
-/* Based on https://github.com/material-components/material-web/blob/master/ripple/lib/_ripple.scss */
 /* stylelint-disable at-rule-no-unknown */
-@mixin static-styles() {
-    .mdc-ripple-surface {
+/* stylelint-disable function-no-unknown */
+@use "../motion/animation";
+@use "../modules/math-ext";
+@use "../system/shape";
+@use "../theme/dom";
+
+.mdc-ripple {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    border-radius: var(--ripple-state-layer-shape);
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+
+    @include dom.forced-colors-mode() {
+        display: none;
+    }
+
+    &::before,
+    &::after {
         position: absolute;
-        inset: 0;
-        overflow: hidden;
+
+        /* z-index: -1; */
         pointer-events: none;
-        outline: none;
-        -webkit-tap-highlight-color: transparent;
-
-        @media screen and (forced-colors: active) {
-            display: none;
-        }
-
-        &::before,
-        &::after {
-            position: absolute;
-
-            /* z-index: -1; */
-            pointer-events: none;
-            content: "";
-            opacity: 0;
-        }
-
-        &::before {
-            inset: 0;
-            transition: opacity 15ms linear, background-color 15ms linear;
-        }
-
-        &::after {
-            transition: opacity 375ms linear;
-            transform-origin: center center;
-        }
+        content: "";
+        opacity: 0;
     }
 
-    .mdc-ripple--focused::before {
-        transition-duration: 75ms;
+    &::before {
+        inset: 0;
+        background-color: var(--ripple-hover-state-layer-color);
+        transition: opacity 15ms linear, background-color 15ms linear;
     }
 
-    .mdc-ripple--pressed::after {
-        transition-duration: 105ms;
+    &::after {
+        background: radial-gradient(
+            closest-side,
+            var(--ripple-pressed-state-layer-color) max(calc(100% - #{math-ext.to-rem(70px)}), 65%),
+            transparent 100%
+        );
+        transition: animation.linear(opacity, 375ms);
+        transform-origin: center center;
     }
+}
+
+.mdc-ripple.ripple--unbounded {
+    --ripple-state-layer-shape: #{shape.get-fallback(corner-full)};
+}
+
+.mdc-ripple--hovered::before {
+    background-color: var(--ripple-hover-state-layer-color);
+    opacity: var(--ripple-hover-state-layer-opacity);
+}
+
+.mdc-ripple--focused::before {
+    background-color: var(--ripple-focus-state-layer-color);
+    opacity: var(--ripple-focus-state-layer-opacity);
+    transition-duration: 75ms;
+}
+
+.mdc-ripple--pressed::after {
+    opacity: var(--ripple-pressed-state-layer-opacity);
+    transition-duration: 105ms;
 }

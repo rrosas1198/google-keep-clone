@@ -1,10 +1,12 @@
-/* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
 @use "sass:map";
 @use "sass:meta";
 @use "../modules/string-ext";
 @use "../references/palette";
 @use "../theme/custom-properties";
+
+$_namespace: "sys-color";
 
 $light-theme: (
     background: palette.get-fallback(neutral-100),
@@ -36,7 +38,7 @@ $light-theme: (
     surface-variant: palette.get-fallback(neutral-variant-90),
     tertiary: palette.get-fallback(tertiary-40),
     tertiary-container: palette.get-fallback(tertiary-90)
-) !default;
+);
 
 $dark-theme: (
     background: palette.get-fallback(neutral-10),
@@ -68,7 +70,7 @@ $dark-theme: (
     surface-variant: palette.get-fallback(neutral-variant-30),
     tertiary: palette.get-fallback(tertiary-80),
     tertiary-container: palette.get-fallback(tertiary-30)
-) !default;
+);
 
 @function get-keys() {
     @return map.keys($light-theme);
@@ -81,6 +83,7 @@ $dark-theme: (
 }
 
 @function get-fallback($property, $show-warn: true) {
+    $property: _resolve-var($property);
     $property: get-custom-property($property, $light-theme);
     $fallback: custom-properties.get-fallback($property);
     @if $show-warn {
@@ -93,7 +96,17 @@ $dark-theme: (
 @function get-custom-property($property, $theme: $light-theme) {
     $property: _validate-color($property);
     $fallback: map.get($theme, $property);
-    @return custom-properties.define("sys-color-#{$property}", $fallback);
+    @return custom-properties.define("#{$_namespace}-#{$property}", $fallback);
+}
+
+@function _resolve-var($input) {
+    @if custom-properties.is-variable($input) {
+        $value: string-ext.trim-prefix($input, "var(--#{$_namespace}-");
+        $value: string-ext.trim-suffix($value, ")");
+        @return $value;
+    }
+
+    @return $input;
 }
 
 @function _validate-color($property) {

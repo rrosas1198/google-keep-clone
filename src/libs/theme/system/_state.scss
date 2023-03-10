@@ -1,5 +1,5 @@
-/* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
 @use "sass:map";
 
 $_state: (
@@ -7,7 +7,7 @@ $_state: (
     focus-state-layer-opacity: 0.12,
     hover-state-layer-opacity: 0.08,
     pressed-state-layer-opacity: 0.12
-) !default;
+);
 
 @function get-fallback($property) {
     $property: _validate-state($property);

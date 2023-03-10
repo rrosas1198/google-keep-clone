@@ -1,0 +1,9 @@
+/* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
+.icon {
+    display: block;
+    width: var(--icon-width, 24px);
+    height: var(--icon-height, 24px);
+    /* stylelint-disable-next-line value-keyword-case */
+    fill: currentColor;
+}

@@ -1,12 +1,17 @@
-/* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
 @use "sass:list";
 @use "sass:map";
 @use "../system/breakpoints";
 
-@mixin breakpoint-up($name) {
-    $min: breakpoints.min($name);
-    @if $min and $min != 0 {
+@mixin breakpoint-up($name, $landscape: false) {
+    $min: breakpoints.get-min($name);
+
+    @if $min and $min != 0 and $landscape {
+        @media (min-width: $min) and (orientation: landscape) {
+            @content;
+        }
+    } @else if ($min and $min != 0) {
         @media (min-width: $min) {
             @content;
         }
@@ -15,9 +20,14 @@
     }
 }
 
-@mixin breakpoint-down($name) {
-    $max: breakpoints.max($name);
-    @if $max and $max != 0 {
+@mixin breakpoint-down($name, $landscape: false) {
+    $max: breakpoints.get-max($name);
+
+    @if $max and $max != 0 and $landscape {
+        @media (max-width: $max) and (orientation: landscape) {
+            @content;
+        }
+    } @else if ($max and $max != 0) {
         @media (max-width: $max) {
             @content;
         }
@@ -26,40 +36,48 @@
     }
 }
 
-@mixin breakpoint-between($lower, $upper) {
-    $min: breakpoints.min($lower);
-    $max: breakpoints.max($upper);
+@mixin breakpoint-between($lower, $upper, $landscape: false) {
+    $min: breakpoints.get-min($lower);
+    $max: breakpoints.get-max($upper);
 
-    @if ($min != null and $max != null) {
+    @if $min != null and $max != null and $landscape {
+        @media (min-width: $min) and (max-width: $max) and (orientation: landscape) {
+            @content;
+        }
+    } @else if $min != null and $max != null {
         @media (min-width: $min) and (max-width: $max) {
             @content;
         }
     } @else if ($max == null) {
-        @include breakpoint-up($lower) {
+        @include breakpoint-up($lower, $landscape) {
             @content;
         }
     } @else if ($min == null) {
-        @include breakpoint-down($upper) {
+        @include breakpoint-down($upper, $landscape) {
             @content;
         }
     }
 }
 
-@mixin breakpoint-only($name) {
-    $min: breakpoints.min($name);
-    $next: breakpoints.next($name);
-    $max: breakpoints.max($next);
+@mixin breakpoint-only($name, $landscape: false) {
+    $min: breakpoints.get-min($name);
+    $next: breakpoints.get-next($name);
+    $max: breakpoints.get-max($next);
 
-    @if $min != null and $max != null {
+    @if $min != null and $max != null and $landscape {
+        @media (min-width: $min) and (max-width: $max) and (orientation: landscape) {
+            @content;
+        }
+    } @else if $min != null and $max != null {
         @media (min-width: $min) and (max-width: $max) {
             @content;
         }
     } @else if $max == null {
-        @include breakpoint-up($name) {
+        @include breakpoint-up($name, $landscape) {
             @content;
         }
     } @else if $min == null {
-        @include breakpoint-down($next) {
+        @include breakpoint-down($next, $landscape) {
             @content;
         }
     }

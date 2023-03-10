@@ -20,6 +20,9 @@
     "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
     "eslint.lintTask.enable": true,
     "eslint.format.enable": true,
+    "stylelint.configFile": ".stylelintrc.js",
+    "stylelint.snippet": ["css", "scss"],
+    "stylelint.validate": ["css", "scss"],
     "cSpell.language": "en,es",
-    "cSpell.words": ["composables", "nuxt"]
+    "cSpell.words": ["composables", "nuxt", "typescale", "varname"]
 }

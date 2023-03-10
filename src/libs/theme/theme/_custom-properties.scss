@@ -1,6 +1,5 @@
-/* Based on https://github.com/material-components/material-web/blob/master/sass/_var.scss */
-/* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
 @use "sass:map";
 @use "sass:meta";
 @use "sass:string";
@@ -25,6 +24,11 @@
 @function define-variable($name, $fallback: null) {
     $name: _create-name($name);
 
+    /* @if is-variable($fallback) {
+        $fallback-name: _create-name($fallback);
+        @return var(#{$name}, $fallback-name);
+    } */
+
     @if meta.type-of($fallback) != "map" and $fallback != null {
         @return var(#{$name}, $fallback);
     }
@@ -35,7 +39,8 @@
     @if is-custom-property($var) {
         @return $var;
     }
-    @if not _is-variable($var) {
+
+    @if not is-variable($var) {
         @return null;
     }
 
@@ -48,7 +53,7 @@
         $name: string-ext.trim-repeating(string.slice($var, 1, $comma - 1), " ");
         $fallback: string-ext.trim-repeating(string.slice($var, $comma + 1), " ");
 
-        @if _is-variable($fallback) {
+        @if is-variable($fallback) {
             $fallback: parse($fallback);
 
             @if $fallback == null {
@@ -76,7 +81,7 @@
     @return string.unquote("--#{$name}");
 }
 
-@function _is-variable($var) {
+@function is-variable($var) {
     @return meta.type-of($var) == "string" and string-ext.has-prefix($var, "var(");
 }
 

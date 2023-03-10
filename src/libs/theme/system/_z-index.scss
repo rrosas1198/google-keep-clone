@@ -1,0 +1,25 @@
+/* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
+@use "sass:map";
+
+$_z-index: (
+    dropdown: 1000,
+    sticky: 1020,
+    fixed: 1030,
+    modal-backdrop: 1040,
+    modal: 1050,
+    popover: 1060,
+    tooltip: 1070
+);
+
+@function get-fallback($property) {
+    $property: _validate-z-index($property);
+    @return map.get($_z-index, $property);
+}
+
+@function _validate-z-index($property) {
+    @if map.has-key($_z-index, $property) {
+        @return $property;
+    }
+    @error "z-index: invalid property #{$property}";
+}

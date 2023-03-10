@@ -1,13 +1,2 @@
-/* Based on https://github.com/material-components/material-web/blob/master/ripple/lib/ripple-styles.scss */
 /* stylelint-disable at-rule-no-unknown */
 @use "./ripple";
-@use "./ripple-theme";
-@use "./ripple-tokens";
-
-@mixin core-styles() {
-    @include ripple.static-styles();
-
-    .mdc-ripple-surface {
-        @include ripple-theme.theme-styles(ripple-tokens.$theme-tokens);
-    }
-}

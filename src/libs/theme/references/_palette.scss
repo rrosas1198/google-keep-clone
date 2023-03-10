@@ -1,5 +1,5 @@
-/* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
 @use "sass:map";
 
 $palette: (
@@ -89,7 +89,7 @@ $palette: (
     tertiary-95: #ffecf1,
     tertiary-99: #fffbfa,
     tertiary-100: #fff
-) !default;
+);
 
 @function get-fallback($property) {
     $property: _validate-palette($property);

@@ -1,5 +1,5 @@
-/* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
 @use "sass:map";
 
 $_motion: (
@@ -30,7 +30,7 @@ $_motion: (
     easing-standard: cubic-bezier(0.2, 0, 0, 1),
     easing-standard-accelerate: cubic-bezier(0.3, 0, 1, 1),
     easing-standard-decelerate: cubic-bezier(0, 0, 0, 1)
-) !default;
+);
 
 @function get-fallback($property) {
     $property: _validate-motion($property);

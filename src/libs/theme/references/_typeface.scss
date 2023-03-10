@@ -1,25 +1,28 @@
-/* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
 @use "sass:map";
 
-$typeface: (
+$_family-brand: "Roboto", sans-serif;
+$_family-plain: "Roboto", sans-serif;
+
+$_typeface: (
     // brand
-    brand: roboto,
+    brand: $_family-brand,
     // plain
-    plain: roboto,
+    plain: $_family-plain,
     // weight
     weight-bold: 700,
     weight-medium: 500,
     weight-regular: 400
-) !default;
+);
 
 @function get-fallback($property) {
     $property: _validate-typeface($property);
-    @return map.get($typeface, $property);
+    @return map.get($_typeface, $property);
 }
 
 @function _validate-typeface($property) {
-    @if map.has-key($typeface, $property) {
+    @if map.has-key($_typeface, $property) {
         @return $property;
     }
     @error "typeface: invalid property #{$property}";

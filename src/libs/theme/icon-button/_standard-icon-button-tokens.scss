@@ -1,6 +1,5 @@
-/* Based on https://github.com/material-components/material-web/blob/master/tokens/latest/_md-comp-icon-button.scss */
-/* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
 @use "sass:map";
 @use "../modules/math-ext";
 @use "../system/color";
@@ -33,7 +32,7 @@ $_theme_tokens: (
     unselected-pressed-icon-color: color.get-varname(on-surface-variant),
     unselected-pressed-state-layer-color: color.get-varname(on-surface-variant),
     unselected-pressed-state-layer-opacity: state.get-fallback(pressed-state-layer-opacity)
-) !default;
+);
 
 $primary-theme: map.merge(
     $_theme_tokens,
@@ -46,4 +45,4 @@ $primary-theme: map.merge(
         selected-pressed-icon-color: color.get-varname(primary),
         selected-pressed-state-layer-color: color.get-varname(primary)
     )
-) !default;
+);

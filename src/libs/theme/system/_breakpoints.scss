@@ -1,43 +1,44 @@
-/* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
+@use "sass:list";
 @use "sass:map";
 @use "../modules/math-ext";
 
 $_breakpoints: (
     xs: (
         width: 0,
-        margin: math-ext.to-em(8px),
-        max-width: 90%
+        margin: 24px,
+        max-width: 100%
     ),
     sm: (
-        width: math-ext.to-em(576px),
-        margin: math-ext.to-em(12px),
-        max-width: 85%
+        width: 576px,
+        margin: null,
+        max-width: null
     ),
     md: (
-        width: math-ext.to-em(768px),
+        width: 768px,
         margin: null,
-        max-width: 80%
+        max-width: null
     ),
     xmd: (
-        width: math-ext.to-em(992px),
-        margin: math-ext.to-em(32px),
+        width: 992px,
+        margin: 32px,
         max-width: null
     ),
     lg: (
-        width: math-ext.to-em(1200px),
+        width: 1200px,
         margin: null,
         max-width: null
     ),
     xlg: (
-        width: math-ext.to-em(1600px),
+        width: 1600px,
         margin: null,
-        max-width: math-ext.to-em(1440px)
+        max-width: 1440px
     ),
     x-xlg: (
-        width: math-ext.to-em(1920px),
+        width: 1920px,
         margin: null,
-        max-width: math-ext.to-em(1728px)
+        max-width: 1600px
     )
 );
 
@@ -52,24 +53,26 @@ $_breakpoints: (
     @return map.get($breakpoint, $value);
 }
 
-@function infix($name) {
-    @return if(min($name) == null, "", "-#{$name}");
+@function get-infix($name) {
+    @return if(get-min($name) == null, "", "-#{$name}");
 }
 
-@function next($name) {
+@function get-next($name) {
+    $name: _validate-key($name);
     $keys: get-keys();
     $index: list.index($keys, $name);
     @return if($index < list.length($keys), list.nth($keys, $index + 1), null);
 }
 
-@function min($name) {
+@function get-min($name) {
+    $name: _validate-key($name);
     $min: get-value($name, width);
     @return if($min != 0, $min, null);
 }
 
-@function max($name) {
-    $next: next($name);
-    @return if($next, min($next) - 0.02, null);
+@function get-max($name) {
+    $next: get-next($name);
+    @return if($next, get-min($next) - 0.02, null);
 }
 
 @function _validate-key($property) {

@@ -1,36 +1,34 @@
-/* stylelint-disable function-no-unknown */
 /* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
 @use "../system/breakpoints";
 @use "./media-query";
 
-@mixin core-styles() {
-    .container,
-    .container-fluid {
-        max-inline-size: var(--sys-layout-max-width);
-        inline-size: 100%;
-        margin-inline: auto;
+.container,
+.container-fluid {
+    max-inline-size: var(--container-max-width);
+    inline-size: 100%;
+    margin-inline: auto;
 
-        @each $breakpoint in breakpoints.get-keys() {
-            $max-width: breakpoints.get-value($breakpoint, max-width);
+    @each $breakpoint in breakpoints.get-keys() {
+        $max-width: breakpoints.get-value($breakpoint, max-width);
 
-            @include media-query.breakpoint-up($breakpoint) {
-                @if $max-width {
-                    --sys-layout-max-width: #{$max-width};
-                }
+        @include media-query.breakpoint-up($breakpoint) {
+            @if $max-width {
+                --container-max-width: #{$max-width};
             }
         }
     }
+}
 
-    .container {
-        padding-inline: var(--sys-layout-margin);
+.container {
+    padding-inline: var(--container-spacing);
 
-        @each $breakpoint in breakpoints.get-keys() {
-            $margin: breakpoints.get-value($breakpoint, margin);
+    @each $breakpoint in breakpoints.get-keys() {
+        $margin: breakpoints.get-value($breakpoint, margin);
 
-            @include media-query.breakpoint-up($breakpoint) {
-                @if $margin {
-                    --sys-layout-margin: #{$margin};
-                }
+        @include media-query.breakpoint-up($breakpoint) {
+            @if $margin {
+                --container-spacing: #{$margin};
             }
         }
     }
