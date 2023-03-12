@@ -7,6 +7,6 @@ $theme_tokens: (
     container-shape: shape.get-fallback("corner-full"),
     container-size: 40px,
     icon-size: 24px,
-    state-layer-shape: shape.get-fallback(corner-full),
+    state-layer-shape: shape.get-fallback("corner-full"),
     state-layer-size: 40px
 );

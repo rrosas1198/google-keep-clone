@@ -96,7 +96,7 @@ function toggleViewMode() {
     padding-inline: 8px;
     padding-block: 4px;
     // margin-block: 8px;
-    border-radius: shape.get-fallback(corner-extra-large);
+    border-radius: shape.get-fallback("corner-extra-large");
 }
 
 .home__search {

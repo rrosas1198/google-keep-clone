@@ -45,7 +45,7 @@
 }
 
 .mdc-ripple.ripple--unbounded {
-    --ripple-shape: #{shape.get-fallback(corner-full)};
+    --ripple-shape: #{shape.get-fallback("corner-full")};
 }
 
 .mdc-ripple--hovered::before {

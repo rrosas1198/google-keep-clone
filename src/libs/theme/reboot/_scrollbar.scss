@@ -6,8 +6,8 @@
 
 $scrollbar-theme: (
     container-width: 4px,
-    container-shape: shape.get-fallback(corner-small),
-    container-color: color.get-varname(outline)
+    container-shape: shape.get-fallback("corner-small"),
+    container-color: color.get-varname("outline")
 );
 
 @mixin with-scrollbar($theme: $scrollbar-theme) {

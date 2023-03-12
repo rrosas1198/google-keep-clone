@@ -4,8 +4,8 @@
 @use "../system/color";
 
 $selection-theme: (
-    container-color: color.get-varname(secondary),
-    text-color: color.get-varname(on-secondary)
+    container-color: color.get-varname("secondary"),
+    text-color: color.get-varname("on-secondary")
 );
 
 @mixin with-selection($theme: $selection-theme) {

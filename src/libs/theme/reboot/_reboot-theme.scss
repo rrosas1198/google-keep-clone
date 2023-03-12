@@ -6,13 +6,13 @@
 @use "../theme/typography";
 
 $body-theme: (
-    container-color: color.get-varname(background),
-    body-text-font: typescale.get-fallback(body-medium-font),
-    body-text-weight: typescale.get-fallback(body-medium-weight),
-    body-text-size: typescale.get-fallback(body-medium-size),
-    body-text-line-height: typescale.get-fallback(body-medium-line-height),
-    body-text-tracking: typescale.get-fallback(body-medium-tracking),
-    body-text-color: color.get-varname(on-background)
+    container-color: color.get-varname("background"),
+    body-text-font: typescale.get-fallback("body-medium-font"),
+    body-text-weight: typescale.get-fallback("body-medium-weight"),
+    body-text-size: typescale.get-fallback("body-medium-size"),
+    body-text-line-height: typescale.get-fallback("body-medium-line-height"),
+    body-text-tracking: typescale.get-fallback("body-medium-tracking"),
+    body-text-color: color.get-varname("on-background")
 );
 
 @mixin body-styles($theme: $body-theme) {
