@@ -3,7 +3,6 @@ import { defineComponent, ref, renderSlot } from "vue";
 import { useRender } from "../composables";
 import type { IAriaHasPopup } from "../interfaces";
 import { useRipple } from "../ripple";
-import { coerce } from "../utils";
 import type {
     IIconButtonColor,
     IIconButtonProps,
@@ -39,15 +38,15 @@ export const VIconButton = defineComponent({
             default: null
         },
         autofocus: {
-            type: [Boolean, String],
+            type: Boolean,
             default: false
         },
         disabled: {
-            type: [Boolean, String],
+            type: Boolean,
             default: false
         },
         link: {
-            type: [Boolean, String],
+            type: Boolean,
             default: false
         },
         type: {
@@ -64,40 +63,39 @@ export const VIconButton = defineComponent({
         });
 
         useRender(() => {
-            const isAutofocus = coerce<boolean>(props.autofocus);
-            const isDisabled = coerce<boolean>(props.disabled);
-            const isLink = coerce<boolean>(props.link);
+            const Element = props.link ? "a" : "button";
 
-            const Element = isLink ? "a" : "button";
-
-            const classList = {
-                "mdc-icon-button": true,
-                "mdc-icon-button--primary": props.color === "primary",
-                "mdc-icon-button--secondary": props.color === "secondary",
-                "mdc-icon-button--tertiary": props.color === "tertiary",
-                "mdc-icon-button--standard": props.variant === "standard",
-                "mdc-icon-button--elevated": props.variant === "elevated",
-                "mdc-icon-button--filled": props.variant === "filled",
-                "mdc-icon-button--tonal": props.variant === "tonal",
-                "mdc-icon-button--outlined": props.variant === "outlined",
-                "mdc-icon-button--text": props.variant === "text"
+            const renderRipple = () => {
+                const classList = { "mdc-icon-button__ripple": true, ...ripple.classList.value };
+                return <span ref={proxy} class={classList}></span>;
             };
 
             return (
                 <Element
                     id={props.id}
                     name={props.name || props.id}
-                    class={classList}
-                    autofocus={isAutofocus}
-                    disabled={isDisabled}
-                    type={isLink ? undefined : props.type}
-                    role={isLink ? "button" : undefined}
+                    class={{
+                        "mdc-icon-button": true,
+                        "mdc-icon-button--primary": props.color === "primary",
+                        "mdc-icon-button--secondary": props.color === "secondary",
+                        "mdc-icon-button--tertiary": props.color === "tertiary",
+                        "mdc-icon-button--standard": props.variant === "standard",
+                        "mdc-icon-button--elevated": props.variant === "elevated",
+                        "mdc-icon-button--filled": props.variant === "filled",
+                        "mdc-icon-button--tonal": props.variant === "tonal",
+                        "mdc-icon-button--outlined": props.variant === "outlined",
+                        "mdc-icon-button--text": props.variant === "text"
+                    }}
+                    autofocus={props.autofocus}
+                    disabled={props.disabled}
+                    type={props.link ? undefined : props.type}
+                    role={props.link ? "button" : undefined}
                     aria-label={props.ariaLabel}
                     aria-has-popup={props.ariaHasPopup}
                     {...ripple.listeners}
                 >
                     {renderSlot(slots, "default")}
-                    <span ref={proxy} class={ripple.classList.value}></span>
+                    {renderRipple()}
                 </Element>
             );
         });

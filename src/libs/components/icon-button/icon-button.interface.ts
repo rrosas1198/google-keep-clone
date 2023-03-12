@@ -13,8 +13,8 @@ export interface IIconButtonProps {
     variant: IIconButtonVariant;
     ariaLabel: string;
     ariaHasPopup: IAriaHasPopup;
-    autofocus: boolean | string;
-    disabled: boolean | string;
-    link: boolean | string;
+    autofocus: boolean;
+    disabled: boolean;
+    link: boolean;
     type: IIconButtonType;
 }
