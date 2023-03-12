@@ -20,12 +20,12 @@
 
     @include ripple-theme.theme(
         (
-            focus-state-layer-color: map.get($theme, unselected-focus-state-layer-color),
-            focus-state-layer-opacity: map.get($theme, unselected-focus-state-layer-opacity),
-            hover-state-layer-color: map.get($theme, unselected-hover-state-layer-color),
-            hover-state-layer-opacity: map.get($theme, unselected-hover-state-layer-opacity),
-            pressed-state-layer-color: map.get($theme, unselected-pressed-state-layer-color),
-            pressed-state-layer-opacity: map.get($theme, unselected-pressed-state-layer-opacity)
+            focus-color: map.get($theme, unselected-focus-state-layer-color),
+            focus-opacity: map.get($theme, unselected-focus-state-layer-opacity),
+            hover-color: map.get($theme, unselected-hover-state-layer-color),
+            hover-opacity: map.get($theme, unselected-hover-state-layer-opacity),
+            pressed-color: map.get($theme, unselected-pressed-state-layer-color),
+            pressed-opacity: map.get($theme, unselected-pressed-state-layer-opacity)
         )
     );
 
@@ -42,12 +42,12 @@
 
         @include ripple-theme.theme(
             (
-                focus-state-layer-color: map.get($theme, selected-focus-state-layer-color),
-                focus-state-layer-opacity: map.get($theme, selected-focus-state-layer-opacity),
-                hover-state-layer-color: map.get($theme, selected-hover-state-layer-color),
-                hover-state-layer-opacity: map.get($theme, selected-hover-state-layer-opacity),
-                pressed-state-layer-color: map.get($theme, selected-pressed-state-layer-color),
-                pressed-state-layer-opacity: map.get($theme, selected-pressed-state-layer-opacity)
+                focus-color: map.get($theme, selected-focus-state-layer-color),
+                focus-opacity: map.get($theme, selected-focus-state-layer-opacity),
+                hover-color: map.get($theme, selected-hover-state-layer-color),
+                hover-opacity: map.get($theme, selected-hover-state-layer-opacity),
+                pressed-color: map.get($theme, selected-pressed-state-layer-color),
+                pressed-opacity: map.get($theme, selected-pressed-state-layer-opacity)
             )
         );
     }

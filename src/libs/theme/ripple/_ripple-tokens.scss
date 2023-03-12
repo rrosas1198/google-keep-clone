@@ -5,13 +5,13 @@
 @use "../system/state";
 
 $theme-tokens: (
-    dragged-state-layer-opacity: state.get-fallback("dragged-state-layer-opacity"),
-    focus-state-layer-opacity: state.get-fallback("focus-state-layer-opacity"),
-    hover-state-layer-opacity: state.get-fallback("hover-state-layer-opacity"),
-    pressed-state-layer-opacity: state.get-fallback("pressed-state-layer-opacity"),
-    state-layer-shape: shape.get-fallback("corner-none"),
-    focus-state-layer-color: string.unquote("currentColor"),
-    hover-state-layer-color: string.unquote("currentColor"),
-    pressed-state-layer-color: string.unquote("currentColor"),
-    dragged-state-layer-color: string.unquote("currentColor")
+    dragged-opacity: state.get-fallback("dragged-state-layer-opacity"),
+    focus-opacity: state.get-fallback("focus-state-layer-opacity"),
+    hover-opacity: state.get-fallback("hover-state-layer-opacity"),
+    pressed-opacity: state.get-fallback("pressed-state-layer-opacity"),
+    shape: shape.get-fallback("corner-none"),
+    focus-color: string.unquote("currentColor"),
+    hover-color: string.unquote("currentColor"),
+    pressed-color: string.unquote("currentColor"),
+    dragged-color: string.unquote("currentColor")
 );

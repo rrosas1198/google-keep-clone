@@ -10,8 +10,9 @@
     inset: 0;
     overflow: hidden;
     pointer-events: none;
-    border-radius: var(--ripple-state-layer-shape);
+    border-radius: var(--ripple-shape);
     outline: none;
+    will-change: transform;
     -webkit-tap-highlight-color: transparent;
 
     @include dom.forced-colors-mode() {
@@ -21,8 +22,6 @@
     &::before,
     &::after {
         position: absolute;
-
-        /* z-index: -1; */
         pointer-events: none;
         content: "";
         opacity: 0;
@@ -30,14 +29,14 @@
 
     &::before {
         inset: 0;
-        background-color: var(--ripple-hover-state-layer-color);
+        background-color: var(--ripple-hover-color);
         transition: opacity 15ms linear, background-color 15ms linear;
     }
 
     &::after {
         background: radial-gradient(
             closest-side,
-            var(--ripple-pressed-state-layer-color) max(calc(100% - 70px), 65%),
+            var(--ripple-pressed-color) max(calc(100% - 70px), 65%),
             transparent 100%
         );
         transition: animation.linear(opacity, 375ms);
@@ -46,21 +45,21 @@
 }
 
 .mdc-ripple.ripple--unbounded {
-    --ripple-state-layer-shape: #{shape.get-fallback(corner-full)};
+    --ripple-shape: #{shape.get-fallback(corner-full)};
 }
 
 .mdc-ripple--hovered::before {
-    background-color: var(--ripple-hover-state-layer-color);
-    opacity: var(--ripple-hover-state-layer-opacity);
+    background-color: var(--ripple-hover-color);
+    opacity: var(--ripple-hover-opacity);
 }
 
 .mdc-ripple--focused::before {
-    background-color: var(--ripple-focus-state-layer-color);
-    opacity: var(--ripple-focus-state-layer-opacity);
+    background-color: var(--ripple-focus-color);
+    opacity: var(--ripple-focus-opacity);
     transition-duration: 75ms;
 }
 
 .mdc-ripple--pressed::after {
-    opacity: var(--ripple-pressed-state-layer-opacity);
+    opacity: var(--ripple-pressed-opacity);
     transition-duration: 105ms;
 }
