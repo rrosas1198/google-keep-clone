@@ -2,7 +2,6 @@ import type { PropType, Ref, SetupContext } from "vue";
 import { defineComponent, ref, renderSlot } from "vue";
 import { useRender } from "../composables";
 import { useRipple } from "../ripple";
-import { coerce } from "../utils";
 import type { IButtonColor, IButtonProps, IButtonType, IButtonVariant } from "./button.interface";
 
 export const VButton = defineComponent({
@@ -25,11 +24,11 @@ export const VButton = defineComponent({
             default: null
         },
         autofocus: {
-            type: [Boolean, String],
+            type: Boolean,
             default: false
         },
         disabled: {
-            type: [Boolean, String],
+            type: Boolean,
             default: false
         },
         type: {
@@ -51,28 +50,15 @@ export const VButton = defineComponent({
         const ripple = useRipple(proxy, { disabled: props.disabled });
 
         useRender(() => {
-            const isAutofocus = coerce<boolean>(props.autofocus);
-            const isDisabled = coerce<boolean>(props.disabled);
-            const isOutlined = coerce<boolean>(props.variant === "outlined");
+            const isOutlined = props.variant === "outlined";
 
             const hasLeading = "leading" in slots || !!props.leadingIcon;
             const hasTrailing = "trailing" in slots || !!props.trailingIcon;
 
-            const classList = {
-                "mdc-button": true,
-                "mdc-button--icon-leading": hasLeading,
-                "mdc-button--icon-trailing": hasTrailing,
-                "mdc-button--primary": props.color === "primary",
-                "mdc-button--secondary": props.color === "secondary",
-                "mdc-button--tertiary": props.color === "tertiary",
-                "mdc-button--elevated": props.variant === "elevated",
-                "mdc-button--filled": props.variant === "filled",
-                "mdc-button--tonal": props.variant === "tonal",
-                "mdc-button--outlined": props.variant === "outlined",
-                "mdc-button--text": props.variant === "text"
+            const renderRipple = () => {
+                const classList = { "mdc-button__ripple": true, ...ripple.classList.value };
+                return <span ref={proxy} class={classList}></span>;
             };
-
-            const rippleClassList = { "mdc-button__ripple": true, ...ripple.classList.value };
 
             const renderOutline = () => <span class="mdc-button__outline"></span>;
 
@@ -98,13 +84,25 @@ export const VButton = defineComponent({
                 <button
                     id={props.id}
                     name={props.name || props.id}
-                    class={classList}
-                    autofocus={isAutofocus}
-                    disabled={isDisabled}
+                    class={{
+                        "mdc-button": true,
+                        "mdc-button--icon-leading": hasLeading,
+                        "mdc-button--icon-trailing": hasTrailing,
+                        "mdc-button--primary": props.color === "primary",
+                        "mdc-button--secondary": props.color === "secondary",
+                        "mdc-button--tertiary": props.color === "tertiary",
+                        "mdc-button--elevated": props.variant === "elevated",
+                        "mdc-button--filled": props.variant === "filled",
+                        "mdc-button--tonal": props.variant === "tonal",
+                        "mdc-button--outlined": isOutlined,
+                        "mdc-button--text": props.variant === "text"
+                    }}
+                    autofocus={props.autofocus}
+                    disabled={props.disabled}
                     type={props.type}
                     {...ripple.listeners}
                 >
-                    <span ref={proxy} class={rippleClassList}></span>
+                    {renderRipple()}
                     {isOutlined && renderOutline()}
                     {hasLeading && renderLeading()}
                     <span class="mdc-button__label">{renderSlot(slots, "default")}</span>

@@ -9,8 +9,8 @@ export interface IButtonProps {
     name: string;
     color: IButtonColor;
     variant: IButtonVariant;
-    autofocus: boolean | string;
-    disabled: boolean | string;
+    autofocus: boolean;
+    disabled: boolean;
     type: IButtonType;
     leadingIcon: string;
     trailingIcon: string;
