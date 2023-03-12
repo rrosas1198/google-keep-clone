@@ -1,7 +1,66 @@
 /* stylelint-disable at-rule-no-unknown */
-/* stylelint-disable function-no-unknown */
-@mixin static-styles() {
-    .mdc-icon-button--standard {
-        background-color: transparent;
+@use "../ripple/ripple-theme";
+
+.mdc-icon-button--standard {
+    width: var(--icon-button-state-layer-size);
+    height: var(--icon-button-state-layer-size);
+    color: var(--icon-button-unselected-icon-color);
+    background-color: transparent;
+
+    @include ripple-theme.theme(
+        (
+            focus-color: var(--icon-button-unselected-focus-state-layer-color),
+            focus-opacity: var(--icon-button-unselected-focus-state-layer-opacity),
+            hover-color: var(--icon-button-unselected-hover-state-layer-color),
+            hover-opacity: var(--icon-button-unselected-hover-state-layer-opacity),
+            pressed-color: var(--icon-button-unselected-pressed-state-layer-color),
+            pressed-opacity: var(--icon-button-unselected-pressed-state-layer-opacity),
+            shape: var(--icon-button-state-layer-shape-start-start)
+        )
+    );
+
+    &:hover {
+        color: var(--icon-button-unselected-hover-icon-color);
+    }
+
+    &:focus {
+        color: var(--icon-button-unselected-focus-icon-color);
+    }
+
+    &:active {
+        color: var(--icon-button-unselected-pressed-icon-color);
+    }
+
+    &:disabled {
+        color: var(--icon-button-disabled-icon-color);
+    }
+}
+
+.mdc-icon-button--selected {
+    @include ripple-theme.theme(
+        (
+            focus-color: var(--icon-button-selected-focus-state-layer-color),
+            focus-opacity: var(--icon-button-selected-focus-state-layer-opacity),
+            hover-color: var(--icon-button-selected-hover-state-layer-color),
+            hover-opacity: var(--icon-button-selected-hover-state-layer-opacity),
+            pressed-color: var(--icon-button-selected-pressed-state-layer-color),
+            pressed-opacity: var(--icon-button-selected-pressed-state-layer-opacity)
+        )
+    );
+
+    &:not(:disabled) {
+        color: var(--icon-button-selected-icon-color);
+
+        &:hover {
+            color: var(--icon-button-selected-hover-icon-color);
+        }
+
+        &:focus {
+            color: var(--icon-button-selected-focus-icon-color);
+        }
+
+        &:active {
+            color: var(--icon-button-selected-pressed-icon-color);
+        }
     }
 }

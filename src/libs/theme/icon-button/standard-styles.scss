@@ -1,15 +1,7 @@
 /* stylelint-disable at-rule-no-unknown */
-/* stylelint-disable function-no-unknown */
-@use "./standard-icon-button";
-@use "./standard-icon-button-tokens";
-@use "./standard-icon-button-theme";
+@use "./standard-theme";
+@use "./standard-tokens";
 
-@mixin core-styles() {
-    @include standard-icon-button.static-styles();
-
-    .mdc-icon-button--standard.mdc-icon-button--primary {
-        @include standard-icon-button-theme.theme-styles(
-            standard-icon-button-tokens.$primary-theme
-        );
-    }
+.mdc-icon-button--standard.mdc-icon-button--primary {
+    @include standard-theme.theme(standard-tokens.$primary-theme);
 }

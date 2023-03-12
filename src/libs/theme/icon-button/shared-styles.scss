@@ -1,7 +1,2 @@
 /* stylelint-disable at-rule-no-unknown */
-/* stylelint-disable function-no-unknown */
-@use "./icon-button";
-
-@mixin core-styles() {
-    @include icon-button.static-styles();
-}
+@use "./shared";

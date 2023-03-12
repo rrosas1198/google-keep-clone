@@ -24,5 +24,5 @@
     "stylelint.snippet": ["css", "scss"],
     "stylelint.validate": ["css", "scss"],
     "cSpell.language": "en,es",
-    "cSpell.words": ["composables", "nuxt", "typescale", "varname"]
+    "cSpell.words": ["composables", "nuxt", "stylelint", "typescale", "varname"]
 }

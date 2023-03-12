@@ -9,7 +9,3 @@
 @use "src/libs/theme/icon-button/shared-styles" as shared-icon-button-styles;
 @use "src/libs/theme/icon-button/standard-styles" as standard-icon-button-styles;
 @use "src/libs/theme/ripple/ripple-styles";
-
-/* icon button */
-@include shared-icon-button-styles.core-styles();
-@include standard-icon-button-styles.core-styles();

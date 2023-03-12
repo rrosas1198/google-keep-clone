@@ -1,0 +1,12 @@
+/* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
+@use "sass:map";
+@use "../system/shape";
+
+$theme_tokens: (
+    container-shape: shape.get-fallback("corner-full"),
+    container-size: 40px,
+    icon-size: 24px,
+    state-layer-shape: shape.get-fallback(corner-full),
+    state-layer-size: 40px
+);

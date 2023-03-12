@@ -1,6 +1,6 @@
 <template>
     <header class="home__header container-fluid">
-        <VIconButton id="menu" link aria-label="Abrir menú">
+        <VIconButton id="menu" link aria-label="Abrir menú" color="primary" variant="standard">
             <i class="material-symbols-outlined">menu</i>
         </VIconButton>
 
