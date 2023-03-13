@@ -4,7 +4,7 @@
     </NuxtLayout>
 </template>
 
-<script setup>
+<script setup lang="ts">
 useHead({
     htmlAttrs: { lang: "es" },
     title: "Google Keep",
