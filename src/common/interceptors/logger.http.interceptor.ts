@@ -1,23 +1,21 @@
 import type { IHttpInterceptor } from "src/libs/http";
-import { ConsoleLogger } from "../miscellaneous";
+import { LoggerService } from "src/libs/logger";
 
-const consoleLogger = new ConsoleLogger("HttpService");
+const loggerService = new LoggerService("HttpService");
 
 export const LoggerHttpInterceptor: IHttpInterceptor = {
     onRequest: context => {
         if (context.error) {
-            consoleLogger.error("Request", context.request, context);
-            return;
+            loggerService.error("Request", context.request, context);
+        } else {
+            loggerService.info("Request", context.options.method, context.request, context);
         }
-
-        consoleLogger.info("Request", context.options.method, context.request, context);
     },
     onResponse: context => {
         if (context.error) {
-            consoleLogger.error("Response", context.options.method, context.request, context);
-            return;
+            loggerService.error("Response", context.options.method, context.request, context);
+        } else {
+            loggerService.info("Response", context.options.method, context.request, context);
         }
-
-        consoleLogger.info("Response", context.options.method, context.request, context);
     }
 };
