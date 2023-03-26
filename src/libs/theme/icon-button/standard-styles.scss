@@ -1,7 +1,8 @@
 /* stylelint-disable at-rule-no-unknown */
+@use "./standard-icon-button";
 @use "./standard-theme";
 @use "./standard-tokens";
 
-.mdc-icon-button--standard.mdc-icon-button--primary {
+.mdc-icon-button--standard {
     @include standard-theme.theme(standard-tokens.$primary-theme);
 }

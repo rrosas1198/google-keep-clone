@@ -1,7 +1,7 @@
 import type { IModule } from "src/libs/container";
 import { Container } from "src/libs/container";
 import { HttpService } from "src/libs/http";
-import { once } from "../utils";
+import { once } from "src/common/utils";
 import { NoteModule } from "./notes/note.module";
 
 const _modules: IModule[] = [NoteModule];

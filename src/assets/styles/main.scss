@@ -9,3 +9,7 @@
 @use "src/libs/theme/icon-button/shared-styles" as shared-icon-button-styles;
 @use "src/libs/theme/icon-button/standard-styles" as standard-icon-button-styles;
 @use "src/libs/theme/ripple/ripple-styles";
+
+:root {
+    --navigation-height: 58px;
+}

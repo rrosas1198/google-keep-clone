@@ -8,7 +8,9 @@ Object.assign(twbsConfig.rules, {
     "number-leading-zero": "always",
     "declaration-colon-newline-after": null,
     "selector-class-pattern": "",
-    "no-invalid-double-slash-comments": null
+    "no-invalid-double-slash-comments": null,
+    "scss/dollar-variable-pattern": null,
+    "scss/at-function-pattern": null
 });
 
 module.exports = twbsConfig;

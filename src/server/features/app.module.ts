@@ -1,7 +1,7 @@
 import type { IModule } from "src/libs/container";
 import { Container } from "src/libs/container";
 import { LowDbService } from "src/libs/lowdb";
-import { once } from "src/utils";
+import { once } from "src/common/utils";
 import type { ILowDbDocument } from "../interfaces";
 import { resolveCwd } from "../utils";
 import { NoteModule } from "./notes/note.module";

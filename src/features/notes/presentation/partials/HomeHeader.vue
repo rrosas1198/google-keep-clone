@@ -58,14 +58,18 @@ function toggleViewMode() {
 @use "src/libs/theme/layout/media-query";
 @use "src/libs/theme/system/color";
 @use "src/libs/theme/system/shape";
+@use "src/libs/theme/system/z-index";
 
 .home__header {
+    position: fixed;
     inline-size: 100%;
+    block-size: var(--navigation-height);
     display: flex;
     align-items: center;
     padding-inline: 8px;
     padding-block: 4px;
     border-bottom: 1px solid color.get-varname("surface-variant");
+    z-index: z-index.get-fallback(fixed);
 
     @include media-query.breakpoint-up(md) {
         padding-block: 8px;

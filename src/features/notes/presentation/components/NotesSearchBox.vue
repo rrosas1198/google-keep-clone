@@ -97,9 +97,10 @@ function _setFocusModel(focused: boolean) {
     align-items: center;
     margin-inline-start: auto;
     border-radius: shape.get-fallback("corner-small");
-    background-color: color.get-varname("inverse-on-surface");
 
     &.home__search--expanded {
+        background-color: color.get-varname("inverse-on-surface");
+
         @include media-query.breakpoint-down(md) {
             margin-inline-start: 0;
             flex: 1;
@@ -109,6 +110,7 @@ function _setFocusModel(focused: boolean) {
     @include media-query.breakpoint-up(md) {
         flex: 1;
         margin-inline: auto;
+        background-color: color.get-varname("inverse-on-surface");
     }
 }
 
