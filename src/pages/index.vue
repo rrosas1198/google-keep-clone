@@ -4,23 +4,21 @@
     <main class="home container">
         <CreateNote />
 
-        <section class="home__notes">
-            <article>Card 1</article>
-            <article>Card 2</article>
-            <article>Card 3</article>
-            <article>Card 4</article>
-            <article>Card 5</article>
-            <article>Card 6</article>
-            <article>Card 7</article>
-        </section>
+        <Masonry class="home__notes" tag="section" :items="notes" :column-width="240">
+            <template #default="{ item, index }">
+                <NoteCard />
+            </template>
+        </Masonry>
     </main>
 </template>
 
 <script setup lang="ts">
+import Masonry from "src/common/components/Masonry.vue";
 import { Note } from "src/features/notes/domain/entities";
 import { ListNotesUseCase } from "src/features/notes/domain/use-cases";
 import { NoteModule } from "src/features/notes/note.module";
 import CreateNote from "src/features/notes/presentation/components/CreateNote.vue";
+import NoteCard from "src/features/notes/presentation/components/NoteCard.vue";
 import HomeHeader from "src/features/notes/presentation/partials/HomeHeader.vue";
 
 const listNotesUseCase = NoteModule.resolve(ListNotesUseCase);
@@ -32,8 +30,9 @@ useHead({
 });
 
 useAsyncData(async () => {
-    const [response, _error] = await listNotesUseCase.execute();
-    notes.value = response;
+    const [response, error] = await listNotesUseCase.execute();
+
+    notes.value = response || [];
 });
 </script>
 
@@ -44,5 +43,11 @@ useAsyncData(async () => {
     .create-note {
         margin-block: 32px;
     }
+}
+
+.home__notes {
+    --masonry-gap: 16px;
+    row-gap: 16px;
+    column-gap: 16px;
 }
 </style>
