@@ -13,7 +13,7 @@
 
         <NotesSearchBox v-model:focused="isSearchFocused" />
 
-        <VIconButton id="refresh" link ariaLabel="Actualizar">
+        <VIconButton id="refresh" link ariaLabel="Actualizar" @click.prevent="onRefresh">
             <i class="material-symbols-outlined">refresh</i>
         </VIconButton>
 
@@ -22,7 +22,7 @@
             class="home__grid-view"
             link
             :ariaLabel="gridViewLabel"
-            @click.prevent="toggleViewMode"
+            @click.prevent="onToggleViewMode"
         >
             <i class="material-symbols-outlined">{{ gridViewIcon }}</i>
         </VIconButton>
@@ -41,6 +41,8 @@
 import { VIconButton } from "src/libs/components";
 import NotesSearchBox from "../components/NotesSearchBox.vue";
 
+const emit = defineEmits(["refresh"])
+
 const isSingleView = ref(false);
 const isSearchFocused = ref(false);
 
@@ -49,7 +51,11 @@ const gridViewLabel = computed(() =>
     isSingleView.value ? "Vista de cuadrícula" : "Vista de lista"
 );
 
-function toggleViewMode() {
+function onRefresh() {
+    emit("refresh");
+}
+
+function onToggleViewMode() {
     isSingleView.value = !isSingleView.value;
 }
 </script>

@@ -88,6 +88,7 @@ function _setFocusModel(focused: boolean) {
 @use "src/libs/theme/layout/media-query";
 @use "src/libs/theme/system/color";
 @use "src/libs/theme/system/shape";
+@use "src/libs/theme/theme/typography";
 
 .home__search {
     position: relative;
@@ -125,6 +126,8 @@ function _setFocusModel(focused: boolean) {
     border: none;
     border-radius: inherit;
     appearance: none;
+
+    @include typography.theme-styles("body-large");
 
     @include media-query.breakpoint-up(md) {
         display: block;

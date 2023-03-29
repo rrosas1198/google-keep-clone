@@ -1,5 +1,5 @@
 <template>
-    <HomeHeader />
+    <HomeHeader @refresh="fetchList" />
 
     <main class="home container">
         <CreateNote />
@@ -25,15 +25,24 @@ const listNotesUseCase = NoteModule.resolve(ListNotesUseCase);
 
 const notes = ref<Note[]>([]);
 
+let isLoading = false;
+
 useHead({
     title: "Guarda tus ideas estés donde estés"
 });
 
-useAsyncData(async () => {
-    const [response, _error] = await listNotesUseCase.execute();
+useAsyncData(() => fetchList());
 
+async function fetchList() {
+    if (isLoading) return;
+
+    isLoading = true;
+
+    const [response, _error] = await listNotesUseCase.execute();
     notes.value = response || [];
-});
+
+    isLoading = false;
+};
 </script>
 
 <style lang="scss">
