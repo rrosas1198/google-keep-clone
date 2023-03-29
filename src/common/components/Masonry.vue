@@ -1,11 +1,11 @@
 <template>
     <component ref="root" class="masonry" :is="tag">
-        <div v-for="(index, idx) in indexes" :key="idx" :data-index="idx" class="masonry__column">
-            <div v-for="ix in index" :key="ix" class="masonry-item">
-                <slot :item="items[ix]" :index="ix">
+        <div v-for="(index, idx) in indexes" :key="idx" class="masonry__column" :data-index="idx">
+            <template v-for="ix in index">
+                <slot :item="items[ix]">
                     {{ items[ix] }}
                 </slot>
-            </div>
+            </template>
         </div>
     </component>
 </template>
@@ -20,7 +20,7 @@ const props = defineProps({
         default: 400
     },
     items: {
-        type: Array as PropType<unknown[]>,
+        type: Array as PropType<any[]>,
         default: () => []
     },
     tag: {

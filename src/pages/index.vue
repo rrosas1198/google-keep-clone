@@ -5,8 +5,8 @@
         <CreateNote />
 
         <Masonry class="home__notes" tag="section" :items="notes" :column-width="240">
-            <template #default="{ item, index }">
-                <NoteCard />
+            <template #default="{ item }">
+                <NoteCard :note="item"/>
             </template>
         </Masonry>
     </main>
@@ -30,18 +30,20 @@ useHead({
 });
 
 useAsyncData(async () => {
-    const [response, error] = await listNotesUseCase.execute();
+    const [response, _error] = await listNotesUseCase.execute();
 
     notes.value = response || [];
 });
 </script>
 
 <style lang="scss">
+$home-section-padding: 32px;
+
 .home {
     padding-block-start: var(--navigation-height);
 
     .create-note {
-        margin-block: 32px;
+        margin-block: $home-section-padding;
     }
 }
 
@@ -49,5 +51,6 @@ useAsyncData(async () => {
     --masonry-gap: 16px;
     row-gap: 16px;
     column-gap: 16px;
+    padding-block-end: $home-section-padding;
 }
 </style>
