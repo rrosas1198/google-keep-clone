@@ -1,7 +1,7 @@
+import { once } from "src/common/utils";
 import type { IModule } from "src/libs/container";
 import { Container } from "src/libs/container";
 import { LowDbService } from "src/libs/lowdb";
-import { once } from "src/common/utils";
 import type { ILowDbDocument } from "../interfaces";
 import { resolveCwd } from "../utils";
 import { NoteModule } from "./notes/note.module";
@@ -14,7 +14,7 @@ export const registerModules = once(() => {
     // Global singletons
     globalContainer.registerLazySingleton(LowDbService<ILowDbDocument>, () => {
         const filepath = resolveCwd("static/database.json");
-        return new LowDbService<ILowDbDocument>(filepath);
+        return new LowDbService<ILowDbDocument>(filepath, { notes: [] });
     });
 
     // Feature modules
